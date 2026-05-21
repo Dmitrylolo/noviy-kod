@@ -35,6 +35,7 @@ function VideoFacade({ youtubeId, title }: { youtubeId: string; title: string })
       <img
         src={`https://img.youtube.com/vi/${youtubeId}/maxresdefault.jpg`}
         alt={title}
+        onError={(e) => { e.currentTarget.src = '/production-1.jpg' }}
         className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
       />
       {/* Gradient */}
