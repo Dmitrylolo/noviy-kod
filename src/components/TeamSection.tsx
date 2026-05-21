@@ -31,7 +31,7 @@ export default function TeamSection({ lang }: TeamSectionProps) {
               <div className="w-20 h-20 bg-zinc-800 flex-shrink-0 overflow-hidden">
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img
-                  src="/team-director.jpg"
+                  src="/director-chankova.png"
                   alt={data.director.name}
                   className="w-full h-full object-cover object-top"
                 />

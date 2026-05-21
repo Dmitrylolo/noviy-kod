@@ -256,7 +256,7 @@ export const heroes: Record<Lang, Hero[]> = {
 export const team: Record<Lang, { director: { name: string; bio: string; statement: string[] }; members: TeamMember[] }> = {
   ua: {
     director: {
-      name: 'Режисерка',
+      name: 'Дар'я Чанкова',
       bio: 'Документаліст з десятирічним досвідом. Авторка проєктів про людей у кризових ситуаціях.',
       statement: [
         '«Новий код» — це проєкт, який виріс із запитання: що залишається від людини-митця, коли вона стає воїном?',
@@ -274,7 +274,7 @@ export const team: Record<Lang, { director: { name: string; bio: string; stateme
   },
   en: {
     director: {
-      name: 'Director',
+      name: 'Daria Chankova',
       bio: 'Documentary filmmaker with a decade of experience. Author of projects about people in crisis situations.',
       statement: [
         '"New Code" grew from a question: what remains of an artist when they become a warrior?',
