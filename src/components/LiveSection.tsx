@@ -11,6 +11,26 @@ interface LiveSectionProps {
 function VideoFacade({ youtubeId, title }: { youtubeId: string; title: string }) {
   const [playing, setPlaying] = useState(false)
 
+  // Coming soon — no video yet
+  if (!youtubeId) {
+    return (
+      <div className="yt-embed relative overflow-hidden bg-zinc-900">
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img
+          src="/production-1.jpg"
+          alt={title}
+          className="absolute inset-0 w-full h-full object-cover opacity-40"
+        />
+        <div className="absolute inset-0 bg-black/50" />
+        <div className="absolute inset-0 flex items-center justify-center">
+          <span className="font-display text-white/80 text-sm tracking-[0.3em] uppercase border border-white/20 px-6 py-3">
+            Незабаром
+          </span>
+        </div>
+      </div>
+    )
+  }
+
   if (playing) {
     return (
       <div className="yt-embed">
@@ -75,30 +95,46 @@ export default function LiveSection({ lang }: LiveSectionProps) {
               {t.description}
             </p>
 
-            <div className="flex flex-wrap gap-3">
-              <a
-                href={t.watchUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="btn-primary"
-              >
-                <svg width="14" height="14" viewBox="0 0 14 14" fill="currentColor">
-                  <polygon points="3,1 13,7 3,13" />
-                </svg>
-                {t.watchLabel}
-              </a>
-              <a
-                href={t.watchUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="btn-outline"
-              >
-                {t.ytLabel}
-                <svg width="12" height="12" viewBox="0 0 12 12" fill="currentColor" className="ml-1">
-                  <path d="M10 7v3H2V2h3V0H0v12h12V7z M7 0v2h1.59L4.29 6.29l1.42 1.42L10 3.41V5h2V0z" />
-                </svg>
-              </a>
-            </div>
+            {t.comingSoon ? (
+              <div className="flex flex-wrap gap-3">
+                <a
+                  href={t.watchUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="btn-outline"
+                >
+                  {t.ytLabel}
+                  <svg width="12" height="12" viewBox="0 0 12 12" fill="currentColor" className="ml-1">
+                    <path d="M10 7v3H2V2h3V0H0v12h12V7z M7 0v2h1.59L4.29 6.29l1.42 1.42L10 3.41V5h2V0z" />
+                  </svg>
+                </a>
+              </div>
+            ) : (
+              <div className="flex flex-wrap gap-3">
+                <a
+                  href={t.watchUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="btn-primary"
+                >
+                  <svg width="14" height="14" viewBox="0 0 14 14" fill="currentColor">
+                    <polygon points="3,1 13,7 3,13" />
+                  </svg>
+                  {t.watchLabel}
+                </a>
+                <a
+                  href={t.watchUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="btn-outline"
+                >
+                  {t.ytLabel}
+                  <svg width="12" height="12" viewBox="0 0 12 12" fill="currentColor" className="ml-1">
+                    <path d="M10 7v3H2V2h3V0H0v12h12V7z M7 0v2h1.59L4.29 6.29l1.42 1.42L10 3.41V5h2V0z" />
+                  </svg>
+                </a>
+              </div>
+            )}
 
             {/* Counter */}
             <div className="flex items-center gap-4 mt-8 pt-8 border-t border-white/10 text-white/30 text-sm font-display tracking-widest">
