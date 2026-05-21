@@ -22,7 +22,7 @@ const productionTexts = {
 
 // Gallery using real production photos
 const galleryItems = [
-  { id: 0, src: '/production-1.jpg',  alt: 'Production photo 1' },
+  { id: 0, src: '/production-1.jpg', alt: 'Production photo 1' },
   { id: 1, src: '/production-2.webp', alt: 'Production photo 2' },
   { id: 2, src: '/production-3.webp', alt: 'Production photo 3' },
   { id: 3, src: '/production-4.webp', alt: 'Production photo 4' },

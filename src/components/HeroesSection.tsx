@@ -2,7 +2,7 @@
 
 import { heroes, ui } from '@/lib/content'
 import type { Hero, Lang } from '@/lib/types'
-import { useState } from 'react'
+import { useRef, useState } from 'react'
 
 interface HeroesSectionProps {
   lang: Lang
@@ -76,6 +76,22 @@ export default function HeroesSection({ lang }: HeroesSectionProps) {
   const t = ui[lang]
   const heroList = heroes[lang]
   const [selected, setSelected] = useState<Hero | null>(null)
+  const [activeHero, setActiveHero] = useState(0)
+  const scrollRef = useRef<HTMLDivElement>(null)
+
+  const handleScroll = () => {
+    const el = scrollRef.current
+    if (!el || heroList.length === 0) return
+    const cardWidth = el.scrollWidth / heroList.length
+    setActiveHero(Math.min(Math.round(el.scrollLeft / cardWidth), heroList.length - 1))
+  }
+
+  const scrollToHero = (i: number) => {
+    const el = scrollRef.current
+    if (!el || heroList.length === 0) return
+    const cardWidth = el.scrollWidth / heroList.length
+    el.scrollTo({ left: cardWidth * i, behavior: 'smooth' })
+  }
 
   return (
     <section id="heroes" className="py-16 lg:py-24 bg-black">
@@ -87,13 +103,17 @@ export default function HeroesSection({ lang }: HeroesSectionProps) {
           </h2>
         </div>
 
-        {/* Grid */}
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
+        {/* Grid (desktop) / Carousel (mobile) */}
+        <div
+          ref={scrollRef}
+          onScroll={handleScroll}
+          className="flex overflow-x-auto gap-4 pb-2 -mx-4 px-4 sm:mx-0 sm:px-0 sm:grid sm:grid-cols-2 lg:grid-cols-4 snap-x snap-mandatory sm:snap-none scrollbar-none"
+        >
           {heroList.map((hero) => (
             <button
               key={hero.id}
               onClick={() => setSelected(hero)}
-              className="group text-left relative overflow-hidden bg-zinc-900 hover:bg-zinc-800 transition-colors"
+              className="group text-left relative overflow-hidden bg-zinc-900 hover:bg-zinc-800 transition-colors flex-shrink-0 w-64 sm:w-auto snap-start"
             >
               <div className="aspect-[3/4] bg-zinc-800 relative overflow-hidden">
                 <div className="absolute inset-0 bg-gradient-to-t from-black via-black/30 to-transparent z-10" />
@@ -122,6 +142,21 @@ export default function HeroesSection({ lang }: HeroesSectionProps) {
               </div>
             </button>
           ))}
+        </div>
+
+        {/* Carousel dots — mobile only */}
+        <div className="flex items-center gap-2 mt-5 sm:hidden">
+          {heroList.map((_, i) => (
+            <button
+              key={i}
+              onClick={() => scrollToHero(i)}
+              aria-label={`Герой ${i + 1}`}
+              className={`h-0.5 rounded-full transition-all duration-300 ${i === activeHero ? 'w-8 bg-[#E8A030]' : 'w-4 bg-white/25'}`}
+            />
+          ))}
+          <span className="ml-auto font-display text-xs text-white/40 tracking-widest">
+            {String(activeHero + 1).padStart(2, '0')} — {String(heroList.length).padStart(2, '0')}
+          </span>
         </div>
       </div>
 

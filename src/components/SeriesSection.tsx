@@ -3,7 +3,7 @@
 import { seasons, ui } from '@/lib/content'
 import type { Episode, Lang } from '@/lib/types'
 import Image from 'next/image'
-import { useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 
 interface SeriesSectionProps {
   lang: Lang
@@ -67,8 +67,30 @@ export default function SeriesSection({ lang }: SeriesSectionProps) {
   const t = ui[lang]
   const allSeasons = seasons[lang]
   const [activeTab, setActiveTab] = useState(0)
+  const [activeEp, setActiveEp] = useState(0)
+  const scrollRef = useRef<HTMLDivElement>(null)
 
   const currentSeason = allSeasons[activeTab]
+  const total = currentSeason.episodes.length
+
+  useEffect(() => {
+    setActiveEp(0)
+    if (scrollRef.current) scrollRef.current.scrollLeft = 0
+  }, [activeTab])
+
+  const handleScroll = () => {
+    const el = scrollRef.current
+    if (!el || total === 0) return
+    const cardWidth = el.scrollWidth / total
+    setActiveEp(Math.min(Math.round(el.scrollLeft / cardWidth), total - 1))
+  }
+
+  const scrollToEp = (i: number) => {
+    const el = scrollRef.current
+    if (!el || total === 0) return
+    const cardWidth = el.scrollWidth / total
+    el.scrollTo({ left: cardWidth * i, behavior: 'smooth' })
+  }
 
   return (
     <section id="series" className="py-16 lg:py-24 bg-zinc-950">
@@ -106,11 +128,33 @@ export default function SeriesSection({ lang }: SeriesSectionProps) {
 
         {/* Episodes grid */}
         {currentSeason.episodes.length > 0 ? (
-          <div className="flex overflow-x-auto gap-4 pb-2 -mx-4 px-4 sm:mx-0 sm:px-0 sm:grid sm:grid-cols-2 lg:grid-cols-4 snap-x snap-mandatory sm:snap-none">
-            {currentSeason.episodes.map((ep) => (
-              <EpisodeCard key={ep.id} ep={ep} t={t.episode} />
-            ))}
-          </div>
+          <>
+            <div
+              ref={scrollRef}
+              onScroll={handleScroll}
+              className="flex overflow-x-auto gap-4 pb-2 -mx-4 px-4 sm:mx-0 sm:px-0 sm:grid sm:grid-cols-2 lg:grid-cols-4 snap-x snap-mandatory sm:snap-none scrollbar-none"
+            >
+              {currentSeason.episodes.map((ep) => (
+                <EpisodeCard key={ep.id} ep={ep} t={t.episode} />
+              ))}
+            </div>
+            {/* Carousel dots + counter — mobile only */}
+            {total > 1 && (
+              <div className="flex items-center gap-2 mt-5 sm:hidden">
+                {currentSeason.episodes.map((_, i) => (
+                  <button
+                    key={i}
+                    onClick={() => scrollToEp(i)}
+                    aria-label={`Перейти до епізоду ${i + 1}`}
+                    className={`h-0.5 rounded-full transition-all duration-300 ${i === activeEp ? 'w-8 bg-[#E8A030]' : 'w-4 bg-white/25'}`}
+                  />
+                ))}
+                <span className="ml-auto font-display text-xs text-white/40 tracking-widest">
+                  {String(activeEp + 1).padStart(2, '0')} — {String(total).padStart(2, '0')}
+                </span>
+              </div>
+            )}
+          </>
         ) : (
           <div className="py-20 text-center text-white/30 font-display tracking-widest uppercase">
             {lang === 'ua' ? 'Незабаром' : 'Coming Soon'}

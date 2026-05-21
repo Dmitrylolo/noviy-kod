@@ -11,7 +11,7 @@ export default function HeroSection({ lang }: HeroSectionProps) {
   return (
     <section
       id="top"
-      className="relative min-h-screen flex flex-col justify-end pb-16 lg:pb-24 overflow-hidden"
+      className="relative min-h-[100svh] flex flex-col overflow-hidden"
     >
       {/* Background */}
       <div className="absolute inset-0 bg-gradient-to-b from-black/10 via-black/20 to-black/80 z-10" />
@@ -21,8 +21,11 @@ export default function HeroSection({ lang }: HeroSectionProps) {
         aria-hidden="true"
       />
 
+      {/* Spacer: fills space above content, min = header height */}
+      <div className="flex-1 min-h-20" />
+
       {/* Content */}
-      <div className="relative z-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
+      <div className="relative z-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full pb-8 lg:pb-12">
         <div className="max-w-2xl">
           {/* Title */}
           <h1 className="font-display text-6xl sm:text-7xl lg:text-9xl text-white mb-6 leading-none">
@@ -66,8 +69,8 @@ export default function HeroSection({ lang }: HeroSectionProps) {
         </div>
       </div>
 
-      {/* Scroll indicator */}
-      <div className="absolute bottom-8 left-1/2 -translate-x-1/2 z-20 hidden sm:flex flex-col items-center gap-2 text-white/30">
+      {/* Scroll indicator — in normal flow, always below content */}
+      <div className="relative z-20 hidden sm:flex flex-col items-center gap-2 text-white/30 pb-8">
         <span className="font-display text-xs tracking-widest uppercase">{t.scroll}</span>
         <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor" className="animate-bounce">
           <path d="M8 12L2 6h12z" />
