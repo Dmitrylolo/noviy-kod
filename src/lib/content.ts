@@ -167,7 +167,7 @@ export const heroes: Record<Lang, Hero[]> = {
       youtubeId: 'ORS1Oh_iRV0',
       youtubeUrl: 'https://www.youtube.com/watch?v=ORS1Oh_iRV0',
       episodeUrl: 'https://www.youtube.com/watch?v=ORS1Oh_iRV0',
-      photo: '/hero-3.jpg',
+      photo: '/hero-grabar.webp',
     },
     {
       id: 'artist',
@@ -178,7 +178,7 @@ export const heroes: Record<Lang, Hero[]> = {
       youtubeId: 'j697xh6tXsU',
       youtubeUrl: 'https://www.youtube.com/watch?v=j697xh6tXsU',
       episodeUrl: 'https://www.youtube.com/watch?v=j697xh6tXsU',
-      photo: '/hero-1.jpg',
+      photo: '/hero-vyshebaba.webp',
     },
     {
       id: 'actor',
@@ -189,7 +189,7 @@ export const heroes: Record<Lang, Hero[]> = {
       youtubeId: '0Z0vQ_mbXqA',
       youtubeUrl: 'https://www.youtube.com/watch?v=0Z0vQ_mbXqA',
       episodeUrl: 'https://www.youtube.com/watch?v=0Z0vQ_mbXqA',
-      photo: '/hero-2.jpg',
+      photo: '/hero-tkach.webp',
     },
     {
       id: 'poet',
@@ -200,6 +200,7 @@ export const heroes: Record<Lang, Hero[]> = {
       youtubeId: '-3geo8Gjy5o',
       youtubeUrl: 'https://www.youtube.com/watch?v=-3geo8Gjy5o',
       episodeUrl: 'https://www.youtube.com/watch?v=-3geo8Gjy5o',
+      photo: '/hero-olena.webp',
     },
   ],
   en: [
@@ -212,7 +213,7 @@ export const heroes: Record<Lang, Hero[]> = {
       youtubeId: 'ORS1Oh_iRV0',
       youtubeUrl: 'https://www.youtube.com/watch?v=ORS1Oh_iRV0',
       episodeUrl: 'https://www.youtube.com/watch?v=ORS1Oh_iRV0',
-      photo: '/hero-3.jpg',
+      photo: '/hero-grabar.webp',
     },
     {
       id: 'artist',
@@ -223,7 +224,7 @@ export const heroes: Record<Lang, Hero[]> = {
       youtubeId: 'j697xh6tXsU',
       youtubeUrl: 'https://www.youtube.com/watch?v=j697xh6tXsU',
       episodeUrl: 'https://www.youtube.com/watch?v=j697xh6tXsU',
-      photo: '/hero-1.jpg',
+      photo: '/hero-vyshebaba.webp',
     },
     {
       id: 'actor',
@@ -234,7 +235,7 @@ export const heroes: Record<Lang, Hero[]> = {
       youtubeId: '0Z0vQ_mbXqA',
       youtubeUrl: 'https://www.youtube.com/watch?v=0Z0vQ_mbXqA',
       episodeUrl: 'https://www.youtube.com/watch?v=0Z0vQ_mbXqA',
-      photo: '/hero-2.jpg',
+      photo: '/hero-tkach.webp',
     },
     {
       id: 'poet',
@@ -245,6 +246,7 @@ export const heroes: Record<Lang, Hero[]> = {
       youtubeId: '-3geo8Gjy5o',
       youtubeUrl: 'https://www.youtube.com/watch?v=-3geo8Gjy5o',
       episodeUrl: 'https://www.youtube.com/watch?v=-3geo8Gjy5o',
+      photo: '/hero-olena.webp',
     },
   ],
 }

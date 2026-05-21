@@ -20,12 +20,15 @@ const productionTexts = {
   ],
 }
 
-// Placeholder gallery items (replace src with real images)
-const galleryItems = Array.from({ length: 6 }, (_, i) => ({
-  id: i,
-  src: `/production-${i + 1}.jpg`,
-  alt: `Production photo ${i + 1}`,
-}))
+// Gallery using real production photos
+const galleryItems = [
+  { id: 0, src: '/production-1.jpg',  alt: 'Production photo 1' },
+  { id: 1, src: '/production-2.webp', alt: 'Production photo 2' },
+  { id: 2, src: '/production-3.webp', alt: 'Production photo 3' },
+  { id: 3, src: '/production-4.webp', alt: 'Production photo 4' },
+  { id: 4, src: '/production-5.webp', alt: 'Production photo 5' },
+  { id: 5, src: '/production-6.webp', alt: 'Production photo 6' },
+]
 
 export default function ProductionSection({ lang }: ProductionSectionProps) {
   const t = ui[lang]
