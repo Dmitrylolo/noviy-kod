@@ -95,8 +95,8 @@ export default function SeriesSection({ lang }: SeriesSectionProps) {
               key={season.id}
               onClick={() => setActiveTab(i)}
               className={`font-display text-sm tracking-widest uppercase px-5 py-3 whitespace-nowrap transition-colors border-b-2 -mb-px ${activeTab === i
-                  ? 'text-[#E8A030] border-[#E8A030]'
-                  : 'text-white/40 border-transparent hover:text-white/70'
+                ? 'text-[#E8A030] border-[#E8A030]'
+                : 'text-white/40 border-transparent hover:text-white/70'
                 }`}
             >
               {season.label}

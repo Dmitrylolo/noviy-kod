@@ -80,10 +80,10 @@ export default function Header({ lang }: HeaderProps) {
               aria-label="Інклюзивність / Accessibility"
             >
               <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor">
-                <circle cx="12" cy="4" r="2"/>
-                <path d="M14.5 8h-5L8 12l3 1v5h2v-5l3-1-1.5-4z"/>
-                <path d="M9 21a4 4 0 01-4-4 4 4 0 014-4" strokeWidth="0"/>
-                <path fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" d="M9 21a4 4 0 006-3.5"/>
+                <circle cx="12" cy="4" r="2" />
+                <path d="M14.5 8h-5L8 12l3 1v5h2v-5l3-1-1.5-4z" />
+                <path d="M9 21a4 4 0 01-4-4 4 4 0 014-4" strokeWidth="0" />
+                <path fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" d="M9 21a4 4 0 006-3.5" />
               </svg>
             </a>
 
