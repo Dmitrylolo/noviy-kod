@@ -126,7 +126,8 @@ export default function SeriesSection({ lang }: SeriesSectionProps) {
           ))}
         </div>
 
-        {/* Episodes grid */}
+        {/* Episodes grid — min-height prevents page jump on empty tabs */}
+        <div className="min-h-[300px]">
         {currentSeason.episodes.length > 0 ? (
           <>
             <div
@@ -156,10 +157,11 @@ export default function SeriesSection({ lang }: SeriesSectionProps) {
             )}
           </>
         ) : (
-          <div className="py-20 text-center text-white/30 font-display tracking-widest uppercase">
+          <div className="flex items-center justify-center h-[300px] text-white/30 font-display tracking-widest uppercase">
             {lang === 'ua' ? 'Незабаром' : 'Coming Soon'}
           </div>
         )}
+        </div>
 
         <div className="mt-6 sm:hidden">
           <a
