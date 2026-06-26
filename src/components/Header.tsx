@@ -28,7 +28,6 @@ export default function Header({ lang }: HeaderProps) {
     { href: '#heroes', label: t.nav.heroes },
     { href: '#production', label: t.nav.production },
     { href: '#team', label: t.nav.team },
-    { href: '#accessibility', label: t.nav.accessibility },
   ]
 
   return (
@@ -74,6 +73,20 @@ export default function Header({ lang }: HeaderProps) {
               </Link>
             </div>
 
+            {/* Accessibility */}
+            <a
+              href="#accessibility"
+              className="w-9 h-9 flex items-center justify-center border border-white/30 hover:border-white/70 transition-colors rounded-full text-white/70 hover:text-white"
+              aria-label="Інклюзивність / Accessibility"
+            >
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                <circle cx="12" cy="4" r="2" />
+                <path d="M13 7h-2l-1.5 4H12v4h2v-4.5h2.5V9H14l-.5-2z" />
+                <circle cx="10" cy="19" r="3" fill="none" stroke="currentColor" strokeWidth="1.8" />
+                <circle cx="15.5" cy="17" r="1.8" fill="none" stroke="currentColor" strokeWidth="1.5" />
+              </svg>
+            </a>
+
             {/* CTA */}
             <a href="#live" className="btn-primary">
               {t.nav.watch}
@@ -118,6 +131,14 @@ export default function Header({ lang }: HeaderProps) {
                 {otherLang.toUpperCase()}
               </Link>
             </div>
+            <a href="#accessibility" onClick={() => setMenuOpen(false)} className="text-white/60 hover:text-white transition-colors" aria-label="Інклюзивність">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                <circle cx="12" cy="4" r="2" />
+                <path d="M13 7h-2l-1.5 4H12v4h2v-4.5h2.5V9H14l-.5-2z" />
+                <circle cx="10" cy="19" r="3" fill="none" stroke="currentColor" strokeWidth="1.8" />
+                <circle cx="15.5" cy="17" r="1.8" fill="none" stroke="currentColor" strokeWidth="1.5" />
+              </svg>
+            </a>
             <a href="#live" onClick={() => setMenuOpen(false)} className="btn-primary ml-auto">
               {t.nav.watch}
             </a>
