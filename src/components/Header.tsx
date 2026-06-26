@@ -2,6 +2,7 @@
 
 import { ui } from '@/lib/content'
 import type { Lang } from '@/lib/types'
+import { Accessibility } from 'lucide-react'
 import Link from 'next/link'
 import { useEffect, useState } from 'react'
 
@@ -79,12 +80,7 @@ export default function Header({ lang }: HeaderProps) {
               className="w-9 h-9 flex items-center justify-center border border-white/30 hover:border-white/70 transition-colors rounded-full text-white/70 hover:text-white"
               aria-label="Інклюзивність / Accessibility"
             >
-              <svg width="15" height="15" viewBox="0 0 24 24" aria-hidden="true">
-                <circle cx="10" cy="4" r="2" fill="currentColor" />
-                <path d="M10 6v7h7v5M15 18h4" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-                <circle cx="8" cy="19" r="5" fill="none" stroke="currentColor" strokeWidth="2" />
-                <circle cx="17" cy="20" r="1.5" fill="none" stroke="currentColor" strokeWidth="1.5" />
-              </svg>
+              <Accessibility size={15} aria-hidden="true" />
             </a>
 
             {/* CTA */}
@@ -132,12 +128,7 @@ export default function Header({ lang }: HeaderProps) {
               </Link>
             </div>
             <a href="#accessibility" onClick={() => setMenuOpen(false)} className="text-white/60 hover:text-white transition-colors" aria-label="Інклюзивність">
-              <svg width="15" height="15" viewBox="0 0 24 24" aria-hidden="true">
-                <circle cx="10" cy="4" r="2" fill="currentColor" />
-                <path d="M10 6v7h7v5M15 18h4" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-                <circle cx="8" cy="19" r="5" fill="none" stroke="currentColor" strokeWidth="2" />
-                <circle cx="17" cy="20" r="1.5" fill="none" stroke="currentColor" strokeWidth="1.5" />
-              </svg>
+              <Accessibility size={15} aria-hidden="true" />
             </a>
             <a href="#live" onClick={() => setMenuOpen(false)} className="btn-primary ml-auto">
               {t.nav.watch}
