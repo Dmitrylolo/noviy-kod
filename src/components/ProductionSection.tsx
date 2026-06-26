@@ -5,21 +5,6 @@ interface ProductionSectionProps {
   lang: Lang
 }
 
-const productionTexts = {
-  ua: [
-    { label: 'Географія', text: 'Зйомки проходили у зонах бойових дій та прифронтових районах України.' },
-    { label: 'Підхід', text: 'Документальний метод спостереження без постановочних сцен та авторських втручань.' },
-    { label: 'Команда', text: 'Невелика мобільна команда, яка адаптувалась до умов польової роботи.' },
-    { label: 'Взаємодія', text: 'Тривалий контакт з героями — від кількох тижнів до кількох місяців.' },
-  ],
-  en: [
-    { label: 'Geography', text: 'Filming took place in combat zones and near-front areas of Ukraine.' },
-    { label: 'Approach', text: 'Observational documentary method without staged scenes or authorial interventions.' },
-    { label: 'Team', text: 'A small mobile crew that adapted to field work conditions.' },
-    { label: 'Interaction', text: 'Extended contact with subjects — from several weeks to several months.' },
-  ],
-}
-
 // Gallery using real production photos
 const galleryItems = [
   { id: 0, src: '/production-1.jpg', alt: 'Production photo 1' },
@@ -32,7 +17,8 @@ const galleryItems = [
 
 export default function ProductionSection({ lang }: ProductionSectionProps) {
   const t = ui[lang]
-  const texts = productionTexts[lang]
+  const production = (t as typeof t & { production?: { blocks: { label: string; text: string }[] } }).production
+  const blocks = production?.blocks ?? []
 
   return (
     <section id="production" className="py-16 lg:py-24 bg-zinc-950">
@@ -47,7 +33,7 @@ export default function ProductionSection({ lang }: ProductionSectionProps) {
 
         {/* Text blocks */}
         <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
-          {texts.map((item) => (
+          {blocks.map((item) => (
             <div key={item.label} className="border-t border-white/20 pt-4">
               <div className="text-[#E8A030] font-display text-xs tracking-widest uppercase mb-2">
                 {item.label}

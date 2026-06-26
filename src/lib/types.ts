@@ -5,6 +5,7 @@ export interface Episode {
   number: number
   title: string
   synopsis: string
+  description?: string
   youtubeId: string
   youtubeUrl: string
   hasAudioDesc: boolean

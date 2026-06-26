@@ -55,8 +55,8 @@ export default function Footer({ lang }: FooterProps) {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
           {/* Logo */}
-          <a href="#top" className="font-display text-white text-sm tracking-widest">
-            НОВИЙ КОД
+          <a href="#top" className="font-display text-white text-sm tracking-widest" style={{ textTransform: 'none' }}>
+            Новий kod<span className="text-[#E8A030]">_</span>
           </a>
 
           {/* Copyright */}

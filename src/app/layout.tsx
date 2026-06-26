@@ -63,8 +63,8 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="uk" className={`${oswald.variable} ${inter.variable}`}>
-      <body>{children}</body>
+    <html lang="uk" className={`${oswald.variable} ${inter.variable}`} suppressHydrationWarning>
+      <body suppressHydrationWarning>{children}</body>
     </html>
   )
 }

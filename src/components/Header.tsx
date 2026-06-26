@@ -39,10 +39,10 @@ export default function Header({ lang }: HeaderProps) {
         <div className="flex items-center justify-between h-16 lg:h-20">
           {/* Logo */}
           <a href="#top" className="flex-shrink-0">
-            <span className="font-display text-white text-lg leading-none">
-              НОВИЙ
+            <span className="font-display text-white text-lg leading-none" style={{ textTransform: 'none' }}>
+              Новий
               <br />
-              КОД
+              kod<span className="text-[#E8A030]">_</span>
             </span>
           </a>
 

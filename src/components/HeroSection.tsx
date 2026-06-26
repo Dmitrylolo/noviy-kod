@@ -28,8 +28,8 @@ export default function HeroSection({ lang }: HeroSectionProps) {
       <div className="relative z-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full pb-8 lg:pb-12">
         <div className="max-w-2xl">
           {/* Title */}
-          <h1 className="font-display text-6xl sm:text-7xl lg:text-9xl text-white mb-6 leading-none">
-            {t.title}
+          <h1 className="font-display text-6xl sm:text-7xl lg:text-9xl text-white mb-6 leading-none" style={{ textTransform: 'none' }}>
+            Новий kod<span className="text-[#E8A030]">_</span>
           </h1>
 
           {/* Description */}
