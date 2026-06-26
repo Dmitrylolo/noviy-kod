@@ -408,7 +408,7 @@ export const ui = {
       ],
     },
     footer: {
-      rights: '© 2024 Новий код. Усі права захищені.',
+      rights: 'Новий код. Усі права захищені.',
     },
   },
   en: {
@@ -494,7 +494,7 @@ export const ui = {
       ],
     },
     footer: {
-      rights: '© 2024 New Code. All rights reserved.',
+      rights: 'New Code. All rights reserved.',
     },
   },
 }

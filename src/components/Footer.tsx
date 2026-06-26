@@ -61,7 +61,7 @@ export default function Footer({ lang }: FooterProps) {
 
           {/* Copyright */}
           <p className="text-white/30 text-xs text-center">
-            {t.footer.rights}
+            © 2024–{new Date().getFullYear()} {t.footer.rights}
           </p>
 
           {/* Social + lang */}
