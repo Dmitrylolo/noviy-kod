@@ -29,7 +29,7 @@ export default function HeroSection({ lang }: HeroSectionProps) {
         <div className="max-w-2xl">
           {/* Title */}
           <h1 className="font-display text-6xl sm:text-7xl lg:text-9xl text-white mb-6 leading-none" style={{ textTransform: 'none' }}>
-            Новий kod<span className="text-[#E8A030]">_</span>
+            {lang === 'ua' ? 'Новий' : 'New'} kod<span className="text-[#E8A030]">_</span>
           </h1>
 
           {/* Description */}
@@ -58,24 +58,24 @@ export default function HeroSection({ lang }: HeroSectionProps) {
 
           {/* Indicators */}
           <div className="flex flex-wrap gap-6 text-sm text-white/60">
-            <span className="flex items-center gap-2">
+            <a href="#accessibility" className="flex items-center gap-2 hover:text-white/90 transition-colors">
               🎧 {t.audioDesc}
-            </span>
+            </a>
             <span className="text-white/30">|</span>
-            <span className="flex items-center gap-2">
+            <a href={lang === 'ua' ? '/en' : '/'} className="flex items-center gap-2 hover:text-white/90 transition-colors">
               🇬🇧 {t.enAvail}
-            </span>
+            </a>
           </div>
         </div>
       </div>
 
       {/* Scroll indicator — in normal flow, always below content */}
-      <div className="relative z-20 hidden sm:flex flex-col items-center gap-2 text-white/30 pb-8">
+      <a href="#live" className="relative z-20 hidden sm:flex flex-col items-center gap-2 text-white/30 hover:text-white/60 transition-colors pb-8">
         <span className="font-display text-xs tracking-widest uppercase">{t.scroll}</span>
         <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor" className="animate-bounce">
           <path d="M8 12L2 6h12z" />
         </svg>
-      </div>
+      </a>
     </section>
   )
 }

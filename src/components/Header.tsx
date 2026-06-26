@@ -40,7 +40,7 @@ export default function Header({ lang }: HeaderProps) {
           {/* Logo */}
           <a href="#top" className="flex-shrink-0">
             <span className="font-display text-white text-lg leading-none" style={{ textTransform: 'none' }}>
-              Новий
+              {lang === 'ua' ? 'Новий' : 'New'}
               <br />
               kod<span className="text-[#E8A030]">_</span>
             </span>
@@ -79,11 +79,9 @@ export default function Header({ lang }: HeaderProps) {
               className="w-9 h-9 flex items-center justify-center border border-white/30 hover:border-white/70 transition-colors rounded-full text-white/70 hover:text-white"
               aria-label="Інклюзивність / Accessibility"
             >
-              <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
                 <circle cx="12" cy="4" r="2" />
-                <path d="M14.5 8h-5L8 12l3 1v5h2v-5l3-1-1.5-4z" />
-                <path d="M9 21a4 4 0 01-4-4 4 4 0 014-4" strokeWidth="0" />
-                <path fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" d="M9 21a4 4 0 006-3.5" />
+                <path d="M16 9H8l-2 4h3v7h2v-4h2v4h2v-7h3l-2-4z" />
               </svg>
             </a>
 
@@ -131,7 +129,12 @@ export default function Header({ lang }: HeaderProps) {
                 {otherLang.toUpperCase()}
               </Link>
             </div>
-            <a href="#accessibility" onClick={() => setMenuOpen(false)} className="text-white/60">♿</a>
+            <a href="#accessibility" onClick={() => setMenuOpen(false)} className="text-white/60 hover:text-white transition-colors" aria-label="Інклюзивність">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                <circle cx="12" cy="4" r="2" />
+                <path d="M16 9H8l-2 4h3v7h2v-4h2v4h2v-7h3l-2-4z" />
+              </svg>
+            </a>
             <a href="#live" onClick={() => setMenuOpen(false)} className="btn-primary ml-auto">
               {t.nav.watch}
             </a>
