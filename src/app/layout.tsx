@@ -35,10 +35,10 @@ export const metadata: Metadata = {
       'Документальний проєкт про українських військових з творчим минулим.',
     images: [
       {
-        url: '/og-image.jpg',
+        url: 'https://newcode.com.ua/og-image.jpg',
         width: 1200,
         height: 630,
-        alt: 'Новий код',
+        alt: 'Новий код — Документальний проєкт',
       },
     ],
   },
@@ -46,7 +46,7 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     title: 'Новий код — Документальний проєкт',
     description: 'Документальний проєкт про українських військових з творчим минулим.',
-    images: ['/og-image.jpg'],
+    images: ['https://newcode.com.ua/og-image.jpg'],
   },
   icons: {
     icon: [
