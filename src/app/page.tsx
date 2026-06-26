@@ -19,11 +19,11 @@ export const metadata: Metadata = {
     'Документальний проєкт про українських військових з творчим минулим, які під час війни продовжують творити і змінюють культурний код країни.',
   openGraph: {
     locale: 'uk_UA',
-    url: 'https://novykod.com',
+    url: 'https://newcode.com.ua',
   },
   alternates: {
-    canonical: 'https://novykod.com',
-    languages: { en: 'https://novykod.com/en' },
+    canonical: 'https://newcode.com.ua',
+    languages: { en: 'https://newcode.com.ua/en' },
   },
 }
 

@@ -19,11 +19,11 @@ export const metadata: Metadata = {
     'A documentary project about Ukrainian servicemen with creative pasts who continue to create and reshape the cultural code of their country.',
   openGraph: {
     locale: 'en_US',
-    url: 'https://novykod.com/en',
+    url: 'https://newcode.com.ua/en',
   },
   alternates: {
-    canonical: 'https://novykod.com/en',
-    languages: { uk: 'https://novykod.com' },
+    canonical: 'https://newcode.com.ua/en',
+    languages: { uk: 'https://newcode.com.ua' },
   },
 }
 

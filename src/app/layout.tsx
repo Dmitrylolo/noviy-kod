@@ -15,7 +15,7 @@ const inter = Inter({
 })
 
 export const metadata: Metadata = {
-  metadataBase: new URL('https://novykod.com'),
+  metadataBase: new URL('https://newcode.com.ua'),
   title: {
     default: 'Новий код — Документальний проєкт',
     template: '%s | Новий код',
@@ -28,7 +28,7 @@ export const metadata: Metadata = {
     type: 'website',
     locale: 'uk_UA',
     alternateLocale: 'en_US',
-    url: 'https://novykod.com',
+    url: 'https://newcode.com.ua',
     siteName: 'Новий код',
     title: 'Новий код — Документальний проєкт',
     description:

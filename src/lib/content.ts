@@ -391,7 +391,7 @@ export const ui = {
     },
     contact: {
       title: 'Контакти',
-      email: 'info@novykod.com',
+      email: 'info@newcode.com.ua',
       namePlaceholder: 'Ваше ім\'я',
       emailPlaceholder: 'Ваш email',
       messagePlaceholder: 'Повідомлення',
@@ -477,7 +477,7 @@ export const ui = {
     },
     contact: {
       title: 'Contact',
-      email: 'info@novykod.com',
+      email: 'info@newcode.com.ua',
       namePlaceholder: 'Your name',
       emailPlaceholder: 'Your email',
       messagePlaceholder: 'Message',

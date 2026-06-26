@@ -50,7 +50,7 @@ export default function PressSection({ lang }: PressSectionProps) {
               {lang === 'ua' ? 'Прес-матеріали для медіа' : 'Press materials for media'}
             </div>
             <div className="text-white/40 text-xs">
-              {lang === 'ua' ? 'Контакт: info@novykod.com' : 'Contact: info@novykod.com'}
+              {lang === 'ua' ? 'Контакт: info@newcode.com.ua' : 'Contact: info@newcode.com.ua'}
             </div>
           </div>
           <a href="/press-kit.pdf" className="btn-outline" download>
