@@ -21,7 +21,7 @@ function EpisodeCard({ ep, t }: { ep: Episode; t: (typeof ui)['ua']['episode'] }
       {/* Thumbnail */}
       <div className="relative aspect-video bg-zinc-900 overflow-hidden">
         <Image
-          src={`https://img.youtube.com/vi/${ep.youtubeId}/mqdefault.jpg`}
+          src={ep.thumbnail ?? `https://img.youtube.com/vi/${ep.youtubeId}/mqdefault.jpg`}
           alt={ep.title}
           fill
           className="object-cover group-hover:scale-105 transition-transform duration-500"
