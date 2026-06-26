@@ -43,13 +43,25 @@ export default function TeamSection({ lang }: TeamSectionProps) {
                 <p className="text-white/60 text-sm">{data.director.bio}</p>
               </div>
             </div>
-            <div className="space-y-4">
-              {data.director.statement.map((para, i) => (
-                <p key={i} className="text-white/70 text-sm leading-relaxed">
-                  {para}
-                </p>
-              ))}
-            </div>
+            <figure className="m-0">
+              <span
+                className="font-display text-[#E8A030] text-5xl leading-none select-none block mb-1"
+                aria-hidden="true"
+                style={{ textTransform: 'none' }}
+              >
+                «
+              </span>
+              <blockquote className="border-l-2 border-[#E8A030]/40 pl-5 space-y-3 m-0">
+                {data.director.statement.map((para, i) => (
+                  <p key={i} className="text-white/70 text-sm leading-relaxed italic">
+                    {para}
+                  </p>
+                ))}
+              </blockquote>
+              <figcaption className="mt-4 pl-5 font-display text-xs tracking-widest text-[#E8A030] uppercase">
+                — {data.director.name}
+              </figcaption>
+            </figure>
           </div>
 
           {/* Team members */}

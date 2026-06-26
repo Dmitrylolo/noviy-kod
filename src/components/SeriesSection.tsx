@@ -126,42 +126,54 @@ export default function SeriesSection({ lang }: SeriesSectionProps) {
           ))}
         </div>
 
-        {/* Episodes grid — min-height prevents page jump on empty tabs */}
-        <div className="min-h-[300px]">
-        {currentSeason.episodes.length > 0 ? (
-          <>
-            <div
-              ref={scrollRef}
-              onScroll={handleScroll}
-              className="flex overflow-x-auto gap-4 pb-2 -mx-4 px-4 sm:mx-0 sm:px-0 sm:grid sm:grid-cols-2 lg:grid-cols-4 snap-x snap-mandatory sm:snap-none scrollbar-none"
-            >
-              {currentSeason.episodes.map((ep) => (
-                <EpisodeCard key={ep.id} ep={ep} t={t.episode} />
-              ))}
-            </div>
-            {/* Carousel dots + counter — mobile only */}
-            {total > 1 && (
-              <div className="flex items-center gap-2 mt-5 sm:hidden">
-                {currentSeason.episodes.map((_, i) => (
-                  <button
-                    key={i}
-                    onClick={() => scrollToEp(i)}
-                    aria-label={`Перейти до епізоду ${i + 1}`}
-                    className={`h-0.5 rounded-full transition-all duration-300 ${i === activeEp ? 'w-8 bg-[#E8A030]' : 'w-4 bg-white/25'}`}
-                  />
-                ))}
-                <span className="ml-auto font-display text-xs text-white/40 tracking-widest">
-                  {String(activeEp + 1).padStart(2, '0')} — {String(total).padStart(2, '0')}
-                </span>
+        {/* Episodes grid */}
+        <div
+          ref={scrollRef}
+          onScroll={handleScroll}
+          className="flex overflow-x-auto gap-4 pb-2 -mx-4 px-4 sm:mx-0 sm:px-0 sm:grid sm:grid-cols-2 lg:grid-cols-4 snap-x snap-mandatory sm:snap-none scrollbar-none"
+        >
+          {currentSeason.episodes.length > 0 ? (
+            currentSeason.episodes.map((ep) => (
+              <EpisodeCard key={ep.id} ep={ep} t={t.episode} />
+            ))
+          ) : (
+            // Skeleton placeholders — same grid layout keeps height stable
+            Array.from({ length: 4 }).map((_, i) => (
+              <div key={i} className="flex-shrink-0 w-72 sm:w-auto bg-white/5 snap-start">
+                <div className="aspect-video bg-zinc-900 flex items-center justify-center">
+                  {i === 0 && (
+                    <span className="font-display text-white/20 text-sm tracking-widest uppercase">
+                      {lang === 'ua' ? 'Незабаром' : 'Coming Soon'}
+                    </span>
+                  )}
+                </div>
+                <div className="p-4 space-y-2">
+                  <div className="h-3 w-4 bg-white/10 rounded" />
+                  <div className="h-4 w-3/4 bg-white/10 rounded" />
+                  <div className="h-3 w-full bg-white/5 rounded" />
+                  <div className="h-3 w-2/3 bg-white/5 rounded" />
+                </div>
               </div>
-            )}
-          </>
-        ) : (
-          <div className="flex items-center justify-center h-[300px] text-white/30 font-display tracking-widest uppercase">
-            {lang === 'ua' ? 'Незабаром' : 'Coming Soon'}
+            ))
+          )}
+        </div>
+
+        {/* Carousel dots + counter — mobile only, only when has content */}
+        {currentSeason.episodes.length > 0 && total > 1 && (
+          <div className="flex items-center gap-2 mt-5 sm:hidden">
+            {currentSeason.episodes.map((_, i) => (
+              <button
+                key={i}
+                onClick={() => scrollToEp(i)}
+                aria-label={`Перейти до епізоду ${i + 1}`}
+                className={`h-0.5 rounded-full transition-all duration-300 ${i === activeEp ? 'w-8 bg-[#E8A030]' : 'w-4 bg-white/25'}`}
+              />
+            ))}
+            <span className="ml-auto font-display text-xs text-white/40 tracking-widest">
+              {String(activeEp + 1).padStart(2, '0')} — {String(total).padStart(2, '0')}
+            </span>
           </div>
         )}
-        </div>
 
         <div className="mt-6 sm:hidden">
           <a
