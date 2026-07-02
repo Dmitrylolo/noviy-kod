@@ -400,7 +400,8 @@ export const ui = {
     },
     contact: {
       title: 'Контакти',
-      email: 'info@newcode.com.ua',
+      email: 'novyikod.ua@gmail.com',
+      phone: '+38 (050) 430 44 15',
       namePlaceholder: 'Ваше ім\'я',
       emailPlaceholder: 'Ваш email',
       messagePlaceholder: 'Повідомлення',
@@ -491,7 +492,8 @@ export const ui = {
     },
     contact: {
       title: 'Contact',
-      email: 'info@newcode.com.ua',
+      email: 'novyikod.ua@gmail.com',
+      phone: '+38 (050) 430 44 15',
       namePlaceholder: 'Your name',
       emailPlaceholder: 'Your email',
       messagePlaceholder: 'Message',

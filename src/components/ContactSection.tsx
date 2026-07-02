@@ -71,9 +71,15 @@ export default function ContactSection({ lang }: ContactSectionProps) {
 
             <a
               href={`mailto:${t.email}`}
-              className="text-[#E8A030] font-display text-lg tracking-widest mb-10 block hover:text-white transition-colors"
+              className="text-[#E8A030] font-display text-lg tracking-widest mb-3 block hover:text-white transition-colors"
             >
               {t.email}
+            </a>
+            <a
+              href={`tel:${t.phone.replace(/\s|\(|\)/g, '')}`}
+              className="text-white/60 font-display text-base tracking-widest mb-10 block hover:text-white transition-colors"
+            >
+              {t.phone}
             </a>
 
             {/* Socials */}
