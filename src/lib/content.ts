@@ -365,10 +365,15 @@ export const ui = {
     },
     episode: {
       watch: 'Дивитися',
+      details: 'Докладніше',
       audioDesc: 'Тифлокоментар',
       english: 'English',
       subtitles: 'Субтитри',
       featured: 'Актуальне',
+    },
+    episode_modal: {
+      watch: 'Дивитися на YouTube →',
+      close: 'Закрити',
     },
     hero_modal: {
       watchEpisode: 'Дивитися серію →',
@@ -451,10 +456,15 @@ export const ui = {
     },
     episode: {
       watch: 'Watch',
+      details: 'More details',
       audioDesc: 'Audio Description',
       english: 'English',
       subtitles: 'Subtitles',
       featured: 'Featured',
+    },
+    episode_modal: {
+      watch: 'Watch on YouTube →',
+      close: 'Close',
     },
     hero_modal: {
       watchEpisode: 'Watch Episode →',
