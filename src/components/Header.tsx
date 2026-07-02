@@ -43,7 +43,7 @@ export default function Header({ lang }: HeaderProps) {
             <span className="font-display text-white text-lg leading-none" style={{ textTransform: 'none' }}>
               {lang === 'ua' ? 'Новий' : 'New'}
               <br />
-              kod<span className="text-[#E8A030]">_</span>
+              {lang === 'ua' ? 'коd' : 'code'}<span className="text-[#E8A030]">_</span>
             </span>
           </a>
 

@@ -17,20 +17,20 @@ const inter = Inter({
 export const metadata: Metadata = {
   metadataBase: new URL('https://newcode.com.ua'),
   title: {
-    default: 'Новий код — Документальний проєкт',
-    template: '%s | Новий код',
+    default: 'Новий коd_ — Документальний проєкт',
+    template: '%s | Новий коd_',
   },
   description:
     'Документальний проєкт про українських військових з творчим минулим, які під час війни продовжують творити і змінюють культурний код країни.',
   keywords: ['документальний фільм', 'Україна', 'військові', 'культура', 'мистецтво', 'war', 'documentary'],
-  authors: [{ name: 'Новий код' }],
+  authors: [{ name: 'Новий коd_' }],
   openGraph: {
     type: 'website',
     locale: 'uk_UA',
     alternateLocale: 'en_US',
     url: 'https://newcode.com.ua',
-    siteName: 'Новий код',
-    title: 'Новий код — Документальний проєкт',
+    siteName: 'Новий коd_',
+    title: 'Новий коd_ — Документальний проєкт',
     description:
       'Документальний проєкт про українських військових з творчим минулим.',
     images: [
@@ -38,13 +38,13 @@ export const metadata: Metadata = {
         url: 'https://newcode.com.ua/og-image.jpg',
         width: 1200,
         height: 630,
-        alt: 'Новий код — Документальний проєкт',
+        alt: 'Новий коd_ — Документальний проєкт',
       },
     ],
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Новий код — Документальний проєкт',
+    title: 'Новий коd_ — Документальний проєкт',
     description: 'Документальний проєкт про українських військових з творчим минулим.',
     images: ['https://newcode.com.ua/og-image.jpg'],
   },

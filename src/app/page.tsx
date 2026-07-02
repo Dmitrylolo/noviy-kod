@@ -14,7 +14,7 @@ import TeamSection from '@/components/TeamSection'
 import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
-  title: 'Новий код — Документальний проєкт',
+  title: 'Новий коd_ — Документальний проєкт',
   description:
     'Документальний проєкт про українських військових з творчим минулим, які під час війни продовжують творити і змінюють культурний код країни.',
   openGraph: {
