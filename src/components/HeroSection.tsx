@@ -17,7 +17,7 @@ export default function HeroSection({ lang }: HeroSectionProps) {
       <div className="absolute inset-0 bg-gradient-to-b from-black/10 via-black/20 to-black/80 z-10" />
       <div
         className="absolute inset-0 bg-cover bg-no-repeat"
-        style={{ backgroundImage: 'url(/hero-bg.jpg)', backgroundPosition: 'center top' }}
+        style={{ backgroundImage: 'url(/hero-bg.webp)', backgroundPosition: 'center top' }}
         aria-hidden="true"
       />
 
