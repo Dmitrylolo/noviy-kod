@@ -205,7 +205,7 @@ export const heroes: Record<Lang, Hero[]> = {
     },
     {
       id: 'poet',
-      name: 'Олена «Білка» Білозерська',
+      name: 'Олена Білозерська',
       role: 'Журналістка · Письменниця · Художниця · Офіцерка ЗСУ',
       description: 'Журналістка, письменниця, художниця та військова. Багато років вона документує українську війну зсередини, поєднуючи роль свідка, учасниці та хранительки пам\'яті.',
       quote: '«Я створюю портрети загиблих, щоб повернути їм ім\'я, обличчя, особисту історію.»',
@@ -251,7 +251,7 @@ export const heroes: Record<Lang, Hero[]> = {
     },
     {
       id: 'poet',
-      name: 'Olena "Bilka" Bilozerska',
+      name: 'Olena Bilozerska',
       role: 'Journalist · Writer · Artist · Officer of the Armed Forces',
       description: 'Journalist, writer, artist and soldier. For many years she has been documenting the Ukrainian war from the inside, combining the roles of witness, participant and keeper of memory.',
       quote: '"I create portraits of the fallen to return their name, face and personal story."',
