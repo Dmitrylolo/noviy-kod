@@ -24,6 +24,10 @@ export default function Header({ lang }: HeaderProps) {
   const otherLang = lang === 'ua' ? 'en' : 'ua'
   const otherHref = lang === 'ua' ? '/en' : '/'
 
+  function setLangCookie(value: string) {
+    document.cookie = `nk_lang=${value}; path=/; max-age=${60 * 60 * 24 * 365}; SameSite=Lax`
+  }
+
   const navLinks = [
     { href: '#series', label: t.nav.series },
     { href: '#heroes', label: t.nav.heroes },
@@ -68,6 +72,7 @@ export default function Header({ lang }: HeaderProps) {
               <span className="text-white/30 mx-1">|</span>
               <Link
                 href={otherHref}
+                onClick={() => setLangCookie(otherLang)}
                 className="text-white/50 hover:text-white transition-colors"
               >
                 {otherLang.toUpperCase()}
@@ -123,7 +128,7 @@ export default function Header({ lang }: HeaderProps) {
             <div className="flex items-center gap-2 text-sm font-display">
               <span className="text-white">{lang.toUpperCase()}</span>
               <span className="text-white/30">|</span>
-              <Link href={otherHref} className="text-white/50">
+              <Link href={otherHref} onClick={() => setLangCookie(otherLang)} className="text-white/50">
                 {otherLang.toUpperCase()}
               </Link>
             </div>
