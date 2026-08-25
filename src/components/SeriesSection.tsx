@@ -21,11 +21,13 @@ function EpisodeCard({
   ep,
   t,
   tModal,
+  lang,
   onOpen,
 }: {
   ep: Episode
   t: (typeof ui)['ua']['episode']
   tModal: (typeof ui)['ua']['episode_modal']
+  lang: Lang
   onOpen: () => void
 }) {
   return (
@@ -34,48 +36,59 @@ function EpisodeCard({
         }`}
     >
       {/* Thumbnail → YouTube with play button on hover */}
-      <a
-        href={ep.youtubeUrl}
-        target="_blank"
-        rel="noopener noreferrer"
-        className="group/thumb block relative aspect-video bg-zinc-900 overflow-hidden"
-        tabIndex={0}
-        aria-label={`${ep.title} — ${tModal.watch}`}
-      >
-        <Image
-          src={ep.thumbnail ?? `https://img.youtube.com/vi/${ep.youtubeId}/mqdefault.jpg`}
-          alt={ep.title}
-          fill
-          className="object-cover group-hover/thumb:scale-105 transition-transform duration-500"
-          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 25vw"
-        />
-        {/* Dark overlay */}
-        <div className="absolute inset-0 bg-black/0 group-hover/thumb:bg-black/50 transition-colors duration-300" />
-
-        {/* Play button */}
-        <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover/thumb:opacity-100 transition-opacity duration-200">
-          <div className="rounded-full border border-[#E8A030] bg-black/40 backdrop-blur-sm w-14 h-14 flex items-center justify-center group-hover/thumb:scale-110 transition-transform duration-200">
-            <PlayIcon />
+      {ep.comingSoon ? (
+        <div className="relative aspect-video bg-zinc-900 flex items-center justify-center">
+          <div className="text-center">
+            <div className="font-display text-[#E8A030] text-xs tracking-widest uppercase mb-1">
+              {lang === 'ua' ? 'Скоро' : 'Coming soon'}
+            </div>
+            <div className="text-white/20 text-sm">— Сезон 2 —</div>
           </div>
         </div>
+      ) : (
+        <a
+          href={ep.youtubeUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="group/thumb block relative aspect-video bg-zinc-900 overflow-hidden"
+          tabIndex={0}
+          aria-label={`${ep.title} — ${tModal.watch}`}
+        >
+          <Image
+            src={ep.thumbnail ?? `https://img.youtube.com/vi/${ep.youtubeId}/mqdefault.jpg`}
+            alt={ep.title}
+            fill
+            className="object-cover group-hover/thumb:scale-105 transition-transform duration-500"
+            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 25vw"
+          />
+          {/* Dark overlay */}
+          <div className="absolute inset-0 bg-black/0 group-hover/thumb:bg-black/50 transition-colors duration-300" />
 
-        {/* Featured badge */}
-        {ep.featured && (
-          <span className="absolute top-3 left-3 bg-[#E8A030] text-black text-xs font-display px-2 py-0.5 uppercase tracking-widest">
-            {t.featured}
-          </span>
-        )}
+          {/* Play button */}
+          <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover/thumb:opacity-100 transition-opacity duration-200">
+            <div className="rounded-full border border-[#E8A030] bg-black/40 backdrop-blur-sm w-14 h-14 flex items-center justify-center group-hover/thumb:scale-110 transition-transform duration-200">
+              <PlayIcon />
+            </div>
+          </div>
 
-        {/* Accessibility indicators */}
-        <div className="absolute top-3 right-3 flex gap-1">
-          {ep.hasAudioDesc && (
-            <span className="bg-black/70 text-white text-xs px-1.5 py-0.5">🎧</span>
+          {/* Featured badge */}
+          {ep.featured && (
+            <span className="absolute top-3 left-3 bg-[#E8A030] text-black text-xs font-display px-2 py-0.5 uppercase tracking-widest">
+              {t.featured}
+            </span>
           )}
-          {ep.hasEnglish && (
-            <span className="bg-black/70 text-white text-xs px-1.5 py-0.5">🇬🇧</span>
-          )}
-        </div>
-      </a>
+
+          {/* Accessibility indicators */}
+          <div className="absolute top-3 right-3 flex gap-1">
+            {ep.hasAudioDesc && (
+              <span className="bg-black/70 text-white text-xs px-1.5 py-0.5">🎧</span>
+            )}
+            {ep.hasEnglish && (
+              <span className="bg-black/70 text-white text-xs px-1.5 py-0.5">🇬🇧</span>
+            )}
+          </div>
+        </a>
+      )}
 
       {/* Info — whole section opens modal */}
       <button
@@ -95,11 +108,13 @@ function EpisodeModal({
   ep,
   t,
   tModal,
+  lang,
   onClose,
 }: {
   ep: Episode
   t: (typeof ui)['ua']['episode']
   tModal: (typeof ui)['ua']['episode_modal']
+  lang: Lang
   onClose: () => void
 }) {
   useEffect(() => {
@@ -130,13 +145,24 @@ function EpisodeModal({
         <div className="p-6 lg:p-8">
           {/* YouTube embed */}
           <div className="relative aspect-video bg-zinc-900 mb-6 overflow-hidden">
-            <iframe
-              src={`https://www.youtube.com/embed/${ep.youtubeId}?rel=0&modestbranding=1`}
-              title={ep.title}
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-              allowFullScreen
-              className="absolute inset-0 w-full h-full"
-            />
+            {ep.comingSoon || !ep.youtubeId ? (
+              <div className="absolute inset-0 flex items-center justify-center">
+                <div className="text-center">
+                  <div className="font-display text-[#E8A030] text-sm tracking-widest uppercase mb-2">
+                    {lang === 'ua' ? 'Серія вже скоро' : 'Episode coming soon'}
+                  </div>
+                  <div className="text-white/30 text-xs">{lang === 'ua' ? 'Сезон 2 — вересень 2026' : 'Season 2 — September 2026'}</div>
+                </div>
+              </div>
+            ) : (
+              <iframe
+                src={`https://www.youtube.com/embed/${ep.youtubeId}?rel=0&modestbranding=1`}
+                title={ep.title}
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowFullScreen
+                className="absolute inset-0 w-full h-full"
+              />
+            )}
           </div>
 
           {/* Episode number + title */}
@@ -173,15 +199,17 @@ function EpisodeModal({
           )}
 
           {/* Watch on YouTube */}
-          <a
-            href={ep.youtubeUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="btn-primary inline-flex items-center gap-3"
-          >
-            <PlayIcon />
-            {tModal.watch}
-          </a>
+          {!ep.comingSoon && ep.youtubeUrl && (
+            <a
+              href={ep.youtubeUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="btn-primary inline-flex items-center gap-3"
+            >
+              <PlayIcon />
+              {tModal.watch}
+            </a>
+          )}
         </div>
       </div>
     </div>
@@ -266,6 +294,7 @@ export default function SeriesSection({ lang }: SeriesSectionProps) {
                   ep={ep}
                   t={t.episode}
                   tModal={t.episode_modal}
+                  lang={lang}
                   onOpen={() => setSelectedEp(ep)}
                 />
               ))
@@ -327,6 +356,7 @@ export default function SeriesSection({ lang }: SeriesSectionProps) {
           ep={selectedEp}
           t={t.episode}
           tModal={t.episode_modal}
+          lang={lang}
           onClose={() => setSelectedEp(null)}
         />
       )}
