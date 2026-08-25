@@ -1,3 +1,6 @@
+'use client'
+
+import { useState } from 'react'
 import { ui } from '@/lib/content'
 import type { Lang } from '@/lib/types'
 
@@ -33,6 +36,7 @@ export default function ProductionSection({ lang }: ProductionSectionProps) {
   const t = ui[lang]
   const production = (t as typeof t & { production?: { blocks: { label: string; text: string }[] } }).production
   const blocks = production?.blocks ?? []
+  const [lightbox, setLightbox] = useState<{ src: string; alt: string } | null>(null)
 
   return (
     <section id="production" className="py-16 lg:py-24 bg-zinc-950">
@@ -60,14 +64,18 @@ export default function ProductionSection({ lang }: ProductionSectionProps) {
         {/* Season 1 gallery */}
         <div className="grid grid-cols-2 sm:grid-cols-3 gap-2 mb-10">
           {s1Gallery.map((item, i) => (
-            <div key={i} className="aspect-video bg-zinc-800 overflow-hidden group relative">
+            <button
+              key={i}
+              onClick={() => setLightbox({ src: item.src, alt: item.alt[lang] })}
+              className="aspect-[4/3] bg-zinc-800 overflow-hidden group relative cursor-zoom-in"
+            >
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
                 src={item.src}
                 alt={item.alt[lang]}
                 className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
               />
-            </div>
+            </button>
           ))}
         </div>
 
@@ -87,17 +95,44 @@ export default function ProductionSection({ lang }: ProductionSectionProps) {
         {/* Season 2 gallery */}
         <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-2">
           {s2Gallery.map((item, i) => (
-            <div key={i} className="aspect-video bg-zinc-800 overflow-hidden group relative">
+            <button
+              key={i}
+              onClick={() => setLightbox({ src: item.src, alt: item.alt[lang] })}
+              className="aspect-[4/3] bg-zinc-800 overflow-hidden group relative cursor-zoom-in"
+            >
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
                 src={item.src}
                 alt={item.alt[lang]}
                 className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
               />
-            </div>
+            </button>
           ))}
         </div>
       </div>
+
+      {/* Lightbox */}
+      {lightbox && (
+        <div
+          className="fixed inset-0 z-50 bg-black/90 flex items-center justify-center p-4"
+          onClick={() => setLightbox(null)}
+        >
+          <button
+            className="absolute top-4 right-4 text-white/60 hover:text-white text-3xl leading-none"
+            onClick={() => setLightbox(null)}
+            aria-label="Close"
+          >
+            ×
+          </button>
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src={lightbox.src}
+            alt={lightbox.alt}
+            className="max-w-full max-h-[90vh] object-contain shadow-2xl"
+            onClick={(e) => e.stopPropagation()}
+          />
+        </div>
+      )}
     </section>
   )
 }
