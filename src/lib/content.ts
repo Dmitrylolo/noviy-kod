@@ -5,22 +5,24 @@ import type { Hero, Lang, PressItem, Screening, Season, TeamMember } from './typ
 export const liveContent = {
   ua: {
     label: 'Актуальне',
-    title: '«Новий коd_». Сезон 2',
-    description: 'Ще більше історій, які неможливо не розповісти. Вже цього літа.',
-    youtubeId: '',
-    comingSoon: true,
-    watchUrl: 'https://www.youtube.com/@NovyiKod',
-    watchLabel: 'Дивитися зараз',
+    title: '«Новий коd_». Сезон 2 — вже у вересні 2026!',
+    description:
+      'Сергій Жадан, Олена Герасим\'юк, Тарас Козуб і Міша Правильний — герої другого сезону «Нового коdу_». Події розгортаються у Києві, Харкові, Львові та Івано-Франківську, а історії героїв сягають окупованого Донбасу. Це розповідь про пам\'ять і повернення додому, досвід військовослужбовців і ветеранів — та українську культуру, яка під час війни вистоює, змінюється й народжує нові форми та сенси.',
+    youtubeId: 'nSXbKjmJ2RY',
+    comingSoon: false,
+    watchUrl: 'https://www.youtube.com/watch?v=nSXbKjmJ2RY',
+    watchLabel: 'Дивитися трейлер',
     ytLabel: 'На YouTube',
   },
   en: {
     label: 'Coming Soon',
-    title: '"New Code". Season 2',
-    description: 'More stories that cannot remain untold. Coming this summer.',
-    youtubeId: '',
-    comingSoon: true,
-    watchUrl: 'https://www.youtube.com/@NovyiKod',
-    watchLabel: 'Watch Now',
+    title: '"New Code". Season 2 — September 2026!',
+    description:
+      'Serhiy Zhadan, Olena Herasymyuk, Taras Kozub and Misha Pravylnyi — the heroes of the second season of "New Code". Events unfold in Kyiv, Kharkiv, Lviv and Ivano-Frankivsk, and the heroes\' stories reach occupied Donbas. This is a story about memory and returning home, the experience of servicemen and veterans — and Ukrainian culture that endures, transforms and creates new forms and meanings during war.',
+    youtubeId: 'nSXbKjmJ2RY',
+    comingSoon: false,
+    watchUrl: 'https://www.youtube.com/watch?v=nSXbKjmJ2RY',
+    watchLabel: 'Watch Trailer',
     ytLabel: 'On YouTube',
   },
 }
@@ -91,7 +93,64 @@ export const seasons: Record<Lang, Season[]> = {
     {
       id: 'season2',
       label: 'Сезон 2',
-      episodes: [],
+      episodes: [
+        {
+          id: 's2e1',
+          number: 1,
+          title: 'ОЛЕНА ГЕРАСИМ\'ЮК',
+          synopsis: 'Слово, що стає дією',
+          description:
+            'Поезія, Майдан, «Госпітальєри», ветеранський досвід і «Недописані». Історія про слово, яке перестає бути просто текстом і стає дією, пам\'яттю та відповідальністю.',
+          youtubeId: '',
+          youtubeUrl: '',
+          hasAudioDesc: false,
+          hasEnglish: false,
+          hasSubtitles: false,
+          comingSoon: true,
+        },
+        {
+          id: 's2e2',
+          number: 2,
+          title: 'ТАРАС КОЗУБ',
+          synopsis: 'Ліра, що знаходить нову форму',
+          description:
+            'Після втрати руки на війні лірник і ветеран Тарас Козуб стає актором і виходить на сцену. У театрі й музиці він знаходить новий сенс, поєднуючи особистий досвід з українською лірницькою та кобзарською традицією.',
+          youtubeId: '',
+          youtubeUrl: '',
+          hasAudioDesc: false,
+          hasEnglish: false,
+          hasSubtitles: false,
+          comingSoon: true,
+        },
+        {
+          id: 's2e3',
+          number: 3,
+          title: 'МІША ПРАВИЛЬНИЙ',
+          synopsis: 'Дорога додому',
+          description:
+            'Репер і військовий розбирає власний шлях зросійщення у книзі, музиці та виставі «Додому». Історія свідомого повернення до мови, культури та власної країни.',
+          youtubeId: '',
+          youtubeUrl: '',
+          hasAudioDesc: false,
+          hasEnglish: false,
+          hasSubtitles: false,
+          comingSoon: true,
+        },
+        {
+          id: 's2e4',
+          number: 4,
+          title: 'СЕРГІЙ ЖАДАН',
+          synopsis: 'Харків і земля, яку неможливо втратити',
+          description:
+            'Харків, Старобільськ, «Хартія», молоді художники та пам\'ять про землю, до якої неможливо повернутися. Історія про культуру, яка допомагає не втратити дім.',
+          youtubeId: '',
+          youtubeUrl: '',
+          hasAudioDesc: false,
+          hasEnglish: false,
+          hasSubtitles: false,
+          comingSoon: true,
+        },
+      ],
     },
     {
       id: 'specials',
@@ -160,7 +219,64 @@ export const seasons: Record<Lang, Season[]> = {
         },
       ],
     },
-    { id: 'season2', label: 'Season 2', episodes: [] },
+    { id: 'season2', label: 'Season 2', episodes: [
+      {
+        id: 's2e1',
+        number: 1,
+        title: 'OLENA HERASYMYUK',
+        synopsis: 'The word that becomes action',
+        description:
+          'Poetry, Maidan, Hospitallers, veteran experience and "Unfinished". A story about a word that ceases to be mere text and becomes action, memory and responsibility.',
+        youtubeId: '',
+        youtubeUrl: '',
+        hasAudioDesc: false,
+        hasEnglish: false,
+        hasSubtitles: false,
+        comingSoon: true,
+      },
+      {
+        id: 's2e2',
+        number: 2,
+        title: 'TARAS KOZUB',
+        synopsis: 'The lyre that finds a new form',
+        description:
+          'After losing his arm in war, lirnik and veteran Taras Kozub becomes an actor and takes the stage. In theatre and music he finds new meaning, combining personal experience with the Ukrainian lirnik and kobzar tradition.',
+        youtubeId: '',
+        youtubeUrl: '',
+        hasAudioDesc: false,
+        hasEnglish: false,
+        hasSubtitles: false,
+        comingSoon: true,
+      },
+      {
+        id: 's2e3',
+        number: 3,
+        title: 'MISHA PRAVYLNYI',
+        synopsis: 'The road home',
+        description:
+          'Rapper and soldier unpacks his own path of Russification in a book, music and the show "Home". A story of conscious return to language, culture and one\'s own country.',
+        youtubeId: '',
+        youtubeUrl: '',
+        hasAudioDesc: false,
+        hasEnglish: false,
+        hasSubtitles: false,
+        comingSoon: true,
+      },
+      {
+        id: 's2e4',
+        number: 4,
+        title: 'SERHIY ZHADAN',
+        synopsis: 'Kharkiv and the land that cannot be lost',
+        description:
+          'Kharkiv, Starobilsk, Khartiya, young artists and the memory of land to which one cannot return. A story about culture that helps not to lose home.',
+        youtubeId: '',
+        youtubeUrl: '',
+        hasAudioDesc: false,
+        hasEnglish: false,
+        hasSubtitles: false,
+        comingSoon: true,
+      },
+    ] },
     { id: 'specials', label: 'Specials', episodes: [] },
     { id: 'shorts', label: 'Shorts', episodes: [] },
   ],
@@ -213,6 +329,39 @@ export const heroes: Record<Lang, Hero[]> = {
       youtubeUrl: 'https://www.youtube.com/watch?v=-3geo8Gjy5o',
       episodeUrl: 'https://www.youtube.com/watch?v=-3geo8Gjy5o',
       photo: '/hero-olena.webp',
+      season: 1,
+    },
+    {
+      id: 's2-herasymyuk',
+      name: 'Олена Герасим\'\u044eк',
+      role: 'Поетка · Культурна діячка · Ветеранка',
+      description: 'Поезія, Майдан, «Госпітальєри», ветеранський досвід і «Недописані». Історія про слово, яке перестає бути просто текстом і стає дією, пам\'\u044fттю та відповідальністю.',
+      quote: '«Слово перестає бути просто текстом — воно стає дією.»',
+      youtubeId: '', youtubeUrl: '', episodeUrl: '', season: 2, comingSoon: true,
+    },
+    {
+      id: 's2-kozub',
+      name: 'Тарас Козуб',
+      role: 'Лірник · Майстер · Ветеран',
+      description: 'Після втрати руки на війні лірник і ветеран Тарас Козуб стає актором і виходить на сцену. У театрі й музиці він знаходить новий сенс, поєднуючи особистий досвід з українською лірницькою традицією.',
+      quote: '«Театр дав мені нове життя — мову цією людям, які можуть просто не чути його.»',
+      youtubeId: '', youtubeUrl: '', episodeUrl: '', season: 2, comingSoon: true,
+    },
+    {
+      id: 's2-pravylnyi',
+      name: 'Міша Правильний',
+      role: 'Репер · Письменник · Військовослужбовець',
+      description: 'Репер і військовий розбирає власний шлях зросійщення у книзі, музиці та виставі «Додому». Історія свідомого повернення до мови, культури та власної країни.',
+      quote: '«Моя музика — це дорога до себе назад.»',
+      youtubeId: '', youtubeUrl: '', episodeUrl: '', season: 2, comingSoon: true,
+    },
+    {
+      id: 's2-zhadan',
+      name: 'Сергій Жадан',
+      role: 'Письменник · Поет · Музикант · Військовослужбовець',
+      description: 'Харків, Старобільськ, «Хартія», молоді художники та пам\'\u044fть про землю, до якої неможливо повернутися. Історія про культуру, яка допомагає не втратити дім.',
+      quote: '«Харків — це не просто місто. Це мова та пам\'\u044fть.»',
+      youtubeId: '', youtubeUrl: '', episodeUrl: '', season: 2, comingSoon: true,
     },
   ],
   en: [
@@ -259,6 +408,39 @@ export const heroes: Record<Lang, Hero[]> = {
       youtubeUrl: 'https://www.youtube.com/watch?v=-3geo8Gjy5o',
       episodeUrl: 'https://www.youtube.com/watch?v=-3geo8Gjy5o',
       photo: '/hero-olena.webp',
+      season: 1,
+    },
+    {
+      id: 's2-herasymyuk',
+      name: 'Olena Herasymyuk',
+      role: 'Poet · Cultural figure · Veteran',
+      description: 'Poetry, Maidan, Hospitallers, veteran experience and "Unfinished". A story about a word that ceases to be mere text and becomes action, memory and responsibility.',
+      quote: '"The word stops being just text — it becomes action."',
+      youtubeId: '', youtubeUrl: '', episodeUrl: '', season: 2, comingSoon: true,
+    },
+    {
+      id: 's2-kozub',
+      name: 'Taras Kozub',
+      role: 'Lirnik · Master · Veteran',
+      description: 'After losing his arm in war, lirnik and veteran Taras Kozub becomes an actor and takes the stage. In theatre and music he finds new meaning, combining personal experience with the Ukrainian lirnik and kobzar tradition.',
+      quote: '"Theatre gave me a new life — a language for people who simply cannot feel it."',
+      youtubeId: '', youtubeUrl: '', episodeUrl: '', season: 2, comingSoon: true,
+    },
+    {
+      id: 's2-pravylnyi',
+      name: 'Misha Pravylnyi',
+      role: 'Rapper · Writer · Serviceman',
+      description: 'Rapper and soldier unpacks his own path of Russification in a book, music and the show "Home". A story of conscious return to language, culture and one\'s own country.',
+      quote: '"My music is a road back to myself."',
+      youtubeId: '', youtubeUrl: '', episodeUrl: '', season: 2, comingSoon: true,
+    },
+    {
+      id: 's2-zhadan',
+      name: 'Serhiy Zhadan',
+      role: 'Writer · Poet · Musician · Serviceman',
+      description: 'Kharkiv, Starobilsk, Khartiya, young artists and the memory of land to which one cannot return. A story about culture that helps not to lose home.',
+      quote: '"Kharkiv is not just a city. It is language and memory."',
+      youtubeId: '', youtubeUrl: '', episodeUrl: '', season: 2, comingSoon: true,
     },
   ],
 }
@@ -278,10 +460,11 @@ export const team: Record<Lang, { director: { name: string; bio: string; stateme
       ],
     },
     members: [
-      { name: 'Ім\'я Прізвище', role: 'Оператор' },
-      { name: 'Ім\'я Прізвище', role: 'Звукорежисер' },
-      { name: 'Ім\'я Прізвище', role: 'Монтаж' },
-      { name: 'Ім\'я Прізвище', role: 'Продюсер' },
+      { name: 'Антон Печатнов, Артем Терещенко, Станіслав Ткачев, Дмитро Муленко, Дмитро Чуб', role: 'Оператори-постановники' },
+      { name: 'Віталій Ляшко, Артем Стромаков, Василь Вишняков', role: 'Монтаж' },
+      { name: 'Андрій Танабаш', role: 'Продюсер' },
+      { name: 'Дар\'я Чупрун', role: 'Фотографиня' },
+      { name: 'Дмитро Чистяков', role: 'Редактор' },
     ],
   },
   en: {
@@ -296,10 +479,11 @@ export const team: Record<Lang, { director: { name: string; bio: string; stateme
       ],
     },
     members: [
-      { name: 'Name Surname', role: 'Camera Operator' },
-      { name: 'Name Surname', role: 'Sound Designer' },
-      { name: 'Name Surname', role: 'Editor' },
-      { name: 'Name Surname', role: 'Producer' },
+      { name: 'Anton Pechatnov, Artem Tereshchenko, Stanislav Tkachev, Dmytro Mulenko, Dmytro Chub', role: 'Cinematographers' },
+      { name: 'Vitaliy Lyashko, Artem Stromakov, Vasyl Vyshniakov', role: 'Editors' },
+      { name: 'Andrii Tanabash', role: 'Producer' },
+      { name: 'Daria Chuprun', role: 'Photographer' },
+      { name: 'Dmytro Chistiakov', role: 'Story Editor' },
     ],
   },
 }
@@ -308,22 +492,42 @@ export const team: Record<Lang, { director: { name: string; bio: string; stateme
 
 export const press: Record<Lang, PressItem[]> = {
   ua: [
-    { outlet: 'Медіа 1', title: 'Назва публікації', date: '2024', url: '#' },
-    { outlet: 'Медіа 2', title: 'Назва публікації', date: '2024', url: '#' },
-    { outlet: 'Медіа 3', title: 'Назва публікації', date: '2025', url: '#' },
+    { outlet: 'Culture Partnership', title: '«Новий код: як війна народжує нову українську культуру»', date: '2025', url: '#' },
+    { outlet: 'Detector Media', title: '«B Україні запустили документальний вебсеріал про військових, які поєднують службу і творчість»', date: '2025', url: '#' },
+    { outlet: 'Сектор Правди', title: '«Мистецтво як зброя: як війна формує нову українську культуру»', date: '2025', url: '#' },
+    { outlet: '04637', title: '«Документальний вебсеріал про військових, які поєднують службу і творчість, запустили в Україні»', date: '2025', url: '#' },
+    { outlet: 'Еспресо', title: '«Мілітарна культура: як поети й музиканти воюють за Україну»', date: '2025', url: '#' },
+    { outlet: 'Detector Media', title: '«5 листопада — фотовиставка та показ епізодів «Новий коd_»»', date: 'листопад 2025', url: '#' },
+    { outlet: 'Львівська міська рада', title: '«Львів\'ян запрошують на фотовиставку та показ «Новий коd_»»', date: 'листопад 2025', url: '#' },
   ],
   en: [
-    { outlet: 'Media 1', title: 'Publication title', date: '2024', url: '#' },
-    { outlet: 'Media 2', title: 'Publication title', date: '2024', url: '#' },
-    { outlet: 'Media 3', title: 'Publication title', date: '2025', url: '#' },
+    { outlet: 'Culture Partnership', title: '"New Code: how war gives birth to new Ukrainian culture"', date: '2025', url: '#' },
+    { outlet: 'Detector Media', title: '"Ukraine launches documentary web series about soldiers who combine service and creativity"', date: '2025', url: '#' },
+    { outlet: 'Sektor Pravdy', title: '"Art as a weapon: how war shapes new Ukrainian culture"', date: '2025', url: '#' },
+    { outlet: '04637', title: '"Documentary web series about soldiers combining service and art launched in Ukraine"', date: '2025', url: '#' },
+    { outlet: 'Espreso', title: '"Military culture: how poets and musicians fight for Ukraine"', date: '2025', url: '#' },
+    { outlet: 'Detector Media', title: '"Nov 5 — photo exhibition and screening of New Code episodes"', date: 'Nov 2025', url: '#' },
+    { outlet: 'Lviv City Council', title: '"Lviv residents invited to photo exhibition and screening of New Code"', date: 'Nov 2025', url: '#' },
   ],
 }
 
 // ─── Screenings ──────────────────────────────────────────────────────────────
 
 export const screenings: Record<Lang, Screening[]> = {
-  ua: [],
-  en: [],
+  ua: [
+    {
+      title: 'Фотовиставка та показ «Новий коd_»',
+      location: 'Будинок Воїна, Львів',
+      date: '5 листопада 2025',
+    },
+  ],
+  en: [
+    {
+      title: 'Photo Exhibition and Screening of “New Code”',
+      location: 'Budynok Voina, Lviv',
+      date: '5 November 2025',
+    },
+  ],
 }
 
 // ─── Nav / UI strings ────────────────────────────────────────────────────────
@@ -358,9 +562,11 @@ export const ui = {
       accessibility: 'Інклюзивність',
       about: 'Про проєкт',
       press: 'Преса',
+      pressSubtitle: 'Історії проєкту «Новий коd_» виходять за межі екрану — у медіа, публічні розмови та міжнародний культурний простір.',
       pressKit: 'Завантажити прескіт',
       screenings: 'Покази',
       screeningsUpdate: 'Розклад оновлюється',
+      screeningsDescription: '«Новий коd_» можна побачити онлайн та на спеціальних показах. Стежте за анонсами або запросіть проєкт до свого міста, фестивалю чи події.',
       contacts: 'Контакти',
     },
     episode: {
@@ -381,6 +587,7 @@ export const ui = {
     },
     accessibility: {
       title: 'Доступність',
+      description: '«Новий коd_» має бути доступним кожному — незалежно від способу сприйняття та мови.',
       audioDescTitle: 'Тифлокоментар',
       audioDescItems: ['Сезон 1', 'Сезон 2'],
       enTitle: 'Англомовна версія',
@@ -411,9 +618,9 @@ export const ui = {
     },
     production: {
       blocks: [
-        { label: 'Географія', text: 'Зйомки відбувалися в різних регіонах України: Київщина, Харківщина, Донеччина. Частина матеріалу створена безпосередньо під час бойових чергувань і ротацій.' },
-        { label: 'Метод', text: 'Документальне спостереження без постановочних сцен. Камера залишається поруч із людиною в її реальному середовищі, фіксуючи тишу, сумнів і момент внутрішнього вибору.' },
-        { label: 'Команда', text: 'Незалежна авторська команда документалістів, операторів, журналістів і продюсерів з досвідом реалізації воєнних, гуманітарних та культурних проєктів.' },
+        { label: 'Географія', text: 'Зйомки відбувалися в різних регіонах України. Перший сезон — Київщина, Харківщина, Донеччина. Другий сезон розширює географію: Харків, Київ, Львів, Івано-Франківськ. Камера заходить у творчі майстерні й радіостудії, виходить на театральні та концертні сцени.' },
+        { label: 'Метод', text: 'Документальне спостереження без постановочних сцен. Камера залишається поруч з людиною в її реальному середовищі, фіксуючи тишу, сумнів і момент внутрішнього вибору.' },
+        { label: 'Команда', text: 'Незалежна авторська команда документалістів, операторів, журналістів, звукорежисерів та продюсерів з досвідом виробництва воєнних, гуманітарних та культурних проєктів.' },
         { label: 'Довіра', text: 'Основою проєкту стала довіра. Робота над кожним героєм тривала від кількох тижнів до кількох місяців. Саме завдяки цій довірі команда могла бути поруч у найважливіші моменти.' },
       ],
     },
@@ -450,9 +657,11 @@ export const ui = {
       accessibility: 'Accessibility',
       about: 'About',
       press: 'Press',
+      pressSubtitle: 'The stories of “New Code” go beyond the screen — into media, public conversations and international cultural space.',
       pressKit: 'Download Press Kit',
       screenings: 'Screenings',
       screeningsUpdate: 'Schedule updating',
+      screeningsDescription: '"New Code" can be seen online and at special screenings. Follow the announcements or invite the project to your city, festival or event.',
       contacts: 'Contact',
     },
     episode: {
@@ -473,6 +682,7 @@ export const ui = {
     },
     accessibility: {
       title: 'Accessibility',
+      description: '"New Code" should be accessible to everyone — regardless of the way of perception and language.',
       audioDescTitle: 'Audio Description',
       audioDescItems: ['Season 1', 'Season 2'],
       enTitle: 'English Version',
@@ -503,7 +713,7 @@ export const ui = {
     },
     production: {
       blocks: [
-        { label: 'Geography', text: 'Filming took place across different regions of Ukraine: Kyiv region, Kharkiv region, Donetsk region. Part of the material was created directly during combat shifts and rotations.' },
+        { label: 'Geography', text: 'Filming took place across different regions of Ukraine. Season 1 covers Kyiv, Kharkiv and Donetsk regions. Season 2 expands the geography: Kharkiv, Kyiv, Lviv and Ivano-Frankivsk. The camera enters creative workshops and radio studios, takes the stage at theatres and concerts.' },
         { label: 'Method', text: 'Observational documentary without staged scenes. The camera stays with the person in their real environment, capturing silence, doubt and the moment of inner choice.' },
         { label: 'Team', text: 'An independent creative team of documentary filmmakers, cinematographers, journalists and producers with experience in conflict, humanitarian and cultural projects.' },
         { label: 'Trust', text: 'The foundation of the project was trust. Work with each hero lasted from several weeks to several months. This trust allowed the team to be present in the most important moments.' },

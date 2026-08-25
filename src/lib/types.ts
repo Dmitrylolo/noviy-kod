@@ -13,6 +13,7 @@ export interface Episode {
   hasEnglish: boolean
   hasSubtitles: boolean
   featured?: boolean
+  comingSoon?: boolean
 }
 
 export interface Season {
@@ -31,6 +32,8 @@ export interface Hero {
   youtubeUrl: string
   episodeUrl: string
   photo?: string
+  season?: 1 | 2
+  comingSoon?: boolean
 }
 
 export interface TeamMember {

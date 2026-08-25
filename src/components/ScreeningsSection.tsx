@@ -24,6 +24,14 @@ export default function ScreeningsSection({ lang }: ScreeningsSectionProps) {
           </div>
         </div>
 
+        {/* Description */}
+        <p className="text-white/50 text-sm mt-4 mb-2 max-w-xl">
+          {(t.sections as typeof t.sections & { screeningsDescription?: string }).screeningsDescription}
+        </p>
+        <a href="#contacts" className="btn-outline text-xs mb-8 inline-flex">
+          {lang === 'ua' ? 'Запросити проєкт' : 'Invite the project'}
+        </a>
+
         {list.length > 0 && (
           <div className="mt-8 space-y-3">
             {list.map((item, i) => (

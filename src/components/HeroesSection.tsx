@@ -11,10 +11,12 @@ interface HeroesSectionProps {
 function HeroModal({
   hero,
   t,
+  lang,
   onClose,
 }: {
   hero: Hero
   t: (typeof ui)['ua']
+  lang: Lang
   onClose: () => void
 }) {
   return (
@@ -38,15 +40,26 @@ function HeroModal({
 
         <div className="p-6 lg:p-8">
           {/* Video */}
-          <div className="yt-embed mb-6">
-            <iframe
-              src={`https://www.youtube.com/embed/${hero.youtubeId}?rel=0&modestbranding=1`}
-              title={hero.name}
-              allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-              allowFullScreen
-              loading="lazy"
-            />
-          </div>
+          {hero.youtubeId ? (
+            <div className="yt-embed mb-6">
+              <iframe
+                src={`https://www.youtube.com/embed/${hero.youtubeId}?rel=0&modestbranding=1`}
+                title={hero.name}
+                allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowFullScreen
+                loading="lazy"
+              />
+            </div>
+          ) : (
+            <div className="aspect-video bg-zinc-900 flex items-center justify-center mb-6">
+              <div className="text-center">
+                <div className="font-display text-[#E8A030] text-xs tracking-widest uppercase mb-2">
+                  {lang === 'ua' ? 'Серія скоро' : 'Episode coming soon'}
+                </div>
+                <div className="text-white/30 text-sm">—</div>
+              </div>
+            </div>
+          )}
 
           {/* Content */}
           <div className="mb-2 text-[#E8A030] font-display text-xs tracking-widest uppercase">
@@ -58,14 +71,20 @@ function HeroModal({
             {hero.quote}
           </blockquote>
 
-          <a
-            href={hero.episodeUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="btn-primary"
-          >
-            {t.hero_modal.watchEpisode}
-          </a>
+          {hero.episodeUrl ? (
+            <a
+              href={hero.episodeUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="btn-primary"
+            >
+              {t.hero_modal.watchEpisode}
+            </a>
+          ) : (
+            <div className="font-display text-[#E8A030] text-xs tracking-widest uppercase">
+              {lang === 'ua' ? 'Вже скоро — сезон 2' : 'Season 2 — coming soon'}
+            </div>
+          )}
         </div>
       </div>
     </div>
@@ -131,6 +150,12 @@ export default function HeroesSection({ lang }: HeroesSectionProps) {
                 )}
                 {/* Hover overlay */}
                 <div className="absolute inset-0 bg-[#E8A030]/10 opacity-0 group-hover:opacity-100 transition-opacity z-20" />
+                {/* Season 2 badge */}
+                {hero.season === 2 && (
+                  <div className="absolute top-3 left-3 z-30 font-display text-[10px] tracking-widest uppercase bg-[#E8A030] text-black px-2 py-0.5">
+                    {lang === 'ua' ? 'Сезон 2' : 'Season 2'}
+                  </div>
+                )}
               </div>
 
               {/* Info */}
@@ -161,7 +186,7 @@ export default function HeroesSection({ lang }: HeroesSectionProps) {
       </div>
 
       {selected && (
-        <HeroModal hero={selected} t={t} onClose={() => setSelected(null)} />
+        <HeroModal hero={selected} t={t} lang={lang} onClose={() => setSelected(null)} />
       )}
     </section>
   )

@@ -17,9 +17,11 @@ export default function PressSection({ lang }: PressSectionProps) {
           {t.sections.press}
         </h2>
         <p className="text-white/40 text-sm mb-10">
-          {lang === 'ua'
-            ? 'Проєкт представлений у міжнародних медіа та розвивається для фестивальної дистрибуції'
-            : 'The project has been featured in international media and is developing for festival distribution'}
+          {(t.sections as typeof t.sections & { pressSubtitle?: string }).pressSubtitle ?? (
+            lang === 'ua'
+              ? 'Проєкт представлений у міжнародних медіа та розвивається для фестивальної дистрибуції'
+              : 'The project has been featured in international media and is developing for festival distribution'
+          )}
         </p>
 
         {/* Press items */}

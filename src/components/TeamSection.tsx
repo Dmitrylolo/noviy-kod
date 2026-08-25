@@ -5,15 +5,15 @@ interface TeamSectionProps {
   lang: Lang
 }
 
-const partners = [
-  { name: 'Український культурний фонд', abbr: 'УКФ' },
-  { name: 'Partner 2', abbr: 'P2' },
-  { name: 'Partner 3', abbr: 'P3' },
-]
-
 export default function TeamSection({ lang }: TeamSectionProps) {
   const t = ui[lang]
   const data = team[lang]
+
+  const partners = [
+    { name: lang === 'ua' ? 'Український культурний фонд' : 'Ukrainian Cultural Fund', abbr: 'УКФ' },
+    { name: lang === 'ua' ? '3-тя окрема штурмова бригада' : '3rd Separate Assault Brigade', abbr: lang === 'ua' ? '3 ОШБр' : '3 SAB' },
+    { name: lang === 'ua' ? 'ТОВ «Авіокон проєкт»' : 'Aviokon Project', abbr: lang === 'ua' ? 'Авіокон' : 'Aviokon' },
+  ]
 
   return (
     <section id="team" className="py-16 lg:py-24 bg-black">
@@ -31,7 +31,7 @@ export default function TeamSection({ lang }: TeamSectionProps) {
               <div className="w-20 h-20 bg-zinc-800 flex-shrink-0 overflow-hidden">
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img
-                  src="/director-chankova.png"
+                  src="/director-chankova.webp"
                   alt={data.director.name}
                   className="w-full h-full object-cover object-top"
                 />
@@ -67,8 +67,8 @@ export default function TeamSection({ lang }: TeamSectionProps) {
           {/* Team members */}
           <div>
             <div className="grid grid-cols-2 gap-4 mb-10">
-              {data.members.map((member) => (
-                <div key={member.role} className="border-t border-white/10 pt-3">
+              {data.members.map((member, i) => (
+                <div key={i} className="border-t border-white/10 pt-3">
                   <div className="text-[#E8A030] font-display text-xs tracking-widest uppercase mb-1">
                     {member.role}
                   </div>

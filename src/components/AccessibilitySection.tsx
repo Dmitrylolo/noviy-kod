@@ -12,9 +12,14 @@ export default function AccessibilitySection({ lang }: AccessibilitySectionProps
     <section id="accessibility" className="py-16 lg:py-24 bg-zinc-950">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <p className="section-label">{t.title}</p>
-        <h2 className="section-title text-4xl lg:text-5xl text-white mb-12">
+        <h2 className="section-title text-4xl lg:text-5xl text-white mb-4">
           {t.title}
         </h2>
+        {(t as typeof t & { description?: string }).description && (
+          <p className="text-white/50 text-sm max-w-xl mb-10">
+            {(t as typeof t & { description?: string }).description}
+          </p>
+        )}
 
         <div className="grid sm:grid-cols-2 gap-8 lg:gap-16 mb-10">
           {/* Audio description */}
