@@ -1,4 +1,4 @@
-import { ui } from '@/lib/content'
+import { ui, YOUTUBE_URL } from '@/lib/content'
 import type { Lang } from '@/lib/types'
 import Link from 'next/link'
 
@@ -9,7 +9,7 @@ interface FooterProps {
 const socialLinks = [
   {
     label: 'YouTube',
-    href: 'https://www.youtube.com/@novykod',
+    href: YOUTUBE_URL,
     icon: (
       <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
         <path d="M23 7s-.3-2-1.2-2.8c-1.1-1.2-2.4-1.2-3-1.3C16.2 2.8 12 2.8 12 2.8s-4.2 0-6.8.2c-.6.1-1.9.1-3 1.3C1.3 5 1 7 1 7S.7 9.3.7 11.6v2.2c0 2.2.3 4.4.3 4.4s.3 2 1.2 2.8c1.1 1.2 2.6 1.1 3.3 1.2C7.5 22.4 12 22.4 12 22.4s4.2 0 6.8-.2c.6-.1 1.9-.1 3-1.3.9-.8 1.2-2.8 1.2-2.8s.3-2.2.3-4.4v-2.2C23.3 9.3 23 7 23 7zm-13.5 9V8.5l8 3.8-8 3.7z" />

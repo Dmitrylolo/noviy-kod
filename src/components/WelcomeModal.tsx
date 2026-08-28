@@ -31,7 +31,7 @@ const copy = {
 
 const SESSION_KEY = 'nk_welcome_dismissed'
 const PERSIST_KEY = 'nk_welcome_hidden'
-const YOUTUBE_URL = 'https://www.youtube.com/@novykod'
+import { YOUTUBE_URL } from '@/lib/content'
 
 export default function WelcomeModal({ lang }: WelcomeModalProps) {
   const [visible, setVisible] = useState(false)

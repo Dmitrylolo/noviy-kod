@@ -1,5 +1,9 @@
 import type { Hero, Lang, PressItem, Screening, Season, TeamMember } from './types'
 
+// ─── Social links ────────────────────────────────────────────────────────────
+export const YOUTUBE_URL = 'https://www.youtube.com/@NovyiKod'
+export const YOUTUBE_URL_EN = 'https://www.youtube.com/@NovyiKod'
+
 // ─── Live / Featured ────────────────────────────────────────────────────────
 
 export const liveContent = {

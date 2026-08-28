@@ -1,6 +1,6 @@
 'use client'
 
-import { seasons, ui } from '@/lib/content'
+import { seasons, ui, YOUTUBE_URL } from '@/lib/content'
 import type { Episode, Lang } from '@/lib/types'
 import Image from 'next/image'
 import { useEffect, useRef, useState } from 'react'
@@ -256,7 +256,7 @@ export default function SeriesSection({ lang }: SeriesSectionProps) {
               {t.sections.series}
             </h2>
             <a
-              href={`https://www.youtube.com/@novykod${lang === 'en' ? '-en' : ''}`}
+              href={YOUTUBE_URL}
               target="_blank"
               rel="noopener noreferrer"
               className="text-[#E8A030] font-display text-sm tracking-widest uppercase hidden sm:block"
@@ -339,7 +339,7 @@ export default function SeriesSection({ lang }: SeriesSectionProps) {
 
           <div className="mt-6 sm:hidden">
             <a
-              href={`https://www.youtube.com/@novykod${lang === 'en' ? '-en' : ''}`}
+              href={YOUTUBE_URL}
               target="_blank"
               rel="noopener noreferrer"
               className="text-[#E8A030] font-display text-sm tracking-widest uppercase"
