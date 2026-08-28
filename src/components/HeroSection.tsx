@@ -29,7 +29,7 @@ export default function HeroSection({ lang }: HeroSectionProps) {
         <div className="max-w-2xl">
           {/* Title */}
           <h1 className="font-display text-6xl sm:text-7xl lg:text-9xl text-white mb-6 leading-none" style={{ textTransform: 'none' }}>
-            {t.hero.brandPrefix} {t.hero.brandSuffix}<span className="text-[#E8A030]">_</span>
+            {t.brandPrefix} {t.brandSuffix}<span className="text-[#E8A030]">_</span>
           </h1>
 
           {/* Description */}
