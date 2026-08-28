@@ -56,7 +56,7 @@ export default function Footer({ lang }: FooterProps) {
         <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
           {/* Logo */}
           <a href="#top" className="font-display text-white text-sm tracking-widest" style={{ textTransform: 'none' }}>
-            {lang === 'ua' ? 'Новий коd' : 'New code'}<span className="text-[#E8A030]">_</span>
+            {t.footer.title}<span className="text-[#E8A030]">_</span>
           </a>
 
           {/* Copyright */}

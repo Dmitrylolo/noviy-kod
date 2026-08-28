@@ -1,4 +1,4 @@
-import { team, ui } from '@/lib/content'
+import { team, ui, partners as partnersData } from '@/lib/content'
 import type { Lang } from '@/lib/types'
 
 interface TeamSectionProps {
@@ -8,12 +8,7 @@ interface TeamSectionProps {
 export default function TeamSection({ lang }: TeamSectionProps) {
   const t = ui[lang]
   const data = team[lang]
-
-  const partners = [
-    { name: lang === 'ua' ? 'Український культурний фонд' : 'Ukrainian Cultural Fund', abbr: 'УКФ' },
-    { name: lang === 'ua' ? '3-тя окрема штурмова бригада' : '3rd Separate Assault Brigade', abbr: lang === 'ua' ? '3 ОШБр' : '3 SAB' },
-    { name: lang === 'ua' ? 'ТОВ «Авіокон проєкт»' : 'Aviokon Project', abbr: lang === 'ua' ? 'Авіокон' : 'Aviokon' },
-  ]
+  const partners = partnersData[lang]
 
   return (
     <section id="team" className="py-16 lg:py-24 bg-black">

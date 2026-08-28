@@ -26,10 +26,10 @@ export default function ScreeningsSection({ lang }: ScreeningsSectionProps) {
 
         {/* Description */}
         <p className="text-white/50 text-sm mt-4 mb-2 max-w-xl">
-          {(t.sections as typeof t.sections & { screeningsDescription?: string }).screeningsDescription}
+          {t.sections.screeningsDescription}
         </p>
         <a href="#contacts" className="btn-outline text-xs mb-8 inline-flex">
-          {lang === 'ua' ? 'Запросити проєкт' : 'Invite the project'}
+          {t.sections.screeningsInvite}
         </a>
 
         {list.length > 0 && (

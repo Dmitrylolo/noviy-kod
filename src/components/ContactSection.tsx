@@ -115,7 +115,7 @@ export default function ContactSection({ lang }: ContactSectionProps) {
           <div>
             {sent ? (
               <div className="flex items-center justify-center h-full text-white/60 font-display tracking-widest uppercase">
-                {lang === 'ua' ? 'Дякуємо! Ми звяжемося.' : 'Thank you! We\'ll be in touch.'}
+                {t.contact.successMessage}
               </div>
             ) : (
               <form onSubmit={handleSubmit} className="space-y-4">

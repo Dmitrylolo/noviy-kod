@@ -82,14 +82,12 @@ export default function ProductionSection({ lang }: ProductionSectionProps) {
         {/* Season 2 BTS label */}
         <div className="flex items-center gap-4 mb-4">
           <span className="font-display text-[#E8A030] text-xs tracking-widest uppercase">
-            {lang === 'ua' ? 'Сезон 2 — За лаштунками' : 'Season 2 — Behind the Scenes'}
+            {t.sections.s2BehindScenes}
           </span>
           <div className="flex-1 h-px bg-white/10" />
         </div>
         <p className="text-white/40 text-xs mb-4 italic">
-          {lang === 'ua'
-            ? 'Між сценою і фронтом. Між репетицією та бойовим виходом. Між камерою і реальним життям.'
-            : 'Between stage and frontline. Between rehearsal and combat. Between the camera and real life.'}
+          {(t as typeof t & { production?: { s2Description?: string } }).production?.s2Description}
         </p>
 
         {/* Season 2 gallery */}

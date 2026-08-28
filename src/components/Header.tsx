@@ -45,9 +45,9 @@ export default function Header({ lang }: HeaderProps) {
           {/* Logo */}
           <a href="#top" className="flex-shrink-0">
             <span className="font-display text-white text-lg leading-none" style={{ textTransform: 'none' }}>
-              {lang === 'ua' ? 'Новий' : 'New'}
+              {t.hero.brandPrefix}
               <br />
-              {lang === 'ua' ? 'коd' : 'code'}<span className="text-[#E8A030]">_</span>
+              {t.hero.brandSuffix}<span className="text-[#E8A030]">_</span>
             </span>
           </a>
 

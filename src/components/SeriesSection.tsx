@@ -40,9 +40,9 @@ function EpisodeCard({
         <div className="relative aspect-video bg-zinc-900 flex items-center justify-center">
           <div className="text-center">
             <div className="font-display text-[#E8A030] text-xs tracking-widest uppercase mb-1">
-              {lang === 'ua' ? 'Скоро' : 'Coming soon'}
+              {t.episode.comingSoon}
             </div>
-            <div className="text-white/20 text-sm">— Сезон 2 —</div>
+            <div className="text-white/20 text-sm">— {t.sections.season2} —</div>
           </div>
         </div>
       ) : (
@@ -149,9 +149,9 @@ function EpisodeModal({
               <div className="absolute inset-0 flex items-center justify-center">
                 <div className="text-center">
                   <div className="font-display text-[#E8A030] text-sm tracking-widest uppercase mb-2">
-                    {lang === 'ua' ? 'Серія вже скоро' : 'Episode coming soon'}
+                    {t.episode.episodeComingSoon}
                   </div>
-                  <div className="text-white/30 text-xs">{lang === 'ua' ? 'Сезон 2 — вересень 2026' : 'Season 2 — September 2026'}</div>
+                  <div className="text-white/30 text-xs">{t.episode.season2Date}</div>
                 </div>
               </div>
             ) : (
@@ -305,7 +305,7 @@ export default function SeriesSection({ lang }: SeriesSectionProps) {
                   <div className="aspect-video bg-zinc-900 flex items-center justify-center">
                     {i === 0 && (
                       <span className="font-display text-white/20 text-sm tracking-widest uppercase">
-                        {lang === 'ua' ? 'Незабаром' : 'Coming Soon'}
+                        {t.episode.comingSoon}
                       </span>
                     )}
                   </div>

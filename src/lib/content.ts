@@ -4,6 +4,20 @@ import type { Hero, Lang, PressItem, Screening, Season, TeamMember } from './typ
 export const YOUTUBE_URL = 'https://www.youtube.com/@NovyiKod'
 export const YOUTUBE_URL_EN = 'https://www.youtube.com/@NovyiKod'
 
+// ─── Partners ────────────────────────────────────────────────────────────────
+export const partners = {
+  ua: [
+    { name: 'Український культурний фонд', abbr: 'УКФ' },
+    { name: '3-тя окрема штурмова бригада', abbr: '3 ОШБр' },
+    { name: 'ТОВ «Авіокон проєкт»', abbr: 'Авіокон' },
+  ],
+  en: [
+    { name: 'Ukrainian Cultural Fund', abbr: 'UCF' },
+    { name: '3rd Separate Assault Brigade', abbr: '3 SAB' },
+    { name: 'Aviokon Project', abbr: 'Aviokon' },
+  ],
+}
+
 // ─── Live / Featured ────────────────────────────────────────────────────────
 
 export const liveContent = {
@@ -549,6 +563,8 @@ export const ui = {
     },
     hero: {
       title: 'НОВИЙ КОД',
+      brandPrefix: 'Новий',
+      brandSuffix: 'коd',
       subtitle: 'Авторський документальний проєкт про покоління війни,\nяке формує культуру, пам\'ять та сенси майбутнього.\n\nОсобисті історії українських військових, які залишаються митцями.',
       note: 'Створено за підтримки Українського культурного фонду',
       watchSeries: 'Дивитися серії',
@@ -570,10 +586,15 @@ export const ui = {
       press: 'Преса',
       pressSubtitle: 'Історії проєкту «Новий коd_» виходять за межі екрану — у медіа, публічні розмови та міжнародний культурний простір.',
       pressKit: 'Завантажити прескіт',
+      pressKitLabel: 'Прес-матеріали для медіа',
+      pressContact: 'Контакт: info@newcode.com.ua',
       screenings: 'Покази',
       screeningsUpdate: 'Розклад оновлюється',
       screeningsDescription: '«Новий коd_» можна побачити онлайн та на спеціальних показах. Стежте за анонсами або запросіть проєкт до свого міста, фестивалю чи події.',
+      screeningsInvite: 'Запросити проєкт',
       contacts: 'Контакти',
+      season2: 'Сезон 2',
+      s2BehindScenes: 'Сезон 2 — За лаштунками',
     },
     episode: {
       watch: 'Дивитися',
@@ -582,6 +603,9 @@ export const ui = {
       english: 'English',
       subtitles: 'Субтитри',
       featured: 'Актуальне',
+      comingSoon: 'Скоро',
+      episodeComingSoon: 'Серія вже скоро',
+      season2Date: 'Сезон 2 — вересень 2026',
     },
     episode_modal: {
       watch: 'Дивитися на YouTube →',
@@ -590,6 +614,8 @@ export const ui = {
     hero_modal: {
       watchEpisode: 'Дивитися серію →',
       close: 'Закрити',
+      episodeComingSoon: 'Серія скоро',
+      season2ComingSoon: 'Вже скоро — сезон 2',
     },
     accessibility: {
       title: 'Доступність',
@@ -602,6 +628,7 @@ export const ui = {
     },
     about: {
       title: 'Про проєкт',
+      importanceTitle: 'Важливість',
       manifesto: 'Нова Україна народжується зараз. Це покоління, яке одночасно воює і творить, захищає і переосмислює — і формує нову культуру, нову пам\'ять та нові сенси просто зараз, поки все це відбувається на наших очах.',
       paragraphs: [
         '«Новий коd_» — авторський цикл документальних фільмів про українських військових, які були митцями у мирному житті та не втратили здатності творити під час війни. Проєкт створений режисеркою та журналісткою Мариною Чанковою за підтримки Українського культурного фонду та партнерів.',
@@ -621,8 +648,10 @@ export const ui = {
       submit: 'Надіслати',
       subscribe: 'Підписатися',
       subscribePlaceholder: 'Ваш email',
+      successMessage: 'Дякуємо! Ми звяжемося.',
     },
     production: {
+      s2Description: 'Між сценою і фронтом. Між репетицією та бойовим виходом. Між камерою і реальним життям.',
       blocks: [
         { label: 'Географія', text: 'Зйомки відбувалися в різних регіонах України. Перший сезон — Київщина, Харківщина, Донеччина. Другий сезон розширює географію: Харків, Київ, Львів, Івано-Франківськ. Камера заходить у творчі майстерні й радіостудії, виходить на театральні та концертні сцени.' },
         { label: 'Метод', text: 'Документальне спостереження без постановочних сцен. Камера залишається поруч з людиною в її реальному середовищі, фіксуючи тишу, сумнів і момент внутрішнього вибору.' },
@@ -631,6 +660,7 @@ export const ui = {
       ],
     },
     footer: {
+      title: 'Новий коd',
       rights: 'Новий коd_. Усі права захищені.',
     },
   },
@@ -644,6 +674,8 @@ export const ui = {
     },
     hero: {
       title: 'NEW CODE',
+      brandPrefix: 'New',
+      brandSuffix: 'code',
       subtitle: 'An authored documentary project about a generation of war\nthat shapes culture, memory and the meanings of the future.\n\nPersonal stories of Ukrainian servicemen who remain artists.',
       note: 'Created with the support of the Ukrainian Cultural Fund',
       watchSeries: 'Watch Series',
@@ -665,10 +697,15 @@ export const ui = {
       press: 'Press',
       pressSubtitle: 'The stories of “New Code” go beyond the screen — into media, public conversations and international cultural space.',
       pressKit: 'Download Press Kit',
+      pressKitLabel: 'Press materials for media',
+      pressContact: 'Contact: info@newcode.com.ua',
       screenings: 'Screenings',
       screeningsUpdate: 'Schedule updating',
       screeningsDescription: '"New Code" can be seen online and at special screenings. Follow the announcements or invite the project to your city, festival or event.',
+      screeningsInvite: 'Invite the project',
       contacts: 'Contact',
+      season2: 'Season 2',
+      s2BehindScenes: 'Season 2 — Behind the Scenes',
     },
     episode: {
       watch: 'Watch',
@@ -677,6 +714,9 @@ export const ui = {
       english: 'English',
       subtitles: 'Subtitles',
       featured: 'Featured',
+      comingSoon: 'Coming soon',
+      episodeComingSoon: 'Episode coming soon',
+      season2Date: 'Season 2 — September 2026',
     },
     episode_modal: {
       watch: 'Watch on YouTube →',
@@ -685,6 +725,8 @@ export const ui = {
     hero_modal: {
       watchEpisode: 'Watch Episode →',
       close: 'Close',
+      episodeComingSoon: 'Episode coming soon',
+      season2ComingSoon: 'Season 2 — coming soon',
     },
     accessibility: {
       title: 'Accessibility',
@@ -697,6 +739,7 @@ export const ui = {
     },
     about: {
       title: 'About the Project',
+      importanceTitle: 'Why It Matters',
       manifesto: 'A new Ukraine is being born right now. This is a generation that simultaneously fights and creates, defends and reimagines — shaping new culture, new memory and new meaning as it all unfolds before our eyes.',
       paragraphs: [
         '"New Code" is an authored cycle of documentary films about Ukrainian servicemen who were artists in peacetime and have not lost their ability to create during the war. The project was created by documentary filmmaker and journalist Maryna Chankova, supported by the Ukrainian Cultural Fund and partners.',
@@ -716,8 +759,10 @@ export const ui = {
       submit: 'Send',
       subscribe: 'Subscribe',
       subscribePlaceholder: 'Your email',
+      successMessage: "Thank you! We'll be in touch.",
     },
     production: {
+      s2Description: 'Between stage and frontline. Between rehearsal and combat. Between the camera and real life.',
       blocks: [
         { label: 'Geography', text: 'Filming took place across different regions of Ukraine. Season 1 covers Kyiv, Kharkiv and Donetsk regions. Season 2 expands the geography: Kharkiv, Kyiv, Lviv and Ivano-Frankivsk. The camera enters creative workshops and radio studios, takes the stage at theatres and concerts.' },
         { label: 'Method', text: 'Observational documentary without staged scenes. The camera stays with the person in their real environment, capturing silence, doubt and the moment of inner choice.' },
@@ -726,6 +771,7 @@ export const ui = {
       ],
     },
     footer: {
+      title: 'New code',
       rights: 'New Code. All rights reserved.',
     },
   },

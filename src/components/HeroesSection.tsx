@@ -54,7 +54,7 @@ function HeroModal({
             <div className="aspect-video bg-zinc-900 flex items-center justify-center mb-6">
               <div className="text-center">
                 <div className="font-display text-[#E8A030] text-xs tracking-widest uppercase mb-2">
-                  {lang === 'ua' ? 'Серія скоро' : 'Episode coming soon'}
+                  {t.hero_modal.episodeComingSoon}
                 </div>
                 <div className="text-white/30 text-sm">—</div>
               </div>
@@ -82,7 +82,7 @@ function HeroModal({
             </a>
           ) : (
             <div className="font-display text-[#E8A030] text-xs tracking-widest uppercase">
-              {lang === 'ua' ? 'Вже скоро — сезон 2' : 'Season 2 — coming soon'}
+              {t.hero_modal.season2ComingSoon}
             </div>
           )}
         </div>
@@ -153,7 +153,7 @@ export default function HeroesSection({ lang }: HeroesSectionProps) {
                 {/* Season 2 badge */}
                 {hero.season === 2 && (
                   <div className="absolute top-3 left-3 z-30 font-display text-[10px] tracking-widest uppercase bg-[#E8A030] text-black px-2 py-0.5">
-                    {lang === 'ua' ? 'Сезон 2' : 'Season 2'}
+                    {t.sections.season2}
                   </div>
                 )}
               </div>

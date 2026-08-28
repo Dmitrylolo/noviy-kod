@@ -51,7 +51,7 @@ export default function AboutSection({ lang }: AboutSectionProps) {
             {t.importance && (
               <div className="bg-zinc-900 p-6 lg:p-8 border-t border-[#E8A030]/30">
                 <p className="text-[#E8A030] font-display text-xs tracking-widest uppercase mb-4">
-                  {lang === 'ua' ? 'Важливість' : 'Why It Matters'}
+                  {t.about.importanceTitle}
                 </p>
                 <p className="text-white/60 text-sm leading-relaxed">{t.importance}</p>
               </div>

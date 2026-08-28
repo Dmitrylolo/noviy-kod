@@ -17,7 +17,7 @@ export default function PressSection({ lang }: PressSectionProps) {
           {t.sections.press}
         </h2>
         <p className="text-white/40 text-sm mb-10">
-          {(t.sections as typeof t.sections & { pressSubtitle?: string }).pressSubtitle ?? (
+          {t.sections.pressSubtitle ?? (
             lang === 'ua'
               ? 'Проєкт представлений у міжнародних медіа та розвивається для фестивальної дистрибуції'
               : 'The project has been featured in international media and is developing for festival distribution'
@@ -49,10 +49,10 @@ export default function PressSection({ lang }: PressSectionProps) {
         <div className="border-t border-white/10 pt-8 flex flex-col sm:flex-row items-start sm:items-center gap-4 justify-between">
           <div>
             <div className="text-white/60 text-sm mb-1">
-              {lang === 'ua' ? 'Прес-матеріали для медіа' : 'Press materials for media'}
+              {t.sections.pressKitLabel}
             </div>
             <div className="text-white/40 text-xs">
-              {lang === 'ua' ? 'Контакт: info@newcode.com.ua' : 'Contact: info@newcode.com.ua'}
+              {t.sections.pressContact}
             </div>
           </div>
           <a href="/press-kit.pdf" className="btn-outline" download>
