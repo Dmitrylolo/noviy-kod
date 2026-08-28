@@ -12,6 +12,7 @@ export default function AboutSection({ lang }: AboutSectionProps) {
     manifesto?: string
     paragraphs?: string[]
     importance?: string
+    importanceTitle?: string
   }
 
   return (
@@ -51,7 +52,7 @@ export default function AboutSection({ lang }: AboutSectionProps) {
             {t.importance && (
               <div className="bg-zinc-900 p-6 lg:p-8 border-t border-[#E8A030]/30">
                 <p className="text-[#E8A030] font-display text-xs tracking-widest uppercase mb-4">
-                  {t.about.importanceTitle}
+                  {t.importanceTitle}
                 </p>
                 <p className="text-white/60 text-sm leading-relaxed">{t.importance}</p>
               </div>
