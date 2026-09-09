@@ -18,12 +18,13 @@ function detectLang(acceptLanguage: string | null): 'ua' | 'en' {
 export function middleware(request: NextRequest) {
   const url = request.nextUrl.clone()
 
-  // Legacy: /?lang=en → /en, set cookie so future visits stay on EN
-  if (url.searchParams.get('lang') === 'en') {
+  // Explicit language switch via query param
+  const forcedLang = url.searchParams.get('lang')
+  if (forcedLang === 'en' || forcedLang === 'ua') {
     url.searchParams.delete('lang')
-    url.pathname = '/en'
+    url.pathname = forcedLang === 'en' ? '/en' : '/'
     const res = NextResponse.redirect(url)
-    res.cookies.set(LANG_COOKIE, 'en', { path: '/', maxAge: COOKIE_MAX_AGE, sameSite: 'lax' })
+    res.cookies.set(LANG_COOKIE, forcedLang, { path: '/', maxAge: COOKIE_MAX_AGE, sameSite: 'lax' })
     return res
   }
 

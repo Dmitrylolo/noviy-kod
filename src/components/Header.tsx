@@ -22,7 +22,7 @@ export default function Header({ lang }: HeaderProps) {
   }, [])
 
   const otherLang = lang === 'ua' ? 'en' : 'ua'
-  const otherHref = lang === 'ua' ? '/en' : '/'
+  const otherHref = lang === 'ua' ? '/?lang=en' : '/?lang=ua'
 
   function setLangCookie(value: string) {
     document.cookie = `nk_lang=${value}; path=/; max-age=${60 * 60 * 24 * 365}; SameSite=Lax`

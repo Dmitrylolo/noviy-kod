@@ -49,7 +49,7 @@ export default function HeroSection({ lang }: HeroSectionProps) {
               {t.watchSeries}
             </a>
             <a
-              href={lang === 'ua' ? '/en' : '/'}
+              href={lang === 'ua' ? '/?lang=en' : '/?lang=ua'}
               className="btn-outline"
             >
               {t.watchEn}
@@ -62,7 +62,7 @@ export default function HeroSection({ lang }: HeroSectionProps) {
               🎧 {t.audioDesc}
             </a>
             <span className="text-white/30">|</span>
-            <a href={lang === 'ua' ? '/en' : '/'} className="flex items-center gap-2 hover:text-white/90 transition-colors">
+            <a href={lang === 'ua' ? '/?lang=en' : '/?lang=ua'} className="flex items-center gap-2 hover:text-white/90 transition-colors">
               🇬🇧 {t.enAvail}
             </a>
           </div>

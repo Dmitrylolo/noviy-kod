@@ -56,7 +56,7 @@ export default function AccessibilitySection({ lang }: AccessibilitySectionProps
         </div>
 
         <a
-          href={lang === 'ua' ? '/en' : '/'}
+          href={lang === 'ua' ? '/?lang=en' : '/?lang=ua'}
           className="btn-outline"
         >
           {t.watchBtn}

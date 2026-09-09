@@ -47,7 +47,7 @@ const socialLinks = [
 
 export default function Footer({ lang }: FooterProps) {
   const t = ui[lang]
-  const otherHref = lang === 'ua' ? '/en' : '/'
+  const otherHref = lang === 'ua' ? '/?lang=en' : '/?lang=ua'
   const otherLabel = lang === 'ua' ? 'EN' : 'UA'
 
   return (
