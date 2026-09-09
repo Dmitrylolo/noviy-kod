@@ -6,6 +6,8 @@ export const ui = {
       production: 'Виробництво',
       team: 'Команда',
       watch: 'Дивитися',
+      currentLang: 'Українська',
+      switchLang: 'English',
     },
     hero: {
       title: 'НОВИЙ КОД',
@@ -14,9 +16,9 @@ export const ui = {
       subtitle: 'Авторський документальний проєкт про покоління війни,\nяке формує культуру, пам\'ять та сенси майбутнього.\n\nОсобисті історії українських військових, які залишаються митцями.',
       note: 'Створено за підтримки Українського культурного фонду',
       watchSeries: 'Дивитися серії',
-      watchEn: 'Watch in English',
+      switchLang: 'Watch in English',
       audioDesc: 'Доступно з тифлокоментарем',
-      enAvail: 'English version available',
+      languageVersionAvailable: 'English version available',
       scroll: 'Прокрутити вниз',
     },
     sections: {
@@ -126,6 +128,8 @@ export const ui = {
       production: 'Production',
       team: 'Team',
       watch: 'Watch',
+      currentLang: 'English',
+      switchLang: 'Українська',
     },
     hero: {
       title: 'NEW CODE',
@@ -134,9 +138,9 @@ export const ui = {
       subtitle: 'An authored documentary project about a generation of war\nthat shapes culture, memory and the meanings of the future.\n\nPersonal stories of Ukrainian servicemen who remain artists.',
       note: 'Created with the support of the Ukrainian Cultural Fund',
       watchSeries: 'Watch Series',
-      watchEn: 'Watch in English',
+      switchLang: 'Дивитися українською',
       audioDesc: 'Audio description available',
-      enAvail: 'English version available',
+      languageVersionAvailable: 'Доступна українська версія',
       scroll: 'Scroll down',
     },
     sections: {

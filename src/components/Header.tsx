@@ -68,14 +68,14 @@ export default function Header({ lang }: HeaderProps) {
           <div className="hidden lg:flex items-center gap-4">
             {/* Lang switcher */}
             <div className="flex items-center gap-1 text-sm font-display tracking-widest">
-              <span className="text-white">{lang.toUpperCase()}</span>
+              <span className="text-white">{t.nav.currentLang}</span>
               <span className="text-white/30 mx-1">|</span>
               <Link
                 href={otherHref}
                 onClick={() => setLangCookie(otherLang)}
                 className="text-white/50 hover:text-white transition-colors"
               >
-                {otherLang.toUpperCase()}
+                {t.nav.switchLang}
               </Link>
             </div>
 
@@ -126,10 +126,10 @@ export default function Header({ lang }: HeaderProps) {
           </nav>
           <div className="flex items-center gap-4 pt-4 border-t border-white/10">
             <div className="flex items-center gap-2 text-sm font-display">
-              <span className="text-white">{lang.toUpperCase()}</span>
+              <span className="text-white">{t.nav.currentLang}</span>
               <span className="text-white/30">|</span>
               <Link href={otherHref} onClick={() => setLangCookie(otherLang)} className="text-white/50">
-                {otherLang.toUpperCase()}
+                {t.nav.switchLang}
               </Link>
             </div>
             <a href="#accessibility" onClick={() => setMenuOpen(false)} className="text-white/60 hover:text-white transition-colors" aria-label="Інклюзивність">

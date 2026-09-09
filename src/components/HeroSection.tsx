@@ -7,6 +7,8 @@ interface HeroSectionProps {
 
 export default function HeroSection({ lang }: HeroSectionProps) {
   const t = ui[lang].hero
+  const otherHref = lang === 'ua' ? '/?lang=en' : '/?lang=ua'
+  const otherFlag = lang === 'ua' ? '🇬🇧' : '🇺🇦'
 
   return (
     <section
@@ -49,10 +51,10 @@ export default function HeroSection({ lang }: HeroSectionProps) {
               {t.watchSeries}
             </a>
             <a
-              href={lang === 'ua' ? '/?lang=en' : '/?lang=ua'}
+              href={otherHref}
               className="btn-outline"
             >
-              {t.watchEn}
+              {t.switchLang}
             </a>
           </div>
 
@@ -62,8 +64,8 @@ export default function HeroSection({ lang }: HeroSectionProps) {
               🎧 {t.audioDesc}
             </a>
             <span className="text-white/30">|</span>
-            <a href={lang === 'ua' ? '/?lang=en' : '/?lang=ua'} className="flex items-center gap-2 hover:text-white/90 transition-colors">
-              🇬🇧 {t.enAvail}
+            <a href={otherHref} className="flex items-center gap-2 hover:text-white/90 transition-colors">
+              {otherFlag} {t.languageVersionAvailable}
             </a>
           </div>
         </div>
