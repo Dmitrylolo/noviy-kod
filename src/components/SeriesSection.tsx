@@ -276,28 +276,51 @@ function ShortsModal({
   onClose: () => void
 }) {
   const [activeIndex, setActiveIndex] = useState(startIndex)
+  const [isDesktop, setIsDesktop] = useState(false)
   const scrollerRef = useRef<HTMLDivElement>(null)
   const slideRefs = useRef<Array<HTMLDivElement | null>>([])
 
   useEffect(() => {
+    const media = window.matchMedia('(min-width: 1024px)')
+    const update = () => setIsDesktop(media.matches)
+    update()
+    media.addEventListener('change', update)
+    return () => media.removeEventListener('change', update)
+  }, [])
+
+  useEffect(() => {
+    if (isDesktop) return
     slideRefs.current[startIndex]?.scrollIntoView({ behavior: 'auto', block: 'start' })
-  }, [startIndex])
+  }, [isDesktop, startIndex])
 
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => {
       if (e.key === 'Escape') onClose()
       if (e.key === 'ArrowDown') {
-        slideRefs.current[Math.min(activeIndex + 1, episodes.length - 1)]?.scrollIntoView({ behavior: 'smooth', block: 'start' })
+        e.preventDefault()
+        const nextIndex = Math.min(activeIndex + 1, episodes.length - 1)
+        if (isDesktop) {
+          setActiveIndex(nextIndex)
+        } else {
+          slideRefs.current[nextIndex]?.scrollIntoView({ behavior: 'smooth', block: 'start' })
+        }
       }
       if (e.key === 'ArrowUp') {
-        slideRefs.current[Math.max(activeIndex - 1, 0)]?.scrollIntoView({ behavior: 'smooth', block: 'start' })
+        e.preventDefault()
+        const prevIndex = Math.max(activeIndex - 1, 0)
+        if (isDesktop) {
+          setActiveIndex(prevIndex)
+        } else {
+          slideRefs.current[prevIndex]?.scrollIntoView({ behavior: 'smooth', block: 'start' })
+        }
       }
     }
     document.addEventListener('keydown', onKey)
     return () => document.removeEventListener('keydown', onKey)
-  }, [activeIndex, episodes.length, onClose])
+  }, [activeIndex, episodes.length, isDesktop, onClose])
 
   useEffect(() => {
+    if (isDesktop) return
     const root = scrollerRef.current
     if (!root) return
 
@@ -326,7 +349,17 @@ function ShortsModal({
     })
 
     return () => observer.disconnect()
-  }, [activeIndex])
+  }, [activeIndex, isDesktop])
+
+  const activeEpisode = episodes[activeIndex]
+
+  const goToPrev = () => {
+    setActiveIndex((prev) => Math.max(prev - 1, 0))
+  }
+
+  const goToNext = () => {
+    setActiveIndex((prev) => Math.min(prev + 1, episodes.length - 1))
+  }
 
   return (
     <div
@@ -344,43 +377,76 @@ function ShortsModal({
       </div>
 
       <div className="h-full w-full flex items-center justify-center p-4">
-        <div
-          ref={scrollerRef}
-          onClick={(e) => e.stopPropagation()}
-          className="h-[88vh] w-full max-w-[480px] overflow-y-auto snap-y snap-mandatory no-scrollbar"
-        >
-          {episodes.map((ep, i) => (
-            <div
-              key={ep.id}
-              data-index={i}
-              ref={(node) => { slideRefs.current[i] = node }}
-              className="snap-start h-[88vh] flex items-center justify-center"
+        {isDesktop ? (
+          <div className="flex items-center gap-4" onClick={(e) => e.stopPropagation()}>
+            <button
+              onClick={goToPrev}
+              disabled={activeIndex === 0}
+              className="h-10 w-10 border border-white/20 text-white/70 disabled:opacity-30 disabled:cursor-not-allowed"
+              aria-label="Previous short"
             >
-              <div className="w-full h-full bg-zinc-900 border border-white/10 overflow-hidden">
-                <div className="relative w-full h-full">
-                  {i === activeIndex ? (
-                    <iframe
-                      key={`${ep.id}-${activeIndex}`}
-                      src={`https://www.youtube.com/embed/${ep.youtubeId}?autoplay=1&playsinline=1&rel=0&modestbranding=1`}
-                      title={ep.title}
-                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                      allowFullScreen
-                      className="absolute inset-0 w-full h-full"
-                    />
-                  ) : (
-                    <Image
-                      src={resolveEpisodeThumbnail(ep, lang) ?? `https://i.ytimg.com/vi/${ep.youtubeId}/hqdefault.jpg`}
-                      alt={ep.title}
-                      fill
-                      className="object-cover"
-                      sizes="480px"
-                    />
-                  )}
+              ↑
+            </button>
+
+            <div className="w-[420px] h-[88vh] bg-zinc-900 border border-white/10 overflow-hidden">
+              <iframe
+                key={`${activeEpisode.id}-${activeIndex}`}
+                src={`https://www.youtube.com/embed/${activeEpisode.youtubeId}?autoplay=1&playsinline=1&rel=0&modestbranding=1`}
+                title={activeEpisode.title}
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowFullScreen
+                className="w-full h-full"
+              />
+            </div>
+
+            <button
+              onClick={goToNext}
+              disabled={activeIndex === episodes.length - 1}
+              className="h-10 w-10 border border-white/20 text-white/70 disabled:opacity-30 disabled:cursor-not-allowed"
+              aria-label="Next short"
+            >
+              ↓
+            </button>
+          </div>
+        ) : (
+          <div
+            ref={scrollerRef}
+            onClick={(e) => e.stopPropagation()}
+            className="h-[88vh] w-full max-w-[480px] overflow-y-auto snap-y snap-mandatory no-scrollbar"
+          >
+            {episodes.map((ep, i) => (
+              <div
+                key={ep.id}
+                data-index={i}
+                ref={(node) => { slideRefs.current[i] = node }}
+                className="snap-start h-[88vh] flex items-center justify-center"
+              >
+                <div className="w-full h-full bg-zinc-900 border border-white/10 overflow-hidden">
+                  <div className="relative w-full h-full">
+                    {i === activeIndex ? (
+                      <iframe
+                        key={`${ep.id}-${activeIndex}`}
+                        src={`https://www.youtube.com/embed/${ep.youtubeId}?autoplay=1&playsinline=1&rel=0&modestbranding=1`}
+                        title={ep.title}
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                        allowFullScreen
+                        className="absolute inset-0 w-full h-full"
+                      />
+                    ) : (
+                      <Image
+                        src={resolveEpisodeThumbnail(ep, lang) ?? `https://i.ytimg.com/vi/${ep.youtubeId}/hqdefault.jpg`}
+                        alt={ep.title}
+                        fill
+                        className="object-cover"
+                        sizes="480px"
+                      />
+                    )}
+                  </div>
                 </div>
               </div>
-            </div>
-          ))}
-        </div>
+            ))}
+          </div>
+        )}
       </div>
     </div>
   )
@@ -443,7 +509,7 @@ export default function SeriesSection({ lang }: SeriesSectionProps) {
           </div>
 
           {/* Tabs */}
-          <div className="flex items-center gap-0 mb-8 border-b border-white/10 overflow-x-auto">
+          <div className="flex items-center gap-0 mb-8 border-b border-white/10 overflow-x-auto overflow-y-hidden scrollbar-none sm:overflow-x-visible sm:overflow-y-visible">
             {allSeasons.map((season, i) => (
               <button
                 key={season.id}
