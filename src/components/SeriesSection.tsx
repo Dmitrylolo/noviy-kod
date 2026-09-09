@@ -1,6 +1,6 @@
 'use client'
 
-import { seasons, ui, YOUTUBE_URL } from '@/lib/content'
+import { getYoutubeChannelUrl, seasons, ui } from '@/lib/content'
 import type { Episode, Lang } from '@/lib/types'
 import Image from 'next/image'
 import { useEffect, useRef, useState } from 'react'
@@ -21,13 +21,13 @@ function EpisodeCard({
   ep,
   t,
   tModal,
-  lang,
+  season2Label,
   onOpen,
 }: {
   ep: Episode
   t: (typeof ui)['ua']['episode']
   tModal: (typeof ui)['ua']['episode_modal']
-  lang: Lang
+  season2Label: string
   onOpen: () => void
 }) {
   return (
@@ -40,9 +40,9 @@ function EpisodeCard({
         <div className="relative aspect-video bg-zinc-900 flex items-center justify-center">
           <div className="text-center">
             <div className="font-display text-[#E8A030] text-xs tracking-widest uppercase mb-1">
-              {t.episode.comingSoon}
+              {t.comingSoon}
             </div>
-            <div className="text-white/20 text-sm">— {t.sections.season2} —</div>
+            <div className="text-white/20 text-sm">— {season2Label} —</div>
           </div>
         </div>
       ) : (
@@ -108,13 +108,11 @@ function EpisodeModal({
   ep,
   t,
   tModal,
-  lang,
   onClose,
 }: {
   ep: Episode
   t: (typeof ui)['ua']['episode']
   tModal: (typeof ui)['ua']['episode_modal']
-  lang: Lang
   onClose: () => void
 }) {
   useEffect(() => {
@@ -149,9 +147,9 @@ function EpisodeModal({
               <div className="absolute inset-0 flex items-center justify-center">
                 <div className="text-center">
                   <div className="font-display text-[#E8A030] text-sm tracking-widest uppercase mb-2">
-                    {t.episode.episodeComingSoon}
+                    {t.episodeComingSoon}
                   </div>
-                  <div className="text-white/30 text-xs">{t.episode.season2Date}</div>
+                  <div className="text-white/30 text-xs">{t.season2Date}</div>
                 </div>
               </div>
             ) : (
@@ -218,6 +216,7 @@ function EpisodeModal({
 
 export default function SeriesSection({ lang }: SeriesSectionProps) {
   const t = ui[lang]
+  const youtubeUrl = getYoutubeChannelUrl(lang)
   const allSeasons = seasons[lang]
   const [activeTab, setActiveTab] = useState(0)
   const [activeEp, setActiveEp] = useState(0)
@@ -256,7 +255,7 @@ export default function SeriesSection({ lang }: SeriesSectionProps) {
               {t.sections.series}
             </h2>
             <a
-              href={YOUTUBE_URL}
+              href={youtubeUrl}
               target="_blank"
               rel="noopener noreferrer"
               className="text-[#E8A030] font-display text-sm tracking-widest uppercase hidden sm:block"
@@ -294,7 +293,7 @@ export default function SeriesSection({ lang }: SeriesSectionProps) {
                   ep={ep}
                   t={t.episode}
                   tModal={t.episode_modal}
-                  lang={lang}
+                  season2Label={t.sections.season2}
                   onOpen={() => setSelectedEp(ep)}
                 />
               ))
@@ -339,7 +338,7 @@ export default function SeriesSection({ lang }: SeriesSectionProps) {
 
           <div className="mt-6 sm:hidden">
             <a
-              href={YOUTUBE_URL}
+              href={youtubeUrl}
               target="_blank"
               rel="noopener noreferrer"
               className="text-[#E8A030] font-display text-sm tracking-widest uppercase"
@@ -356,7 +355,6 @@ export default function SeriesSection({ lang }: SeriesSectionProps) {
           ep={selectedEp}
           t={t.episode}
           tModal={t.episode_modal}
-          lang={lang}
           onClose={() => setSelectedEp(null)}
         />
       )}

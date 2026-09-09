@@ -1,8 +1,14 @@
 import type { Hero, Lang, PressItem, Screening, Season, TeamMember } from './types'
 
 // ─── Social links ────────────────────────────────────────────────────────────
-export const YOUTUBE_URL = 'https://www.youtube.com/@NovyiKod'
-export const YOUTUBE_URL_EN = 'https://www.youtube.com/@NovyiKod'
+export const youtubeChannels: Record<Lang, string> = {
+  ua: 'https://www.youtube.com/@novyikod',
+  en: 'https://www.youtube.com/@thenewcodedocumentary',
+}
+
+export function getYoutubeChannelUrl(lang: Lang): string {
+  return youtubeChannels[lang]
+}
 
 // ─── Partners ────────────────────────────────────────────────────────────────
 export const partners = {

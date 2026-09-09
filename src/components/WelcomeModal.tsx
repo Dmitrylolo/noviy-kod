@@ -3,6 +3,7 @@
 import type { Lang } from '@/lib/types'
 import { X } from 'lucide-react'
 import { useEffect, useState } from 'react'
+import { getYoutubeChannelUrl } from '@/lib/content'
 
 interface WelcomeModalProps {
   lang: Lang
@@ -31,12 +32,12 @@ const copy = {
 
 const SESSION_KEY = 'nk_welcome_dismissed'
 const PERSIST_KEY = 'nk_welcome_hidden'
-import { YOUTUBE_URL } from '@/lib/content'
 
 export default function WelcomeModal({ lang }: WelcomeModalProps) {
   const [visible, setVisible] = useState(false)
   const [noShow, setNoShow] = useState(false)
   const t = copy[lang]
+  const youtubeUrl = getYoutubeChannelUrl(lang)
 
   useEffect(() => {
     if (!localStorage.getItem(PERSIST_KEY) && !sessionStorage.getItem(SESSION_KEY)) {
@@ -130,7 +131,7 @@ export default function WelcomeModal({ lang }: WelcomeModalProps) {
         {/* Actions */}
         <div className="flex flex-col sm:flex-row gap-3">
           <a
-            href={YOUTUBE_URL}
+            href={youtubeUrl}
             target="_blank"
             rel="noopener noreferrer"
             className="btn-primary justify-center"
