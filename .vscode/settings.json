@@ -1,0 +1,12 @@
+{
+  "editor.unicodeHighlight.allowedCharacters": {
+    "і": true,
+    "ї": true,
+    "є": true,
+    "ґ": true,
+    "І": true,
+    "Ї": true,
+    "Є": true,
+    "Ґ": true
+  }
+}

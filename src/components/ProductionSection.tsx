@@ -1,36 +1,12 @@
 'use client'
 
-import { useState } from 'react'
-import { ui } from '@/lib/content'
+import { getGalleryGridClass, productionGalleries, resolveLocalizedMedia, ui } from '@/lib/content'
 import type { Lang } from '@/lib/types'
+import { useState } from 'react'
 
 interface ProductionSectionProps {
   lang: Lang
 }
-
-// Season 1 gallery
-const s1Gallery = [
-  { src: '/production-1.jpg', alt: { ua: 'Зйомки, сезон 1', en: 'Production, season 1' } },
-  { src: '/production-2.webp', alt: { ua: 'Зйомки, сезон 1', en: 'Production, season 1' } },
-  { src: '/production-3.webp', alt: { ua: 'Зйомки, сезон 1', en: 'Production, season 1' } },
-  { src: '/production-4.webp', alt: { ua: 'Зйомки, сезон 1', en: 'Production, season 1' } },
-  { src: '/production-5.webp', alt: { ua: 'Зйомки, сезон 1', en: 'Production, season 1' } },
-  { src: '/production-6.webp', alt: { ua: 'Зйомки, сезон 1', en: 'Production, season 1' } },
-]
-
-// Season 2 BTS gallery — «Між сценою і фронтом»
-const s2Gallery = [
-  { src: '/production-s2-01.webp', alt: { ua: 'За лаштунками — між сценою і фронтом', en: 'Behind the scenes — between stage and frontline' } },
-  { src: '/production-s2-02.webp', alt: { ua: 'За лаштунками — між репетицією та бойовим виходом', en: 'Behind the scenes — between rehearsal and combat' } },
-  { src: '/production-s2-03.webp', alt: { ua: 'За лаштунками — між камерою і реальним життям', en: 'Behind the scenes — between camera and real life' } },
-  { src: '/production-s2-04.webp', alt: { ua: 'Зйомки. Харків', en: 'Filming. Kharkiv' } },
-  { src: '/production-s2-05.webp', alt: { ua: 'Зйомки. Київ', en: 'Filming. Kyiv' } },
-  { src: '/production-s2-06.webp', alt: { ua: 'Зйомки. Львів', en: 'Filming. Lviv' } },
-  { src: '/production-s2-07.webp', alt: { ua: 'Зйомки. Іванo-Франківськ', en: 'Filming. Ivano-Frankivsk' } },
-  { src: '/production-s2-08.webp', alt: { ua: 'Зйомки, сезон 2', en: 'Production, season 2' } },
-  { src: '/production-s2-09.webp', alt: { ua: 'Зйомки, сезон 2', en: 'Production, season 2' } },
-  { src: '/production-s2-10.webp', alt: { ua: 'Зйомки, сезон 2', en: 'Production, season 2' } },
-]
 
 export default function ProductionSection({ lang }: ProductionSectionProps) {
   const t = ui[lang]
@@ -61,52 +37,43 @@ export default function ProductionSection({ lang }: ProductionSectionProps) {
           ))}
         </div>
 
-        {/* Season 1 gallery */}
-        <div className="grid grid-cols-2 sm:grid-cols-3 gap-2 mb-10">
-          {s1Gallery.map((item, i) => (
-            <button
-              key={i}
-              onClick={() => setLightbox({ src: item.src, alt: item.alt[lang] })}
-              className="aspect-[4/3] bg-zinc-800 overflow-hidden group relative cursor-zoom-in"
-            >
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img
-                src={item.src}
-                alt={item.alt[lang]}
-                className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-              />
-            </button>
-          ))}
-        </div>
+        {productionGalleries.map((gallery, index) => (
+          <div key={gallery.id} className={index > 0 ? 'mt-10' : ''}>
+            {gallery.title?.[lang] && (
+              <>
+                <div className="flex items-center gap-4 mb-4">
+                  <span className="font-display text-[#E8A030] text-xs tracking-widest uppercase">
+                    {gallery.title[lang]}
+                  </span>
+                  <div className="flex-1 h-px bg-white/10" />
+                </div>
+                {gallery.description?.[lang] && (
+                  <p className="text-white/40 text-xs mb-4 italic">{gallery.description[lang]}</p>
+                )}
+              </>
+            )}
 
-        {/* Season 2 BTS label */}
-        <div className="flex items-center gap-4 mb-4">
-          <span className="font-display text-[#E8A030] text-xs tracking-widest uppercase">
-            {t.sections.s2BehindScenes}
-          </span>
-          <div className="flex-1 h-px bg-white/10" />
-        </div>
-        <p className="text-white/40 text-xs mb-4 italic">
-          {(t as typeof t & { production?: { s2Description?: string } }).production?.s2Description}
-        </p>
-
-        {/* Season 2 gallery */}
-        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-2">
-          {s2Gallery.map((item, i) => (
-            <button
-              key={i}
-              onClick={() => setLightbox({ src: item.src, alt: item.alt[lang] })}
-              className="aspect-[4/3] bg-zinc-800 overflow-hidden group relative cursor-zoom-in"
-            >
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img
-                src={item.src}
-                alt={item.alt[lang]}
-                className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-              />
-            </button>
-          ))}
-        </div>
+            <div className={getGalleryGridClass(gallery.columns)}>
+              {gallery.items.map((item, i) => {
+                const src = resolveLocalizedMedia(item.media, lang)
+                return (
+                  <button
+                    key={`${gallery.id}-${i}`}
+                    onClick={() => setLightbox({ src, alt: item.alt[lang] })}
+                    className="aspect-[4/3] bg-zinc-800 overflow-hidden group relative cursor-zoom-in"
+                  >
+                    {/* eslint-disable-next-line @next/next/no-img-element */}
+                    <img
+                      src={src}
+                      alt={item.alt[lang]}
+                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                    />
+                  </button>
+                )
+              })}
+            </div>
+          </div>
+        ))}
       </div>
 
       {/* Lightbox */}

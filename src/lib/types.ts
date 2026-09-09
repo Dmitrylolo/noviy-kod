@@ -1,4 +1,9 @@
-export type Lang = 'ua' | 'en'
+export const SUPPORTED_LANGS = ['ua', 'en'] as const
+export type Lang = (typeof SUPPORTED_LANGS)[number]
+
+export type LocalizedMedia = Partial<Record<Lang, string>> & {
+  default?: string
+}
 
 export interface Episode {
   id: string
@@ -6,7 +11,7 @@ export interface Episode {
   title: string
   synopsis: string
   description?: string
-  thumbnail?: string
+  thumbnail?: string | LocalizedMedia
   youtubeId: string
   youtubeUrl: string
   hasAudioDesc: boolean

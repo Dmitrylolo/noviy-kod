@@ -45,6 +45,14 @@ function compareShape(path: string, a: unknown, b: unknown, errors: string[]) {
 function validateEpisodes(lang: Lang, episodes: Episode[], errors: string[]) {
   for (const ep of episodes) {
     const base = `seasons.${lang}.${ep.id}`
+
+    if (ep.thumbnail && typeof ep.thumbnail === 'object') {
+      const hasAnyThumbnail = Boolean(ep.thumbnail.ua || ep.thumbnail.en || ep.thumbnail.default)
+      if (!hasAnyThumbnail) {
+        errors.push(`${base}.thumbnail object has no usable values`)
+      }
+    }
+
     if (!ep.comingSoon) {
       if (!ep.youtubeId) {
         errors.push(`${base}.youtubeId is empty but episode is released`)

@@ -1,33 +1,13 @@
 'use client'
 
+import { getYoutubeChannelUrl } from '@/lib/content'
+import { ui } from '@/lib/content'
 import type { Lang } from '@/lib/types'
 import { X } from 'lucide-react'
 import { useEffect, useState } from 'react'
-import { getYoutubeChannelUrl } from '@/lib/content'
 
 interface WelcomeModalProps {
   lang: Lang
-}
-
-const copy = {
-  ua: {
-    tag: 'НОВІ СЕРІЇ',
-    heading: 'Ми оновлюємо сайт',
-    body: 'Йде підготовка нового матеріалу — новий сезон і оновлені герої вже скоро з\'являться тут. Поки що переглянути всі серії можна на нашому YouTube каналі.',
-    cta: 'Перейти на YouTube',
-    dismiss: 'Продовжити на сайті',
-    close: 'Закрити',
-    noShow: 'Більше не показувати',
-  },
-  en: {
-    tag: 'NEW EPISODES',
-    heading: 'We\'re updating the site',
-    body: 'New material is on the way — a new season and updated cast profiles are coming soon. In the meantime, all episodes are available on our YouTube channel.',
-    cta: 'Watch on YouTube',
-    dismiss: 'Continue to site',
-    close: 'Close',
-    noShow: 'Don\'t show again',
-  },
 }
 
 const SESSION_KEY = 'nk_welcome_dismissed'
@@ -36,7 +16,7 @@ const PERSIST_KEY = 'nk_welcome_hidden'
 export default function WelcomeModal({ lang }: WelcomeModalProps) {
   const [visible, setVisible] = useState(false)
   const [noShow, setNoShow] = useState(false)
-  const t = copy[lang]
+  const t = ui[lang].welcomeModal
   const youtubeUrl = getYoutubeChannelUrl(lang)
 
   useEffect(() => {

@@ -1,6 +1,9 @@
 import type { Metadata } from 'next'
 import { Inter, Oswald } from 'next/font/google'
+import { NextIntlClientProvider } from 'next-intl'
+import { getLocale, getMessages } from 'next-intl/server'
 import './globals.css'
+import { SUPPORTED_LANGS, type Lang } from '@/lib/types'
 
 const oswald = Oswald({
   subsets: ['latin', 'cyrillic'],
@@ -62,14 +65,23 @@ export const metadata: Metadata = {
   },
 }
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: {
   children: React.ReactNode
 }) {
+  const requestedLocale = await getLocale()
+  const messages = await getMessages()
+  const locale: Lang = SUPPORTED_LANGS.includes(requestedLocale as Lang) ? (requestedLocale as Lang) : 'ua'
+  const htmlLang = locale === 'ua' ? 'uk' : locale
+
   return (
-    <html lang="uk" className={`${oswald.variable} ${inter.variable}`} suppressHydrationWarning>
-      <body suppressHydrationWarning>{children}</body>
+    <html lang={htmlLang} className={`${oswald.variable} ${inter.variable}`} suppressHydrationWarning>
+      <body suppressHydrationWarning>
+        <NextIntlClientProvider locale={locale} messages={messages}>
+          {children}
+        </NextIntlClientProvider>
+      </body>
     </html>
   )
 }

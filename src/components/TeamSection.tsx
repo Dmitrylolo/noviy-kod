@@ -1,4 +1,4 @@
-import { team, ui, partners as partnersData } from '@/lib/content'
+import { partners as partnersData, team, ui } from '@/lib/content'
 import type { Lang } from '@/lib/types'
 
 interface TeamSectionProps {

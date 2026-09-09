@@ -9,6 +9,8 @@ export const liveContent = {
     watchUrl: 'https://www.youtube.com/watch?v=nSXbKjmJ2RY',
     watchLabel: 'Дивитися трейлер',
     ytLabel: 'На YouTube',
+    comingSoonLabel: 'Незабаром',
+    playAriaPrefix: 'Дивитися',
   },
   en: {
     label: 'Coming Soon',
@@ -20,5 +22,7 @@ export const liveContent = {
     watchUrl: 'https://www.youtube.com/watch?v=nSXbKjmJ2RY',
     watchLabel: 'Watch Trailer',
     ytLabel: 'On YouTube',
+    comingSoonLabel: 'Coming soon',
+    playAriaPrefix: 'Watch',
   },
 }

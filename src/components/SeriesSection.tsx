@@ -1,6 +1,6 @@
 'use client'
 
-import { getYoutubeChannelUrl, seasons, ui } from '@/lib/content'
+import { getYoutubeShortsUrl, resolveEpisodeThumbnail, ui, videoContent } from '@/lib/content'
 import type { Episode, Lang } from '@/lib/types'
 import Image from 'next/image'
 import { useEffect, useRef, useState } from 'react'
@@ -22,12 +22,14 @@ function EpisodeCard({
   t,
   tModal,
   season2Label,
+  lang,
   onOpen,
 }: {
   ep: Episode
   t: (typeof ui)['ua']['episode']
   tModal: (typeof ui)['ua']['episode_modal']
   season2Label: string
+  lang: Lang
   onOpen: () => void
 }) {
   return (
@@ -55,7 +57,7 @@ function EpisodeCard({
           aria-label={`${ep.title} — ${tModal.watch}`}
         >
           <Image
-            src={ep.thumbnail ?? `https://img.youtube.com/vi/${ep.youtubeId}/mqdefault.jpg`}
+            src={resolveEpisodeThumbnail(ep, lang) ?? `https://img.youtube.com/vi/${ep.youtubeId}/mqdefault.jpg`}
             alt={ep.title}
             fill
             className="object-cover group-hover/thumb:scale-105 transition-transform duration-500"
@@ -214,16 +216,182 @@ function EpisodeModal({
   )
 }
 
+function ShortsCard({
+  ep,
+  lang,
+  onOpen,
+}: {
+  ep: Episode
+  lang: Lang
+  onOpen: () => void
+}) {
+  return (
+    <button
+      onClick={onOpen}
+      className="group relative flex-shrink-0 w-52 sm:w-56 bg-white/5 snap-start overflow-hidden"
+      aria-label={ep.title}
+    >
+      <div className="relative aspect-[9/16] bg-zinc-900">
+        <Image
+          src={resolveEpisodeThumbnail(ep, lang) ?? `https://i.ytimg.com/vi/${ep.youtubeId}/hqdefault.jpg`}
+          alt={ep.title}
+          fill
+          className="object-cover group-hover:scale-[1.03] transition-transform duration-500"
+          sizes="(max-width: 768px) 60vw, 240px"
+        />
+        <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
+
+        <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-200">
+          <div className="rounded-full border border-[#E8A030] bg-black/40 backdrop-blur-sm w-14 h-14 flex items-center justify-center group-hover:scale-110 transition-transform duration-200">
+            <PlayIcon />
+          </div>
+        </div>
+
+        <div className="absolute left-3 right-3 bottom-3 text-left">
+          <div className="text-white text-xs font-display tracking-widest uppercase mb-1">Short</div>
+          <div className="text-white text-sm leading-snug line-clamp-3">{ep.title}</div>
+        </div>
+      </div>
+    </button>
+  )
+}
+
+function ShortsModal({
+  episodes,
+  startIndex,
+  lang,
+  closeLabel,
+  onClose,
+}: {
+  episodes: Episode[]
+  startIndex: number
+  lang: Lang
+  closeLabel: string
+  onClose: () => void
+}) {
+  const [activeIndex, setActiveIndex] = useState(startIndex)
+  const scrollerRef = useRef<HTMLDivElement>(null)
+  const slideRefs = useRef<Array<HTMLDivElement | null>>([])
+
+  useEffect(() => {
+    slideRefs.current[startIndex]?.scrollIntoView({ behavior: 'auto', block: 'start' })
+  }, [startIndex])
+
+  useEffect(() => {
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') onClose()
+      if (e.key === 'ArrowDown') {
+        slideRefs.current[Math.min(activeIndex + 1, episodes.length - 1)]?.scrollIntoView({ behavior: 'smooth', block: 'start' })
+      }
+      if (e.key === 'ArrowUp') {
+        slideRefs.current[Math.max(activeIndex - 1, 0)]?.scrollIntoView({ behavior: 'smooth', block: 'start' })
+      }
+    }
+    document.addEventListener('keydown', onKey)
+    return () => document.removeEventListener('keydown', onKey)
+  }, [activeIndex, episodes.length, onClose])
+
+  useEffect(() => {
+    const root = scrollerRef.current
+    if (!root) return
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        let bestIndex = activeIndex
+        let bestRatio = 0
+
+        for (const entry of entries) {
+          const i = Number((entry.target as HTMLElement).dataset.index)
+          if (entry.intersectionRatio > bestRatio) {
+            bestRatio = entry.intersectionRatio
+            bestIndex = i
+          }
+        }
+
+        if (bestRatio >= 0.6) {
+          setActiveIndex(bestIndex)
+        }
+      },
+      { root, threshold: [0.5, 0.6, 0.75, 0.9] },
+    )
+
+    slideRefs.current.forEach((node) => {
+      if (node) observer.observe(node)
+    })
+
+    return () => observer.disconnect()
+  }, [activeIndex])
+
+  return (
+    <div
+      className="fixed inset-0 z-[120] bg-black/95 backdrop-blur-sm"
+      onClick={onClose}
+    >
+      <div className="absolute top-4 right-4 z-10">
+        <button
+          onClick={onClose}
+          className="text-white/60 hover:text-white font-display text-xs tracking-widest uppercase"
+          aria-label="Close"
+        >
+          {closeLabel} ×
+        </button>
+      </div>
+
+      <div className="h-full w-full flex items-center justify-center p-4">
+        <div
+          ref={scrollerRef}
+          onClick={(e) => e.stopPropagation()}
+          className="h-[88vh] w-full max-w-[480px] overflow-y-auto snap-y snap-mandatory no-scrollbar"
+        >
+          {episodes.map((ep, i) => (
+            <div
+              key={ep.id}
+              data-index={i}
+              ref={(node) => { slideRefs.current[i] = node }}
+              className="snap-start h-[88vh] flex items-center justify-center"
+            >
+              <div className="w-full h-full bg-zinc-900 border border-white/10 overflow-hidden">
+                <div className="relative w-full h-full">
+                  {i === activeIndex ? (
+                    <iframe
+                      key={`${ep.id}-${activeIndex}`}
+                      src={`https://www.youtube.com/embed/${ep.youtubeId}?autoplay=1&playsinline=1&rel=0&modestbranding=1`}
+                      title={ep.title}
+                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                      allowFullScreen
+                      className="absolute inset-0 w-full h-full"
+                    />
+                  ) : (
+                    <Image
+                      src={resolveEpisodeThumbnail(ep, lang) ?? `https://i.ytimg.com/vi/${ep.youtubeId}/hqdefault.jpg`}
+                      alt={ep.title}
+                      fill
+                      className="object-cover"
+                      sizes="480px"
+                    />
+                  )}
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  )
+}
+
 export default function SeriesSection({ lang }: SeriesSectionProps) {
   const t = ui[lang]
-  const youtubeUrl = getYoutubeChannelUrl(lang)
-  const allSeasons = seasons[lang]
+  const allSeasons = videoContent[lang].seasons
   const [activeTab, setActiveTab] = useState(0)
   const [activeEp, setActiveEp] = useState(0)
   const [selectedEp, setSelectedEp] = useState<Episode | null>(null)
+  const [selectedShortIndex, setSelectedShortIndex] = useState<number | null>(null)
   const scrollRef = useRef<HTMLDivElement>(null)
 
   const currentSeason = allSeasons[activeTab]
+  const isShortsTab = currentSeason.id === 'shorts'
+  const youtubeUrl = isShortsTab ? getYoutubeShortsUrl(lang) : videoContent[lang].channelUrl
   const total = currentSeason.episodes.length
 
   useEffect(() => {
@@ -284,19 +452,33 @@ export default function SeriesSection({ lang }: SeriesSectionProps) {
           <div
             ref={scrollRef}
             onScroll={handleScroll}
-            className="flex overflow-x-auto gap-4 pb-2 -mx-4 px-4 sm:mx-0 sm:px-0 sm:grid sm:grid-cols-2 lg:grid-cols-4 snap-x snap-mandatory sm:snap-none scrollbar-none"
+            className={isShortsTab
+              ? 'flex overflow-x-auto gap-4 pb-2 -mx-4 px-4 sm:mx-0 sm:px-0 snap-x snap-mandatory scrollbar-none'
+              : 'flex overflow-x-auto gap-4 pb-2 -mx-4 px-4 sm:mx-0 sm:px-0 sm:grid sm:grid-cols-2 lg:grid-cols-4 snap-x snap-mandatory sm:snap-none scrollbar-none'}
           >
             {currentSeason.episodes.length > 0 ? (
-              currentSeason.episodes.map((ep) => (
-                <EpisodeCard
-                  key={ep.id}
-                  ep={ep}
-                  t={t.episode}
-                  tModal={t.episode_modal}
-                  season2Label={t.sections.season2}
-                  onOpen={() => setSelectedEp(ep)}
-                />
-              ))
+              isShortsTab ? (
+                currentSeason.episodes.map((ep, i) => (
+                  <ShortsCard
+                    key={ep.id}
+                    ep={ep}
+                    lang={lang}
+                    onOpen={() => setSelectedShortIndex(i)}
+                  />
+                ))
+              ) : (
+                currentSeason.episodes.map((ep) => (
+                  <EpisodeCard
+                    key={ep.id}
+                    ep={ep}
+                    t={t.episode}
+                    tModal={t.episode_modal}
+                    season2Label={t.sections.season2}
+                    lang={lang}
+                    onOpen={() => setSelectedEp(ep)}
+                  />
+                ))
+              )
             ) : (
               // Skeleton placeholders — same grid layout keeps height stable
               Array.from({ length: 4 }).map((_, i) => (
@@ -356,6 +538,16 @@ export default function SeriesSection({ lang }: SeriesSectionProps) {
           t={t.episode}
           tModal={t.episode_modal}
           onClose={() => setSelectedEp(null)}
+        />
+      )}
+
+      {selectedShortIndex !== null && isShortsTab && (
+        <ShortsModal
+          episodes={currentSeason.episodes}
+          startIndex={selectedShortIndex}
+          lang={lang}
+          closeLabel={t.episode_modal.close}
+          onClose={() => setSelectedShortIndex(null)}
         />
       )}
     </>

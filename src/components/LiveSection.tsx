@@ -1,6 +1,6 @@
 'use client'
 
-import { liveContent } from '@/lib/content'
+import { videoContent } from '@/lib/content'
 import type { Lang } from '@/lib/types'
 import { useState } from 'react'
 
@@ -8,7 +8,17 @@ interface LiveSectionProps {
   lang: Lang
 }
 
-function VideoFacade({ youtubeId, title }: { youtubeId: string; title: string }) {
+function VideoFacade({
+  youtubeId,
+  title,
+  comingSoonLabel,
+  playAriaPrefix,
+}: {
+  youtubeId: string
+  title: string
+  comingSoonLabel: string
+  playAriaPrefix: string
+}) {
   const [playing, setPlaying] = useState(false)
 
   // Coming soon — no video yet
@@ -24,7 +34,7 @@ function VideoFacade({ youtubeId, title }: { youtubeId: string; title: string })
         <div className="absolute inset-0 bg-black/50" />
         <div className="absolute inset-0 flex items-center justify-center">
           <span className="font-display text-white/80 text-sm tracking-[0.3em] uppercase border border-white/20 px-6 py-3">
-            Незабаром
+            {comingSoonLabel}
           </span>
         </div>
       </div>
@@ -48,7 +58,7 @@ function VideoFacade({ youtubeId, title }: { youtubeId: string; title: string })
     <button
       onClick={() => setPlaying(true)}
       className="yt-embed w-full relative group overflow-hidden bg-zinc-900 cursor-pointer"
-      aria-label={`Дивитися: ${title}`}
+      aria-label={`${playAriaPrefix}: ${title}`}
     >
       {/* Thumbnail */}
       {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -76,14 +86,19 @@ function VideoFacade({ youtubeId, title }: { youtubeId: string; title: string })
 }
 
 export default function LiveSection({ lang }: LiveSectionProps) {
-  const t = liveContent[lang]
+  const t = videoContent[lang].live
 
   return (
     <section id="live" className="py-16 lg:py-24 bg-black">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid lg:grid-cols-2 gap-8 lg:gap-16 items-start">
           {/* Video facade */}
-          <VideoFacade youtubeId={t.youtubeId} title={t.title} />
+          <VideoFacade
+            youtubeId={t.youtubeId}
+            title={t.title}
+            comingSoonLabel={t.comingSoonLabel}
+            playAriaPrefix={t.playAriaPrefix}
+          />
 
           {/* Info */}
           <div className="flex flex-col justify-center">

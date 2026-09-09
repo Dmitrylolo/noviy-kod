@@ -109,6 +109,15 @@ export const ui = {
       title: 'Новий коd',
       rights: 'Новий коd_. Усі права захищені.',
     },
+    welcomeModal: {
+      tag: 'НОВІ СЕРІЇ',
+      heading: 'Ми оновлюємо сайт',
+      body: 'Йде підготовка нового матеріалу — новий сезон і оновлені герої вже скоро з\'являться тут. Поки що переглянути всі серії можна на нашому YouTube каналі.',
+      cta: 'Перейти на YouTube',
+      dismiss: 'Продовжити на сайті',
+      close: 'Закрити',
+      noShow: 'Більше не показувати',
+    },
   },
   en: {
     nav: {
@@ -219,6 +228,15 @@ export const ui = {
     footer: {
       title: 'New code',
       rights: 'New Code. All rights reserved.',
+    },
+    welcomeModal: {
+      tag: 'NEW EPISODES',
+      heading: 'We\'re updating the site',
+      body: 'New material is on the way — a new season and updated cast profiles are coming soon. In the meantime, all episodes are available on our YouTube channel.',
+      cta: 'Watch on YouTube',
+      dismiss: 'Continue to site',
+      close: 'Close',
+      noShow: 'Don\'t show again',
     },
   },
 }
