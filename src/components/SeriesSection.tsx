@@ -9,6 +9,12 @@ interface SeriesSectionProps {
   lang: Lang
 }
 
+function getDefaultTabIndex(lang: Lang, seasons: (typeof videoContent)[Lang]['seasons']): number {
+  if (lang !== 'ua') return 0
+  const season2Index = seasons.findIndex((season) => season.id === 'season2')
+  return season2Index >= 0 ? season2Index : 0
+}
+
 function PlayIcon() {
   return (
     <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -383,7 +389,7 @@ function ShortsModal({
 export default function SeriesSection({ lang }: SeriesSectionProps) {
   const t = ui[lang]
   const allSeasons = videoContent[lang].seasons
-  const [activeTab, setActiveTab] = useState(0)
+  const [activeTab, setActiveTab] = useState(() => getDefaultTabIndex(lang, allSeasons))
   const [activeEp, setActiveEp] = useState(0)
   const [selectedEp, setSelectedEp] = useState<Episode | null>(null)
   const [selectedShortIndex, setSelectedShortIndex] = useState<number | null>(null)
@@ -398,6 +404,10 @@ export default function SeriesSection({ lang }: SeriesSectionProps) {
     setActiveEp(0)
     if (scrollRef.current) scrollRef.current.scrollLeft = 0
   }, [activeTab])
+
+  useEffect(() => {
+    setActiveTab(getDefaultTabIndex(lang, allSeasons))
+  }, [lang, allSeasons])
 
   const handleScroll = () => {
     const el = scrollRef.current

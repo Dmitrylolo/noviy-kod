@@ -1,7 +1,6 @@
 export * from './content/channels'
 export * from './content/heroes'
 export * from './content/live'
-export * from './content/video'
 export * from './content/partners'
 export * from './content/press'
 export * from './content/production-gallery'
@@ -9,4 +8,5 @@ export * from './content/screenings'
 export * from './content/seasons'
 export * from './content/team'
 export * from './content/ui'
+export * from './content/video'
 

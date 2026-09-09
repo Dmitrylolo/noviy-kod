@@ -1,9 +1,9 @@
+import { SUPPORTED_LANGS, type Lang } from '@/lib/types'
 import type { Metadata } from 'next'
-import { Inter, Oswald } from 'next/font/google'
 import { NextIntlClientProvider } from 'next-intl'
 import { getLocale, getMessages } from 'next-intl/server'
+import { Inter, Oswald } from 'next/font/google'
 import './globals.css'
-import { SUPPORTED_LANGS, type Lang } from '@/lib/types'
 
 const oswald = Oswald({
   subsets: ['latin', 'cyrillic'],

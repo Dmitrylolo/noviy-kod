@@ -1,7 +1,6 @@
 'use client'
 
-import { getYoutubeChannelUrl } from '@/lib/content'
-import { ui } from '@/lib/content'
+import { getYoutubeChannelUrl, ui } from '@/lib/content'
 import type { Lang } from '@/lib/types'
 import { X } from 'lucide-react'
 import { useEffect, useState } from 'react'
