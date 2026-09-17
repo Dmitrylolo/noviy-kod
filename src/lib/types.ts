@@ -14,6 +14,7 @@ export interface Episode {
   thumbnail?: string | LocalizedMedia
   youtubeId: string
   youtubeUrl: string
+  uaFallbackUrl?: string
   hasAudioDesc: boolean
   hasEnglish: boolean
   hasSubtitles: boolean

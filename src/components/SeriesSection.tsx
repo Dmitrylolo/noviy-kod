@@ -38,17 +38,22 @@ function EpisodeCard({
   lang: Lang
   onOpen: () => void
 }) {
+  const hasUkrainianFallback = lang === 'en' && !!ep.uaFallbackUrl
+  const isEnglishSeasonOneIntro = lang === 'en' && ep.id === 's1e1'
+  const displayLabel = hasUkrainianFallback ? 'NOW AVAILABLE IN ENGLISH' : t.comingSoon
+  const isVideoAvailable = !ep.comingSoon && !!ep.youtubeUrl
+
   return (
     <div
       className={`relative flex-shrink-0 w-72 sm:w-auto bg-white/5 snap-start ${ep.featured ? 'border-l-2 border-[#E8A030]' : ''
         }`}
     >
       {/* Thumbnail → YouTube with play button on hover */}
-      {ep.comingSoon ? (
+      {ep.comingSoon && !isVideoAvailable ? (
         <div className="relative aspect-video bg-zinc-900 flex items-center justify-center">
           <div className="text-center">
             <div className="font-display text-[#E8A030] text-xs tracking-widest uppercase mb-1">
-              {t.comingSoon}
+              {displayLabel}
             </div>
             <div className="text-white/20 text-sm">— {season2Label} —</div>
           </div>
@@ -79,6 +84,14 @@ function EpisodeCard({
             </div>
           </div>
 
+          {(isEnglishSeasonOneIntro || hasUkrainianFallback) && (
+            <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent p-3">
+              <div className="font-display text-[#E8A030] text-[10px] tracking-[0.22em] uppercase">
+                {displayLabel}
+              </div>
+            </div>
+          )}
+
           {/* Featured badge */}
           {ep.featured && (
             <span className="absolute top-3 left-3 bg-[#E8A030] text-black text-xs font-display px-2 py-0.5 uppercase tracking-widest">
@@ -104,9 +117,24 @@ function EpisodeCard({
         className="p-4 w-full text-left block hover:bg-white/10 transition-colors group/info"
       >
         <p className="text-white/50 text-sm leading-relaxed">{ep.synopsis}</p>
-        <span className="mt-3 inline-block text-[#E8A030] font-display text-xs tracking-widest uppercase group-hover/info:underline">
-          {t.details} →
-        </span>
+
+        {(isEnglishSeasonOneIntro || hasUkrainianFallback) && ep.uaFallbackUrl && (
+          <a
+            href={ep.uaFallbackUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="mt-3 inline-flex text-[#E8A030] font-display text-[10px] tracking-[0.22em] uppercase underline-offset-4 hover:underline"
+            onClick={(event) => event.stopPropagation()}
+          >
+            {t.watchInUkrainian}
+          </a>
+        )}
+
+        {!hasUkrainianFallback && (
+          <span className="mt-3 inline-block text-[#E8A030] font-display text-xs tracking-widest uppercase group-hover/info:underline">
+            {t.details} →
+          </span>
+        )}
       </button>
     </div>
   )

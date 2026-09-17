@@ -54,6 +54,7 @@ export const ui = {
       comingSoon: 'Скоро',
       episodeComingSoon: 'Серія вже скоро',
       season2Date: 'Сезон 2 — вересень 2026',
+      watchInUkrainian: 'Дивитися українською →',
     },
     episode_modal: {
       watch: 'Дивитися на YouTube →',
@@ -174,8 +175,9 @@ export const ui = {
       subtitles: 'Subtitles',
       featured: 'Featured',
       comingSoon: 'Coming soon',
-      episodeComingSoon: 'Episode coming soon',
+      episodeComingSoon: 'Coming soon',
       season2Date: 'Season 2 — September 2026',
+      watchInUkrainian: 'Watch in Ukrainian →',
     },
     episode_modal: {
       watch: 'Watch on YouTube →',
