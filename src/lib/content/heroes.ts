@@ -26,7 +26,7 @@ export const heroes: Record<Lang, Hero[]> = {
     },
     {
       id: 'actor',
-      name: 'Станіслав «Ткач» Ткачев',
+      name: 'Станіслав «Ткач» Ткачов',
       role: 'Оператор-постановник · Діджей · Сержант роти БПЛА',
       description: 'Військовий, оператор і музикант. Разом із побратимами з кіноіндустрії він знайшов своє місце на війні, не втративши творчого голосу та здатності бачити людину навіть у найскладніших обставинах.',
       quote: '«До війни я дивився на світ через об\'єктив камери. Тепер — через камери безпілотників.»',
@@ -105,7 +105,7 @@ export const heroes: Record<Lang, Hero[]> = {
     },
     {
       id: 'actor',
-      name: 'Stanislav "Tkach" Tkachev',
+      name: 'Stanislav "Tkach" Tkachov',
       role: 'Cinematographer · DJ · UAV Sergeant',
       description: 'Soldier, cinematographer and musician. Together with fellow filmmakers, he found his place in war without losing his creative voice and ability to see people even in the most difficult circumstances.',
       quote: '"Before the war I looked at the world through a camera lens. Now — through drone cameras."',

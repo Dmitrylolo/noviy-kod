@@ -13,7 +13,7 @@ export const team: Record<Lang, { director: { name: string; bio: string; stateme
       ],
     },
     members: [
-      { name: 'Антон Печатнов, Артем Терещенко, Станіслав Ткачев, Дмитро Муленко, Дмитро Чуб', role: 'Оператори-постановники' },
+      { name: 'Антон Печатнов, Артем Терещенко, Станіслав Ткачов, Дмитро Муленко, Дмитро Чуб', role: 'Оператори-постановники' },
       { name: 'Віталій Ляшко, Артем Стромаков, Василь Вишняков', role: 'Монтаж' },
       { name: 'Андрій Танабаш', role: 'Продюсер' },
       { name: 'Дар\'я Чупрун', role: 'Фотографиня' },
@@ -32,7 +32,7 @@ export const team: Record<Lang, { director: { name: string; bio: string; stateme
       ],
     },
     members: [
-      { name: 'Anton Pechatnov, Artem Tereshchenko, Stanislav Tkachev, Dmytro Mulenko, Dmytro Chub', role: 'Cinematographers' },
+      { name: 'Anton Pechatnov, Artem Tereshchenko, Stanislav Tkachov, Dmytro Mulenko, Dmytro Chub', role: 'Cinematographers' },
       { name: 'Vitaliy Lyashko, Artem Stromakov, Vasyl Vyshniakov', role: 'Editors' },
       { name: 'Andrii Tanabash', role: 'Producer' },
       { name: 'Daria Chuprun', role: 'Photographer' },
