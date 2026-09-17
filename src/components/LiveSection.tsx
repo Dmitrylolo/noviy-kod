@@ -10,16 +10,19 @@ interface LiveSectionProps {
 
 function VideoFacade({
   youtubeId,
+  thumbnailYoutubeId,
   title,
   comingSoonLabel,
   playAriaPrefix,
 }: {
   youtubeId: string
+  thumbnailYoutubeId?: string
   title: string
   comingSoonLabel: string
   playAriaPrefix: string
 }) {
   const [playing, setPlaying] = useState(false)
+  const thumbnailVideoId = thumbnailYoutubeId || youtubeId
 
   // Coming soon — no video yet
   if (!youtubeId) {
@@ -63,7 +66,7 @@ function VideoFacade({
       {/* Thumbnail */}
       {/* eslint-disable-next-line @next/next/no-img-element */}
       <img
-        src={`https://img.youtube.com/vi/${youtubeId}/maxresdefault.jpg`}
+        src={`https://img.youtube.com/vi/${thumbnailVideoId}/maxresdefault.jpg`}
         alt={title}
         onError={(e) => { e.currentTarget.src = '/production-1.jpg' }}
         className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
@@ -95,6 +98,7 @@ export default function LiveSection({ lang }: LiveSectionProps) {
           {/* Video facade */}
           <VideoFacade
             youtubeId={t.youtubeId}
+            thumbnailYoutubeId={t.thumbnailYoutubeId}
             title={t.title}
             comingSoonLabel={t.comingSoonLabel}
             playAriaPrefix={t.playAriaPrefix}

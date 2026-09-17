@@ -5,6 +5,7 @@ export const liveContent = {
     description:
       'Сергій Жадан, Олена Герасим\'юк, Тарас Козуб і Міша Правильний — герої другого сезону «Нового коdу_». Події розгортаються у Києві, Харкові, Львові та Івано-Франківську, а історії героїв сягають окупованого Донбасу. Це розповідь про пам\'ять і повернення додому, досвід військовослужбовців і ветеранів — та українську культуру, яка під час війни вистоює, змінюється й народжує нові форми та сенси.',
     youtubeId: 'nSXbKjmJ2RY',
+    thumbnailYoutubeId: 'nSXbKjmJ2RY',
     comingSoon: false,
     watchUrl: 'https://www.youtube.com/watch?v=nSXbKjmJ2RY',
     watchLabel: 'Дивитися трейлер',
@@ -13,16 +14,17 @@ export const liveContent = {
     playAriaPrefix: 'Дивитися',
   },
   en: {
-    label: 'Coming Soon',
-    title: '"New Code". Season 2 — September 2026!',
+    label: 'NOW AVAILABLE IN ENGLISH',
+    title: '“THE NEW CODE” — SEASON 1',
     description:
-      'Serhiy Zhadan, Olena Herasymyuk, Taras Kozub and Misha Pravylnyi — the heroes of the second season of "New Code". Events unfold in Kyiv, Kharkiv, Lviv and Ivano-Frankivsk, and the heroes\' stories reach occupied Donbas. This is a story about memory and returning home, the experience of servicemen and veterans — and Ukrainian culture that endures, transforms and creates new forms and meanings during war.',
-    youtubeId: 'nSXbKjmJ2RY',
+      'The first season of The New Code is now available in English.\n\nFour documentary episodes follow Ukrainian artists whose lives changed because of the war — a musician, a poet, a filmmaker and a writer-soldier.\n\nTogether, their stories reveal a new Ukrainian military culture and help explain what Ukraine is defending: freedom, memory, culture and the right to remain itself.\n\nSeason 2 is now being released in Ukrainian, with English subtitles available on YouTube.',
+    youtubeId: 'OFVa1DV8rOE',
+    thumbnailYoutubeId: 'XusSQcncjZE',
     comingSoon: false,
-    watchUrl: 'https://www.youtube.com/watch?v=nSXbKjmJ2RY',
+    watchUrl: 'https://www.youtube.com/watch?v=OFVa1DV8rOE',
     watchLabel: 'Watch Trailer',
     ytLabel: 'On YouTube',
-    comingSoonLabel: 'Coming soon',
+    comingSoonLabel: 'NOW AVAILABLE IN ENGLISH',
     playAriaPrefix: 'Watch',
   },
 }
