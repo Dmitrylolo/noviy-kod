@@ -491,8 +491,12 @@ export default function SeriesSection({ lang }: SeriesSectionProps) {
 
   const currentSeason = allSeasons[activeTab]
   const isShortsTab = currentSeason.id === 'shorts'
+  const isFeedTab = isShortsTab || currentSeason.id === 'specials'
+  const displayEpisodes = isFeedTab
+    ? [...currentSeason.episodes].sort((first, second) => second.number - first.number)
+    : currentSeason.episodes
   const youtubeUrl = isShortsTab ? getYoutubeShortsUrl(lang) : videoContent[lang].channelUrl
-  const total = currentSeason.episodes.length
+  const total = displayEpisodes.length
 
   useEffect(() => {
     setActiveEp(0)
@@ -560,9 +564,9 @@ export default function SeriesSection({ lang }: SeriesSectionProps) {
               ? 'flex overflow-x-auto gap-4 pb-2 -mx-4 px-4 sm:mx-0 sm:px-0 snap-x snap-mandatory scrollbar-none'
               : 'flex overflow-x-auto gap-4 pb-2 -mx-4 px-4 sm:mx-0 sm:px-0 sm:grid sm:grid-cols-2 lg:grid-cols-4 snap-x snap-mandatory sm:snap-none scrollbar-none'}
           >
-            {currentSeason.episodes.length > 0 ? (
+            {displayEpisodes.length > 0 ? (
               isShortsTab ? (
-                currentSeason.episodes.map((ep, i) => (
+                displayEpisodes.map((ep, i) => (
                   <ShortsCard
                     key={ep.id}
                     ep={ep}
@@ -571,7 +575,7 @@ export default function SeriesSection({ lang }: SeriesSectionProps) {
                   />
                 ))
               ) : (
-                currentSeason.episodes.map((ep) => (
+                displayEpisodes.map((ep) => (
                   <EpisodeCard
                     key={ep.id}
                     ep={ep}
@@ -606,9 +610,9 @@ export default function SeriesSection({ lang }: SeriesSectionProps) {
           </div>
 
           {/* Carousel dots + counter — mobile only, only when has content */}
-          {currentSeason.episodes.length > 0 && total > 1 && (
+          {displayEpisodes.length > 0 && total > 1 && (
             <div className="flex items-center gap-2 mt-5 sm:hidden">
-              {currentSeason.episodes.map((_, i) => (
+              {displayEpisodes.map((_, i) => (
                 <button
                   key={i}
                   onClick={() => scrollToEp(i)}
@@ -647,7 +651,7 @@ export default function SeriesSection({ lang }: SeriesSectionProps) {
 
       {selectedShortIndex !== null && isShortsTab && (
         <ShortsModal
-          episodes={currentSeason.episodes}
+          episodes={displayEpisodes}
           startIndex={selectedShortIndex}
           lang={lang}
           closeLabel={t.episode_modal.close}
