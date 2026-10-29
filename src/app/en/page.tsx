@@ -11,7 +11,6 @@ import ProductionSection from '@/components/ProductionSection'
 import ScreeningsSection from '@/components/ScreeningsSection'
 import SeriesSection from '@/components/SeriesSection'
 import TeamSection from '@/components/TeamSection'
-import WelcomeModal from '@/components/WelcomeModal'
 import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
@@ -31,7 +30,6 @@ export const metadata: Metadata = {
 export default function EnPage() {
   return (
     <main>
-      <WelcomeModal lang="en" />
       <Header lang="en" />
       <HeroSection lang="en" />
       <LiveSection lang="en" />
