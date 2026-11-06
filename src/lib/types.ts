@@ -47,6 +47,14 @@ export interface Hero {
   comingSoon?: boolean
 }
 
+export interface LiveTrailer {
+  id: string
+  youtubeId: string
+  title: string
+  /** Small label over the preview, e.g. "English dubbed". */
+  badge?: string
+}
+
 export interface TeamMember {
   name: string
   role: string

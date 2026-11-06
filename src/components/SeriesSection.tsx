@@ -152,6 +152,7 @@ function EpisodeCard({
                 href={ep.signLanguageUrl}
                 target="_blank"
                 rel="noopener noreferrer"
+                aria-label={`${t.signLanguage}: ${ep.title}`}
                 className="inline-flex items-center gap-1.5 text-[#E8A030] font-display text-[10px] tracking-[0.22em] uppercase underline-offset-4 hover:underline"
               >
                 <SignLanguageIcon size={14} />
@@ -160,7 +161,7 @@ function EpisodeCard({
             ) : (
               <span className="inline-flex items-center gap-1.5 text-white/35 font-display text-[10px] tracking-[0.22em] uppercase">
                 <SignLanguageIcon size={14} />
-                {t.signLanguage} · {t.signLanguageSoon}
+                {t.signLanguageSoon}
               </span>
             ))}
         </div>

@@ -1,6 +1,6 @@
 import { existsSync } from 'node:fs'
 import path from 'node:path'
-import { englishTrailers, heroes, liveContent, partners, press, screenings, seasons, ui, youtubeChannels } from '../src/lib/content'
+import { heroes, liveContent, partners, press, screenings, seasons, ui, youtubeChannels } from '../src/lib/content'
 import type { Episode, Lang } from '../src/lib/types'
 
 const YOUTUBE_ID_PATTERN = /^[A-Za-z0-9_-]{11}$/
@@ -100,17 +100,19 @@ function run() {
     if (FORBIDDEN_CLAIMS.test(JSON.stringify(ui[lang]))) {
       errors.push(`ui.${lang} mentions audio description, which is not available`)
     }
-  }
 
-  const trailerIds = englishTrailers.items.map((item) => item.youtubeId).filter(Boolean)
-  for (const id of trailerIds) {
-    if (!YOUTUBE_ID_PATTERN.test(id)) errors.push(`englishTrailers has an invalid YouTube ID: ${id}`)
-  }
-  if (new Set(trailerIds).size !== trailerIds.length) {
-    errors.push('englishTrailers contains duplicate YouTube IDs')
-  }
-  if (englishTrailers.items.length !== 2) {
-    errors.push('englishTrailers must contain exactly two items')
+    const trailers = liveContent[lang].trailers
+    const expectedCount = lang === 'en' ? 2 : 1
+    if (trailers.length !== expectedCount) {
+      errors.push(`liveContent.${lang}.trailers must contain exactly ${expectedCount} item(s)`)
+    }
+    const trailerIds = trailers.map((trailer) => trailer.youtubeId)
+    for (const id of trailerIds) {
+      if (!YOUTUBE_ID_PATTERN.test(id)) errors.push(`liveContent.${lang}.trailers has an invalid YouTube ID: "${id}"`)
+    }
+    if (new Set(trailerIds).size !== trailerIds.length) {
+      errors.push(`liveContent.${lang}.trailers contains duplicate YouTube IDs`)
+    }
   }
 
   for (const lang of ['ua', 'en'] as const) {
@@ -150,9 +152,6 @@ function run() {
       }
     }
 
-    if (!liveContent[lang].watchUrl || !isHttpUrl(liveContent[lang].watchUrl)) {
-      errors.push(`liveContent.${lang}.watchUrl is invalid`)
-    }
 
     if (!partners[lang] || partners[lang].length === 0) {
       errors.push(`partners.${lang} is empty`)

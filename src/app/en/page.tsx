@@ -1,7 +1,6 @@
 import AboutSection from '@/components/AboutSection'
 import AccessibilitySection from '@/components/AccessibilitySection'
 import ContactSection from '@/components/ContactSection'
-import EnglishTrailersSection from '@/components/EnglishTrailersSection'
 import Footer from '@/components/Footer'
 import Header from '@/components/Header'
 import HeroesSection from '@/components/HeroesSection'
@@ -34,7 +33,6 @@ export default function EnPage() {
       <Header lang="en" />
       <HeroSection lang="en" />
       <LiveSection lang="en" />
-      <EnglishTrailersSection />
       <SeriesSection lang="en" />
       <AboutSection lang="en" />
       <HeroesSection lang="en" />

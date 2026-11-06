@@ -7,7 +7,6 @@ export * from './content/production-gallery'
 export * from './content/screenings'
 export * from './content/seasons'
 export * from './content/team'
-export * from './content/trailers'
 export * from './content/ui'
 export * from './content/video'
 

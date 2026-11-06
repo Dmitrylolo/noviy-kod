@@ -28,9 +28,9 @@ interface CropJob {
 }
 
 const jobs: CropJob[] = [
-  { source: "Олена Герасим'юк.png", output: 'herasymyuk.webp', left: 453, top: 15, width: 675 },
+  { source: "Олена Герасим'юк.png", output: 'herasymyuk.webp', left: 418, top: 0, width: 744 },
   // Taras Kozub: box shifted left so the hurdy-gurdy stays as visible as possible next to the face.
-  { source: 'Тарас Козуб.png', output: 'kozub.webp', left: 330, top: 16, width: 638 },
+  { source: 'Тарас Козуб.png', output: 'kozub.webp', left: 360, top: 16, width: 605 },
   { source: 'Міша Правильний.png', output: 'pravylnyi.webp', left: 389, top: 0, width: 722 },
   // Zhadan is already the closest shot: full-height crop, no further zoom possible.
   { source: 'Сергій Жадан.png', output: 'zhadan.webp', left: 400, top: 0, width: 768 },
