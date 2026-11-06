@@ -1,5 +1,6 @@
 import { ui } from '@/lib/content'
 import type { Lang } from '@/lib/types'
+import { Accessibility } from 'lucide-react'
 
 interface HeroSectionProps {
   lang: Lang
@@ -61,7 +62,8 @@ export default function HeroSection({ lang }: HeroSectionProps) {
           {/* Indicators */}
           <div className="flex flex-wrap gap-6 text-sm text-white/60">
             <a href="#accessibility" className="flex items-center gap-2 hover:text-white/90 transition-colors">
-              🎧 {t.audioDesc}
+              <Accessibility size={16} aria-hidden="true" className="text-[#E8A030]" />
+              {t.accessibleVersions}
             </a>
             <span className="text-white/30">|</span>
             <a href={otherHref} className="flex items-center gap-2 hover:text-white/90 transition-colors">

@@ -141,7 +141,10 @@ export default function HeroesSection({ lang }: HeroesSectionProps) {
                   <img
                     src={hero.photo}
                     alt={hero.name}
+                    loading="lazy"
+                    decoding="async"
                     className="absolute inset-0 w-full h-full object-cover object-top"
+                    style={hero.photoPosition ? { objectPosition: hero.photoPosition } : undefined}
                   />
                 ) : (
                   <div className="absolute inset-0 flex items-center justify-center text-white/10 text-6xl font-display">
@@ -150,12 +153,14 @@ export default function HeroesSection({ lang }: HeroesSectionProps) {
                 )}
                 {/* Hover overlay */}
                 <div className="absolute inset-0 bg-[#E8A030]/10 opacity-0 group-hover:opacity-100 transition-opacity z-20" />
-                {/* Season 2 badge */}
-                {hero.season === 2 && (
-                  <div className="absolute top-3 left-3 z-30 font-display text-[10px] tracking-widest uppercase bg-[#E8A030] text-black px-2 py-0.5">
-                    {t.sections.season2}
-                  </div>
-                )}
+                {/* Season badge: heroes without an explicit season belong to season 1 */}
+                <div
+                  className={`absolute top-3 left-3 z-30 font-display text-[10px] tracking-widest uppercase px-2 py-0.5 ${
+                    hero.season === 2 ? 'bg-[#E8A030] text-black' : 'bg-black/60 text-white/80 backdrop-blur-sm'
+                  }`}
+                >
+                  {hero.season === 2 ? t.sections.season2 : t.sections.season1}
+                </div>
               </div>
 
               {/* Info */}

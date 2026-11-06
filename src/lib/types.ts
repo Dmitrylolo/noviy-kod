@@ -15,9 +15,12 @@ export interface Episode {
   youtubeId: string
   youtubeUrl: string
   uaFallbackUrl?: string
-  hasAudioDesc: boolean
+  /** Separate YouTube video with Ukrainian Sign Language interpretation (season 2 only). */
+  signLanguageUrl?: string
   hasEnglish: boolean
   hasSubtitles: boolean
+  /** Episode is available with English subtitles (Ukrainian audio). Not English dubbing. */
+  hasEnglishSubtitles?: boolean
   featured?: boolean
   comingSoon?: boolean
 }
@@ -38,6 +41,8 @@ export interface Hero {
   youtubeUrl: string
   episodeUrl: string
   photo?: string
+  /** CSS object-position for the portrait, used to keep head size/height consistent across cards. */
+  photoPosition?: string
   season?: 1 | 2
   comingSoon?: boolean
 }

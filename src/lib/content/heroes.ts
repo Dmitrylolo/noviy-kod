@@ -54,6 +54,8 @@ export const heroes: Record<Lang, Hero[]> = {
       description: 'Поезія, Майдан, «Госпітальєри», ветеранський досвід і «Недописані». Історія про слово, яке перестає бути просто текстом і стає дією, пам\'\u044fттю та відповідальністю.',
       quote: '«Слово перестає бути просто текстом — воно стає дією.»',
       youtubeId: '', youtubeUrl: '', episodeUrl: '', season: 2, comingSoon: true,
+      photo: '/heroes/herasymyuk.webp',
+      photoPosition: '50% 0%',
     },
     {
       id: 's2-kozub',
@@ -62,6 +64,8 @@ export const heroes: Record<Lang, Hero[]> = {
       description: 'Після втрати руки на війні лірник і ветеран Тарас Козуб стає актором і виходить на сцену. У театрі й музиці він знаходить новий сенс, поєднуючи особистий досвід з українською лірницькою традицією.',
       quote: '«Театр дав мені нове життя — мову цією людям, які можуть просто не чути його.»',
       youtubeId: '', youtubeUrl: '', episodeUrl: '', season: 2, comingSoon: true,
+      photo: '/heroes/kozub.webp',
+      photoPosition: '50% 0%',
     },
     {
       id: 's2-pravylnyi',
@@ -70,6 +74,8 @@ export const heroes: Record<Lang, Hero[]> = {
       description: 'Репер і військовий розбирає власний шлях зросійщення у книзі, музиці та виставі «Додому». Історія свідомого повернення до мови, культури та власної країни.',
       quote: '«Моя музика — це дорога до себе назад.»',
       youtubeId: '', youtubeUrl: '', episodeUrl: '', season: 2, comingSoon: true,
+      photo: '/heroes/pravylnyi.webp',
+      photoPosition: '50% 0%',
     },
     {
       id: 's2-zhadan',
@@ -78,6 +84,8 @@ export const heroes: Record<Lang, Hero[]> = {
       description: 'Харків, Старобільськ, «Хартія», молоді художники та пам\'\u044fть про землю, до якої неможливо повернутися. Історія про культуру, яка допомагає не втратити дім.',
       quote: '«Харків — це не просто місто. Це мова та пам\'\u044fть.»',
       youtubeId: '', youtubeUrl: '', episodeUrl: '', season: 2, comingSoon: true,
+      photo: '/heroes/zhadan.webp',
+      photoPosition: '50% 0%',
     },
   ],
   en: [
@@ -133,6 +141,8 @@ export const heroes: Record<Lang, Hero[]> = {
       description: 'Poetry, Maidan, Hospitallers, veteran experience and "Unfinished". A story about a word that ceases to be mere text and becomes action, memory and responsibility.',
       quote: '"The word stops being just text — it becomes action."',
       youtubeId: '', youtubeUrl: '', episodeUrl: '', season: 2, comingSoon: true,
+      photo: '/heroes/herasymyuk.webp',
+      photoPosition: '50% 0%',
     },
     {
       id: 's2-kozub',
@@ -141,6 +151,8 @@ export const heroes: Record<Lang, Hero[]> = {
       description: 'After losing his arm in war, lirnik and veteran Taras Kozub becomes an actor and takes the stage. In theatre and music he finds new meaning, combining personal experience with the Ukrainian lirnik and kobzar tradition.',
       quote: '"Theatre gave me a new life — a language for people who simply cannot feel it."',
       youtubeId: '', youtubeUrl: '', episodeUrl: '', season: 2, comingSoon: true,
+      photo: '/heroes/kozub.webp',
+      photoPosition: '50% 0%',
     },
     {
       id: 's2-pravylnyi',
@@ -149,6 +161,8 @@ export const heroes: Record<Lang, Hero[]> = {
       description: 'Rapper and soldier unpacks his own path of Russification in a book, music and the show "Home". A story of conscious return to language, culture and one\'s own country.',
       quote: '"My music is a road back to myself."',
       youtubeId: '', youtubeUrl: '', episodeUrl: '', season: 2, comingSoon: true,
+      photo: '/heroes/pravylnyi.webp',
+      photoPosition: '50% 0%',
     },
     {
       id: 's2-zhadan',
@@ -157,6 +171,8 @@ export const heroes: Record<Lang, Hero[]> = {
       description: 'Kharkiv, Starobilsk, Khartiya, young artists and the memory of land to which one cannot return. A story about culture that helps not to lose home.',
       quote: '"Kharkiv is not just a city. It is language and memory."',
       youtubeId: '', youtubeUrl: '', episodeUrl: '', season: 2, comingSoon: true,
+      photo: '/heroes/zhadan.webp',
+      photoPosition: '50% 0%',
     },
   ],
 }

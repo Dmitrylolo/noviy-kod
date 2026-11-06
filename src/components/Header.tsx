@@ -83,7 +83,8 @@ export default function Header({ lang }: HeaderProps) {
             <a
               href="#accessibility"
               className="w-9 h-9 flex items-center justify-center border border-white/30 hover:border-white/70 transition-colors rounded-full text-white/70 hover:text-white"
-              aria-label="Інклюзивність / Accessibility"
+              aria-label={t.nav.accessibility}
+              title={t.nav.accessibility}
             >
               <Accessibility size={15} aria-hidden="true" />
             </a>
@@ -132,7 +133,7 @@ export default function Header({ lang }: HeaderProps) {
                 {t.nav.switchLang}
               </Link>
             </div>
-            <a href="#accessibility" onClick={() => setMenuOpen(false)} className="text-white/60 hover:text-white transition-colors" aria-label="Інклюзивність">
+            <a href="#accessibility" onClick={() => setMenuOpen(false)} className="text-white/60 hover:text-white transition-colors" aria-label={t.nav.accessibility}>
               <Accessibility size={15} aria-hidden="true" />
             </a>
             <a href="#live" onClick={() => setMenuOpen(false)} className="btn-primary ml-auto">

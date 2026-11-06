@@ -4,6 +4,7 @@ import { getYoutubeShortsUrl, resolveEpisodeThumbnail, ui, videoContent } from '
 import type { Episode, Lang } from '@/lib/types'
 import Image from 'next/image'
 import { useEffect, useRef, useState } from 'react'
+import { SignLanguageIcon } from './icons'
 
 interface SeriesSectionProps {
   lang: Lang
@@ -29,6 +30,7 @@ function EpisodeCard({
   tModal,
   season2Label,
   lang,
+  isSeason2,
   onOpen,
 }: {
   ep: Episode
@@ -36,12 +38,15 @@ function EpisodeCard({
   tModal: (typeof ui)['ua']['episode_modal']
   season2Label: string
   lang: Lang
+  isSeason2: boolean
   onOpen: () => void
 }) {
   const hasUkrainianFallback = lang === 'en' && !!ep.uaFallbackUrl
   const isEnglishSeasonOneIntro = lang === 'en' && ep.id === 's1e1'
+  const showUkrainianLink = (isEnglishSeasonOneIntro || hasUkrainianFallback) && !!ep.uaFallbackUrl
   const displayLabel = hasUkrainianFallback ? 'NOW AVAILABLE IN ENGLISH' : t.comingSoon
   const isVideoAvailable = !ep.comingSoon && !!ep.youtubeUrl
+  const hasFooter = showUkrainianLink || isSeason2
 
   return (
     <div
@@ -101,11 +106,13 @@ function EpisodeCard({
 
           {/* Accessibility indicators */}
           <div className="absolute top-3 right-3 flex gap-1">
-            {ep.hasAudioDesc && (
-              <span className="bg-black/70 text-white text-xs px-1.5 py-0.5">🎧</span>
-            )}
             {ep.hasEnglish && (
               <span className="bg-black/70 text-white text-xs px-1.5 py-0.5">🇬🇧</span>
+            )}
+            {ep.hasEnglishSubtitles && (
+              <span className="bg-black/70 text-white font-display text-[10px] tracking-widest px-1.5 py-1 leading-none">
+                {t.enSubBadge}
+              </span>
             )}
           </div>
         </a>
@@ -114,21 +121,9 @@ function EpisodeCard({
       {/* Info — whole section opens modal */}
       <button
         onClick={onOpen}
-        className="p-4 w-full text-left block hover:bg-white/10 transition-colors group/info"
+        className={`${hasFooter ? 'px-4 pt-4 pb-2' : 'p-4'} w-full text-left block hover:bg-white/10 transition-colors group/info`}
       >
         <p className="text-white/50 text-sm leading-relaxed">{ep.synopsis}</p>
-
-        {(isEnglishSeasonOneIntro || hasUkrainianFallback) && ep.uaFallbackUrl && (
-          <a
-            href={ep.uaFallbackUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="mt-3 inline-flex text-[#E8A030] font-display text-[10px] tracking-[0.22em] uppercase underline-offset-4 hover:underline"
-            onClick={(event) => event.stopPropagation()}
-          >
-            {t.watchInUkrainian}
-          </a>
-        )}
 
         {!hasUkrainianFallback && (
           <span className="mt-3 inline-block text-[#E8A030] font-display text-xs tracking-widest uppercase group-hover/info:underline">
@@ -136,6 +131,40 @@ function EpisodeCard({
           </span>
         )}
       </button>
+
+      {/* Extra links live outside the button so no interactive element is nested */}
+      {hasFooter && (
+        <div className="px-4 pb-4 pt-1 flex flex-wrap items-center gap-x-5 gap-y-2">
+          {showUkrainianLink && (
+            <a
+              href={ep.uaFallbackUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex text-[#E8A030] font-display text-[10px] tracking-[0.22em] uppercase underline-offset-4 hover:underline"
+            >
+              {t.watchInUkrainian}
+            </a>
+          )}
+
+          {isSeason2 &&
+            (ep.signLanguageUrl ? (
+              <a
+                href={ep.signLanguageUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-1.5 text-[#E8A030] font-display text-[10px] tracking-[0.22em] uppercase underline-offset-4 hover:underline"
+              >
+                <SignLanguageIcon size={14} />
+                {t.signLanguage}
+              </a>
+            ) : (
+              <span className="inline-flex items-center gap-1.5 text-white/35 font-display text-[10px] tracking-[0.22em] uppercase">
+                <SignLanguageIcon size={14} />
+                {t.signLanguage} · {t.signLanguageSoon}
+              </span>
+            ))}
+        </div>
+      )}
     </div>
   )
 }
@@ -204,16 +233,16 @@ function EpisodeModal({
           <h2 className="font-display text-2xl lg:text-3xl text-white uppercase mb-4">{ep.title}</h2>
 
           {/* Accessibility indicators */}
-          {(ep.hasAudioDesc || ep.hasEnglish || ep.hasSubtitles) && (
+          {(ep.hasEnglish || ep.hasSubtitles || ep.hasEnglishSubtitles) && (
             <div className="flex flex-wrap gap-3 mb-5">
-              {ep.hasAudioDesc && (
-                <span className="text-white/50 text-xs font-display tracking-wide uppercase flex items-center gap-1">
-                  🎧 {t.audioDesc}
-                </span>
-              )}
               {ep.hasEnglish && (
                 <span className="text-white/50 text-xs font-display tracking-wide uppercase flex items-center gap-1">
                   🇬🇧 {t.english}
+                </span>
+              )}
+              {ep.hasEnglishSubtitles && (
+                <span className="text-white/50 text-xs font-display tracking-wide uppercase flex items-center gap-1">
+                  CC {t.englishSubtitles}
                 </span>
               )}
               {ep.hasSubtitles && (
@@ -234,15 +263,28 @@ function EpisodeModal({
 
           {/* Watch on YouTube */}
           {!ep.comingSoon && ep.youtubeUrl && (
-            <a
-              href={ep.youtubeUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="btn-primary inline-flex items-center gap-3"
-            >
-              <PlayIcon />
-              {tModal.watch}
-            </a>
+            <div className="flex flex-wrap items-center gap-x-6 gap-y-4">
+              <a
+                href={ep.youtubeUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="btn-primary inline-flex items-center gap-3"
+              >
+                <PlayIcon />
+                {tModal.watch}
+              </a>
+              {ep.signLanguageUrl && (
+                <a
+                  href={ep.signLanguageUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2 text-[#E8A030] font-display text-xs tracking-widest uppercase underline-offset-4 hover:underline"
+                >
+                  <SignLanguageIcon size={16} />
+                  {t.signLanguage}
+                </a>
+              )}
+            </div>
           )}
         </div>
       </div>
@@ -556,6 +598,16 @@ export default function SeriesSection({ lang }: SeriesSectionProps) {
             ))}
           </div>
 
+          {/* Season 2 English subtitles note (only when episode data confirms it) */}
+          {currentSeason.id === 'season2' && currentSeason.episodes.some((ep) => ep.hasEnglishSubtitles) && (
+            <p className="flex items-center gap-3 text-white/60 text-sm mb-6">
+              <span className="flex-shrink-0 bg-black/70 border border-white/20 text-white font-display text-[10px] tracking-widest px-1.5 py-1 leading-none">
+                {t.episode.enSubBadge}
+              </span>
+              {t.episode.season2SubtitlesNote}
+            </p>
+          )}
+
           {/* Episodes grid */}
           <div
             ref={scrollRef}
@@ -583,6 +635,7 @@ export default function SeriesSection({ lang }: SeriesSectionProps) {
                     tModal={t.episode_modal}
                     season2Label={t.sections.season2}
                     lang={lang}
+                    isSeason2={currentSeason.id === 'season2'}
                     onOpen={() => setSelectedEp(ep)}
                   />
                 ))
