@@ -53,6 +53,8 @@ export interface LiveTrailer {
   title: string
   /** Short caption for the selector button, e.g. "Trailer". Falls back to "Trailer N". */
   label?: string
+  /** Caption of the play/watch buttons for this video, e.g. "Watch Trailer". Falls back to the section default. */
+  watchLabel?: string
   /** Small label over the preview, e.g. "English dubbed". */
   badge?: string
 }

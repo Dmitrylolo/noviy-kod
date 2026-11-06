@@ -31,7 +31,7 @@ function TrailerSwitcher({
   trailerLabel: string
 }) {
   return (
-    <div role="group" aria-label={groupLabel} className="mt-3 grid grid-cols-2 gap-2">
+    <div role="group" aria-label={groupLabel} className="mt-2 grid grid-cols-2 gap-2">
       {trailers.map((trailer, i) => {
         const isActive = i === activeIndex
         return (
@@ -41,7 +41,7 @@ function TrailerSwitcher({
             onClick={() => onSelect(i)}
             aria-pressed={isActive}
             title={trailer.title}
-            className={`flex items-center justify-center gap-2 border px-3 py-2 font-display text-xs tracking-widest uppercase transition-colors duration-200 motion-reduce:transition-none focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#E8A030] ${
+            className={`relative flex items-center justify-center gap-2 border px-3 py-1.5 font-display text-xs tracking-widest uppercase before:absolute before:inset-x-0 before:-inset-y-2 transition-colors duration-200 motion-reduce:transition-none focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#E8A030] ${
               isActive
                 ? 'border-[#E8A030] bg-[#E8A030]/10 text-[#E8A030]'
                 : 'border-white/15 bg-zinc-950 text-white/60 hover:border-white/40 hover:text-white'
@@ -167,7 +167,7 @@ function VideoFacade({
               <polygon points="1,0 12,6 1,12" />
             </svg>
             <span className="font-display text-white text-sm tracking-widest uppercase">
-              {title}
+              {active.watchLabel ?? title}
             </span>
           </div>
         </div>
@@ -294,7 +294,7 @@ export default function LiveSection({ lang }: LiveSectionProps) {
                   <svg width="14" height="14" viewBox="0 0 14 14" fill="currentColor">
                     <polygon points="3,1 13,7 3,13" />
                   </svg>
-                  {t.watchLabel}
+                  {active.watchLabel ?? t.watchLabel}
                 </a>
                 <a
                   href={watchUrl}

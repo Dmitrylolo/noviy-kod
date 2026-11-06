@@ -17,6 +17,7 @@ const enTrailers: LiveTrailer[] = [
   {
     id: 'en-trailer',
     label: 'Trailer',
+    watchLabel: 'Watch Trailer',
     youtubeId: 'OFVa1DV8rOE',
     title: 'War isn’t what you think',
     badge: 'English dubbed',
@@ -24,6 +25,7 @@ const enTrailers: LiveTrailer[] = [
   {
     id: 'en-teaser',
     label: 'Teaser',
+    watchLabel: 'Watch Teaser',
     youtubeId: 'XusSQcncjZE',
     title: 'How does modern war shape culture?',
     badge: 'English dubbed',
