@@ -51,6 +51,8 @@ export interface LiveTrailer {
   id: string
   youtubeId: string
   title: string
+  /** Short caption for the selector button, e.g. "Trailer". Falls back to "Trailer N". */
+  label?: string
   /** Small label over the preview, e.g. "English dubbed". */
   badge?: string
 }

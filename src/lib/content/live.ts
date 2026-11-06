@@ -16,12 +16,14 @@ const uaTrailers: LiveTrailer[] = [
 const enTrailers: LiveTrailer[] = [
   {
     id: 'en-trailer',
+    label: 'Trailer',
     youtubeId: 'OFVa1DV8rOE',
     title: 'War isn’t what you think',
     badge: 'English dubbed',
   },
   {
     id: 'en-teaser',
+    label: 'Teaser',
     youtubeId: 'XusSQcncjZE',
     title: 'How does modern war shape culture?',
     badge: 'English dubbed',

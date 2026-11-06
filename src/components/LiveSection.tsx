@@ -17,6 +17,47 @@ interface PauseHandlers {
   onBlur: (e: FocusEvent<HTMLElement>) => void
 }
 
+function TrailerSwitcher({
+  trailers,
+  activeIndex,
+  onSelect,
+  groupLabel,
+  trailerLabel,
+}: {
+  trailers: LiveTrailer[]
+  activeIndex: number
+  onSelect: (index: number) => void
+  groupLabel: string
+  trailerLabel: string
+}) {
+  return (
+    <div role="group" aria-label={groupLabel} className="mt-3 grid grid-cols-2 gap-2">
+      {trailers.map((trailer, i) => {
+        const isActive = i === activeIndex
+        return (
+          <button
+            key={trailer.id}
+            type="button"
+            onClick={() => onSelect(i)}
+            aria-pressed={isActive}
+            title={trailer.title}
+            className={`flex items-center justify-center gap-2 border px-3 py-2 font-display text-xs tracking-widest uppercase transition-colors duration-200 motion-reduce:transition-none focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#E8A030] ${
+              isActive
+                ? 'border-[#E8A030] bg-[#E8A030]/10 text-[#E8A030]'
+                : 'border-white/15 bg-zinc-950 text-white/60 hover:border-white/40 hover:text-white'
+            }`}
+          >
+            <span className={isActive ? 'text-[#E8A030]' : 'text-white/30'}>
+              {String(i + 1).padStart(2, '0')}
+            </span>
+            <span className="truncate">{trailer.label ?? `${trailerLabel} ${i + 1}`}</span>
+          </button>
+        )
+      })}
+    </div>
+  )
+}
+
 function VideoFacade({
   trailers,
   activeIndex,
@@ -66,20 +107,37 @@ function VideoFacade({
     )
   }
 
+  const switcher = canRotate ? (
+    <TrailerSwitcher
+      trailers={trailers}
+      activeIndex={activeIndex}
+      onSelect={onSelect}
+      groupLabel={trailersGroupLabel}
+      trailerLabel={trailerLabel}
+    />
+  ) : null
+
+  // While a trailer plays, selecting another one swaps the single iframe (keyed by trailer),
+  // so two videos can never play at the same time.
   if (playing) {
     return (
-      <div className="yt-embed">
-        <iframe
-          src={`https://www.youtube.com/embed/${youtubeId}?rel=0&modestbranding=1&autoplay=1`}
-          title={active.title}
-          allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; autoplay"
-          allowFullScreen
-        />
+      <div>
+        <div className="yt-embed">
+          <iframe
+            key={active.id}
+            src={`https://www.youtube.com/embed/${youtubeId}?rel=0&modestbranding=1&autoplay=1`}
+            title={active.title}
+            allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; autoplay"
+            allowFullScreen
+          />
+        </div>
+        {switcher}
       </div>
     )
   }
 
   return (
+    <div>
     <div className="yt-embed relative group overflow-hidden bg-zinc-900" {...pauseHandlers}>
       <button
         onClick={onPlay}
@@ -120,31 +178,8 @@ function VideoFacade({
           {active.badge}
         </span>
       )}
-
-      {canRotate && (
-        <div
-          role="group"
-          aria-label={trailersGroupLabel}
-          className="absolute bottom-1 left-1/2 -translate-x-1/2 z-10 flex items-center"
-        >
-          {trailers.map((trailer, i) => (
-            <button
-              key={trailer.id}
-              type="button"
-              onClick={() => onSelect(i)}
-              aria-label={`${trailerLabel} ${i + 1} / ${trailers.length}: ${trailer.title}`}
-              aria-current={i === activeIndex ? 'true' : undefined}
-              className="group/dot px-1.5 py-3"
-            >
-              <span
-                className={`block h-0.5 rounded-full transition-all duration-300 ${
-                  i === activeIndex ? 'w-8 bg-[#E8A030]' : 'w-4 bg-white/40 group-hover/dot:bg-white/70'
-                }`}
-              />
-            </button>
-          ))}
-        </div>
-      )}
+    </div>
+    {switcher}
     </div>
   )
 }
@@ -158,6 +193,8 @@ export default function LiveSection({ lang }: LiveSectionProps) {
   const [focused, setFocused] = useState(false)
   const [reducedMotion, setReducedMotion] = useState(false)
   const [tabVisible, setTabVisible] = useState(true)
+  // Once the visitor picks a trailer manually, auto-rotation stays off until the section remounts
+  const [userSelected, setUserSelected] = useState(false)
 
   const active = trailers[activeIndex]
   // Buttons on the right always point to the trailer whose cover is currently shown
@@ -178,10 +215,10 @@ export default function LiveSection({ lang }: LiveSectionProps) {
     return () => document.removeEventListener('visibilitychange', update)
   }, [])
 
-  const paused = playing || hovered || focused || reducedMotion || !tabVisible
+  const paused = playing || hovered || focused || reducedMotion || !tabVisible || userSelected
   const canRotate = trailers.length > 1
 
-  // One timeout per slide: any index change (manual or automatic) restarts the 7s countdown
+  // One timeout per slide: any index change restarts the 7s countdown
   useEffect(() => {
     if (!canRotate || paused) return
     const timer = window.setTimeout(() => {
@@ -209,7 +246,7 @@ export default function LiveSection({ lang }: LiveSectionProps) {
             trailers={trailers}
             activeIndex={activeIndex}
             onSelect={(index) => {
-              setPlaying(false)
+              setUserSelected(true)
               setActiveIndex(index)
             }}
             playing={playing}
