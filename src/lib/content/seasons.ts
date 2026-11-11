@@ -1,5 +1,12 @@
 import type { Lang, Season } from '../types'
 
+const pavloVyshebabaVideo = {
+  youtubeId: 'uwq50eBQcIY',
+  youtubeUrl: 'https://www.youtube.com/shorts/uwq50eBQcIY',
+  hasEnglish: false,
+  hasSubtitles: false,
+}
+
 export const seasons: Record<Lang, Season[]> = {
   ua: [
     {
@@ -189,6 +196,13 @@ export const seasons: Record<Lang, Season[]> = {
           hasEnglish: false,
           hasSubtitles: false,
         },
+        {
+          ...pavloVyshebabaVideo,
+          id: 'ua-special-7',
+          number: 7,
+          title: 'Павло Вишебаба: нова книга «Маргіналії»',
+          synopsis: 'Павло Вишебаба розповідає про нову книгу та творчість під час війни.',
+        },
       ],
     },
     {
@@ -235,14 +249,11 @@ export const seasons: Record<Lang, Season[]> = {
           hasSubtitles: false,
         },
         {
+          ...pavloVyshebabaVideo,
           id: 'ua-short-5',
           number: 5,
           title: 'Павло Вишебаба: нова книга «Маргіналії»',
           synopsis: 'Поет Павло Вишебаба розповідає про нову книгу та творчість під час війни.',
-          youtubeId: 'uwq50eBQcIY',
-          youtubeUrl: 'https://www.youtube.com/shorts/uwq50eBQcIY',
-          hasEnglish: false,
-          hasSubtitles: false,
         },
         {
           id: 'ua-short-6',
@@ -437,6 +448,13 @@ export const seasons: Record<Lang, Season[]> = {
           youtubeUrl: 'https://www.youtube.com/watch?v=RwDeqo7dsWU',
           hasEnglish: false,
           hasSubtitles: false,
+        },
+        {
+          ...pavloVyshebabaVideo,
+          id: 'en-special-6',
+          number: 6,
+          title: 'Pavlo Vyshebaba: The New Book “Marginalia”',
+          synopsis: 'Pavlo Vyshebaba speaks about his new book and his creative work during the war. In Ukrainian.',
         },
       ],
     },
