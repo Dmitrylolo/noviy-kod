@@ -2,7 +2,7 @@
 
 import { heroes, ui } from '@/lib/content'
 import type { Hero, Lang } from '@/lib/types'
-import { useRef, useState } from 'react'
+import { useCallback, useEffect, useId, useRef, useState } from 'react'
 
 interface HeroesSectionProps {
   lang: Lang
@@ -11,80 +11,118 @@ interface HeroesSectionProps {
 function HeroModal({
   hero,
   t,
-  lang,
   onClose,
 }: {
   hero: Hero
   t: (typeof ui)['ua']
-  lang: Lang
   onClose: () => void
 }) {
+  const dialogRef = useRef<HTMLDivElement>(null)
+  const closeRef = useRef<HTMLButtonElement>(null)
+  const titleId = useId()
+  const descriptionId = useId()
+
+  useEffect(() => {
+    const previouslyFocused = document.activeElement as HTMLElement | null
+    const { overflow, paddingRight } = document.body.style
+    const scrollbarWidth = window.innerWidth - document.documentElement.clientWidth
+    document.body.style.overflow = 'hidden'
+    if (scrollbarWidth > 0) document.body.style.paddingRight = `${scrollbarWidth}px`
+    closeRef.current?.focus()
+
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') {
+        e.preventDefault()
+        onClose()
+        return
+      }
+      if (e.key !== 'Tab') return
+      // Keep Tab / Shift+Tab inside the dialog
+      const focusable = dialogRef.current?.querySelectorAll<HTMLElement>('a[href], button:not([disabled])')
+      if (!focusable || focusable.length === 0) return
+      const first = focusable[0]
+      const last = focusable[focusable.length - 1]
+      if (e.shiftKey && document.activeElement === first) {
+        e.preventDefault()
+        last.focus()
+      } else if (!e.shiftKey && document.activeElement === last) {
+        e.preventDefault()
+        first.focus()
+      }
+    }
+    document.addEventListener('keydown', onKey)
+    return () => {
+      document.removeEventListener('keydown', onKey)
+      document.body.style.overflow = overflow
+      document.body.style.paddingRight = paddingRight
+      previouslyFocused?.focus()
+    }
+  }, [onClose])
+
   return (
     <div
       className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-black/90 backdrop-blur-sm"
       onClick={onClose}
     >
       <div
-        className="bg-zinc-950 border border-white/10 w-full max-w-3xl max-h-[90vh] overflow-y-auto"
+        ref={dialogRef}
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby={titleId}
+        aria-describedby={descriptionId}
+        className="bg-zinc-950 border border-white/10 w-full max-w-3xl max-h-[90vh] overflow-y-auto overscroll-contain"
         onClick={(e) => e.stopPropagation()}
       >
         {/* Close */}
-        <div className="flex justify-end p-4 border-b border-white/10">
+        <div className="sticky top-0 z-10 flex justify-end p-4 border-b border-white/10 bg-zinc-950">
           <button
+            ref={closeRef}
+            type="button"
             onClick={onClose}
-            className="text-white/40 hover:text-white font-display text-sm tracking-widest uppercase transition-colors"
+            className="text-white/40 hover:text-white font-display text-sm tracking-widest uppercase transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#E8A030]"
           >
             {t.hero_modal.close} ×
           </button>
         </div>
 
-        <div className="p-6 lg:p-8">
-          {/* Video */}
-          {hero.youtubeId ? (
-            <div className="yt-embed mb-6">
-              <iframe
-                src={`https://www.youtube.com/embed/${hero.youtubeId}?rel=0&modestbranding=1`}
-                title={hero.name}
-                allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                allowFullScreen
-                loading="lazy"
+        <div className="p-6 lg:p-8 grid grid-cols-[7rem_1fr] sm:grid-cols-[14rem_1fr] gap-x-5 sm:gap-x-8 gap-y-5">
+          {/* Photo: same file and object-position as the card */}
+          <div className="sm:row-span-2 aspect-[3/4] bg-zinc-800 overflow-hidden self-start">
+            {hero.photo && (
+              // eslint-disable-next-line @next/next/no-img-element
+              <img
+                src={hero.photo}
+                alt={hero.name}
+                className="w-full h-full object-cover object-top"
+                style={hero.photoPosition ? { objectPosition: hero.photoPosition } : undefined}
               />
-            </div>
-          ) : (
-            <div className="aspect-video bg-zinc-900 flex items-center justify-center mb-6">
-              <div className="text-center">
-                <div className="font-display text-[#E8A030] text-xs tracking-widest uppercase mb-2">
-                  {t.hero_modal.episodeComingSoon}
-                </div>
-                <div className="text-white/30 text-sm">—</div>
-              </div>
-            </div>
-          )}
-
-          {/* Content */}
-          <div className="mb-2 text-[#E8A030] font-display text-xs tracking-widest uppercase">
-            {hero.role}
+            )}
           </div>
-          <h2 className="font-display text-3xl text-white uppercase mb-4">{hero.name}</h2>
-          <p className="text-white/60 leading-relaxed mb-6">{hero.description}</p>
-          <blockquote className="border-l-2 border-[#E8A030] pl-4 text-white/80 italic mb-6">
-            {hero.quote}
-          </blockquote>
 
-          {hero.episodeUrl ? (
-            <a
-              href={hero.episodeUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="btn-primary"
+          <div className="self-end">
+            <div
+              className={`inline-block mb-3 font-display text-[10px] tracking-widest uppercase px-2 py-0.5 ${
+                hero.season === 2 ? 'bg-[#E8A030] text-black' : 'bg-white/10 text-white/80'
+              }`}
             >
-              {t.hero_modal.watchEpisode}
-            </a>
-          ) : (
-            <div className="font-display text-[#E8A030] text-xs tracking-widest uppercase">
-              {t.hero_modal.season2ComingSoon}
+              {hero.season === 2 ? t.sections.season2 : t.sections.season1}
             </div>
-          )}
+            <h2 id={titleId} className="font-display text-2xl sm:text-3xl text-white uppercase mb-2">
+              {hero.name}
+            </h2>
+            <div className="text-[#E8A030] font-display text-xs tracking-widest uppercase">{hero.role}</div>
+          </div>
+
+          <div className="col-span-2 sm:col-span-1">
+            <p id={descriptionId} className="text-white/70 leading-relaxed mb-6">
+              {hero.description}
+            </p>
+            {hero.episodeUrl && (
+              <a href={hero.episodeUrl} target="_blank" rel="noopener noreferrer" className="btn-primary">
+                {t.hero_modal.watchStory}
+              </a>
+            )}
+          </div>
         </div>
       </div>
     </div>
@@ -97,6 +135,7 @@ export default function HeroesSection({ lang }: HeroesSectionProps) {
   const [selected, setSelected] = useState<Hero | null>(null)
   const [activeHero, setActiveHero] = useState(0)
   const scrollRef = useRef<HTMLDivElement>(null)
+  const closeModal = useCallback(() => setSelected(null), [])
 
   const handleScroll = () => {
     const el = scrollRef.current
@@ -132,6 +171,7 @@ export default function HeroesSection({ lang }: HeroesSectionProps) {
             <button
               key={hero.id}
               onClick={() => setSelected(hero)}
+              aria-haspopup="dialog"
               className="group text-left relative overflow-hidden bg-zinc-900 hover:bg-zinc-800 transition-colors flex-shrink-0 w-64 sm:w-auto snap-start"
             >
               <div className="aspect-[3/4] bg-zinc-800 relative overflow-hidden">
@@ -191,7 +231,7 @@ export default function HeroesSection({ lang }: HeroesSectionProps) {
       </div>
 
       {selected && (
-        <HeroModal hero={selected} t={t} lang={lang} onClose={() => setSelected(null)} />
+        <HeroModal hero={selected} t={t} onClose={closeModal} />
       )}
     </section>
   )

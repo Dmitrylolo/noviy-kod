@@ -1,6 +1,6 @@
-import { seasons, ui } from '@/lib/content'
+import { playlists, seasons, ui } from '@/lib/content'
 import type { Lang } from '@/lib/types'
-import { Languages } from 'lucide-react'
+import { ExternalLink, Languages } from 'lucide-react'
 import { SignLanguageIcon } from './icons'
 
 interface AccessibilitySectionProps {
@@ -12,7 +12,11 @@ export default function AccessibilitySection({ lang }: AccessibilitySectionProps
   const season2Episodes = seasons[lang].find((season) => season.id === 'season2')?.episodes ?? []
   const signVersions = season2Episodes.filter((ep) => ep.signLanguageUrl)
   const hasPendingSignVersions = signVersions.length < season2Episodes.length
-  const englishVersionHref = lang === 'ua' ? '/?lang=en#series' : '#series'
+  // Two different destinations: Season 1 dubbing is on the English channel, Season 2 on the Ukrainian one
+  const englishVersions = [
+    { label: t.enSeason1, href: playlists.season1EnglishDubbed },
+    { label: t.enSeason2, href: playlists.season2Ukrainian },
+  ]
 
   return (
     <section id="accessibility" className="py-16 lg:py-24 bg-zinc-950">
@@ -72,20 +76,22 @@ export default function AccessibilitySection({ lang }: AccessibilitySectionProps
             <h3 className="font-display text-xl text-white uppercase mb-4">
               {t.enTitle}
             </h3>
-            <ul className="space-y-2">
-              {t.enItems.map((item) => (
-                <li key={item} className="flex items-start gap-2 text-white/60 text-sm">
+            <ul className="space-y-3">
+              {englishVersions.map((item) => (
+                <li key={item.href} className="flex items-start gap-2 text-sm">
                   <span className="w-1 h-1 mt-2 rounded-full bg-[#E8A030] flex-shrink-0" />
-                  {item}
+                  <a
+                    href={item.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="group inline-flex items-start gap-1.5 text-white/70 hover:text-[#E8A030] underline decoration-white/20 underline-offset-4 hover:decoration-[#E8A030] transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#E8A030]"
+                  >
+                    {item.label}
+                    <ExternalLink size={13} aria-hidden="true" className="mt-1 flex-shrink-0 opacity-60 group-hover:opacity-100" />
+                  </a>
                 </li>
               ))}
             </ul>
-            <a
-              href={englishVersionHref}
-              className="mt-6 inline-flex text-[#E8A030] font-display text-xs tracking-widest uppercase underline-offset-4 hover:underline"
-            >
-              {t.enLink}
-            </a>
           </div>
         </div>
 

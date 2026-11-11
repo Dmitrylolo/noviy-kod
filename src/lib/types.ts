@@ -40,6 +40,8 @@ export interface Hero {
   youtubeId: string
   youtubeUrl: string
   episodeUrl: string
+  /** Id of the episode in `seasons` this hero belongs to; the modal link must match that episode's URL. */
+  episodeId?: string
   photo?: string
   /** CSS object-position for the portrait, used to keep head size/height consistent across cards. */
   photoPosition?: string

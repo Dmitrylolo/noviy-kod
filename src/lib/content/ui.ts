@@ -67,10 +67,8 @@ export const ui = {
       close: 'Закрити',
     },
     hero_modal: {
-      watchEpisode: 'Дивитися серію →',
+      watchStory: 'Дивитися історію на YouTube',
       close: 'Закрити',
-      episodeComingSoon: 'Серія скоро',
-      season2ComingSoon: 'Вже скоро — сезон 2',
     },
     accessibility: {
       title: 'Доступність',
@@ -82,9 +80,9 @@ export const ui = {
       signLinksLabel: 'Доступні версії:',
       signPending: 'Посилання з’являтимуться в міру публікації відео.',
       enTitle: 'Англомовна версія',
-      enItems: ['Сезон 1 — англомовний дубляж', 'Сезон 2 — українською з англійськими субтитрами'],
-      enLink: 'Дивитися англомовну версію →',
-      watchBtn: 'Дивитися доступні версії',
+      enSeason1: 'Сезон 1 — англомовний дубляж',
+      enSeason2: 'Сезон 2 — українською з англійськими субтитрами',
+      watchBtn: 'Перейти до серій',
     },
     about: {
       title: 'Про проєкт',
@@ -201,10 +199,8 @@ export const ui = {
       close: 'Close',
     },
     hero_modal: {
-      watchEpisode: 'Watch Episode →',
+      watchStory: 'Watch the story on YouTube',
       close: 'Close',
-      episodeComingSoon: 'Episode coming soon',
-      season2ComingSoon: 'Season 2 — coming soon',
     },
     accessibility: {
       title: 'Accessibility',
@@ -216,9 +212,9 @@ export const ui = {
       signLinksLabel: 'Available versions:',
       signPending: 'Links will appear as each video is published.',
       enTitle: 'English Version',
-      enItems: ['Season 1 — English dubbing', 'Season 2 — Ukrainian audio with English subtitles'],
-      enLink: 'Watch in English →',
-      watchBtn: 'Watch accessible versions',
+      enSeason1: 'Season 1 — English dubbing',
+      enSeason2: 'Season 2 — Ukrainian audio with English subtitles',
+      watchBtn: 'Go to episodes',
     },
     about: {
       title: 'About the Project',

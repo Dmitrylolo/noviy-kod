@@ -1,6 +1,6 @@
 import { existsSync } from 'node:fs'
 import path from 'node:path'
-import { heroes, liveContent, partners, press, screenings, seasons, ui, youtubeChannels } from '../src/lib/content'
+import { heroes, liveContent, partners, playlists, press, screenings, seasons, ui, youtubeChannels } from '../src/lib/content'
 import type { Episode, Lang } from '../src/lib/types'
 
 const YOUTUBE_ID_PATTERN = /^[A-Za-z0-9_-]{11}$/
@@ -92,6 +92,10 @@ function run() {
     }
   }
 
+  for (const [key, url] of Object.entries(playlists)) {
+    if (!isHttpUrl(url) || !url.includes('list=')) errors.push(`playlists.${key} is not a valid playlist URL`)
+  }
+
   const uiShapeErrors: string[] = []
   compareShape('ui', ui.ua, ui.en, uiShapeErrors)
   errors.push(...uiShapeErrors)
@@ -127,6 +131,20 @@ function run() {
       }
       if (hero.season === 2 && !hero.photo) {
         errors.push(`${base} (season 2) has no photo`)
+      }
+
+      // The modal link must point to the episode the hero belongs to (matched by id, not by array position)
+      const heroEpisode = hero.episodeId
+        ? seasons[lang].flatMap((season) => season.episodes).find((ep) => ep.id === hero.episodeId)
+        : undefined
+      if (!heroEpisode) {
+        errors.push(`${base}.episodeId is missing or does not match an episode`)
+      } else if (hero.episodeUrl !== heroEpisode.youtubeUrl) {
+        errors.push(`${base}.episodeUrl does not match episode ${heroEpisode.id} (${heroEpisode.youtubeUrl})`)
+      }
+      const wordCount = hero.description.trim().split(/\s+/).length
+      if (wordCount < 60 || wordCount > 100) {
+        errors.push(`${base}.description has ${wordCount} words (expected 60-100)`)
       }
       if (!hero.comingSoon) {
         if (!hero.youtubeUrl || !isHttpUrl(hero.youtubeUrl)) {

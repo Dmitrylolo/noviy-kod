@@ -1,4 +1,4 @@
-import type { Lang, TeamMember } from '../types'
+import type { Lang, TeamMember } from '../types';
 
 export const team: Record<Lang, { director: { name: string; bio: string; statement: string[] }; members: TeamMember[] }> = {
   ua: {
@@ -14,10 +14,11 @@ export const team: Record<Lang, { director: { name: string; bio: string; stateme
     },
     members: [
       { name: 'Антон Печатнов, Артем Терещенко, Станіслав Ткачов, Дмитро Муленко, Дмитро Чуб', role: 'Оператори-постановники' },
-      { name: 'Віталій Ляшко, Артем Стромаков, Василь Вишняков', role: 'Монтаж' },
+      { name: 'Віталій Ляшко, Артем Стромаков', role: 'Монтаж' },
       { name: 'Андрій Танабаш', role: 'Продюсер' },
       { name: 'Дар\'я Чупрун', role: 'Фотографиня' },
-      { name: 'Дмитро Чистяков', role: 'Редактор' },
+      { name: 'Інна Замятіна, Дмитро Чистяков', role: 'Редактори' },
+      { name: 'Дмитро Черненков', role: 'Розробник та редактор сайту' },
     ],
   },
   en: {
@@ -33,10 +34,11 @@ export const team: Record<Lang, { director: { name: string; bio: string; stateme
     },
     members: [
       { name: 'Anton Pechatnov, Artem Tereshchenko, Stanislav Tkachov, Dmytro Mulenko, Dmytro Chub', role: 'Cinematographers' },
-      { name: 'Vitaliy Lyashko, Artem Stromakov, Vasyl Vyshniakov', role: 'Editors' },
+      { name: 'Vitaliy Lyashko, Artem Stromakov', role: 'Video Editors' },
       { name: 'Andrii Tanabash', role: 'Producer' },
       { name: 'Daria Chuprun', role: 'Photographer' },
-      { name: 'Dmytro Chistiakov', role: 'Story Editor' },
+      { name: 'Inna Zamiatina, Dmytro Chistiakov', role: 'Editors' },
+      { name: 'Dmytro Chernenkov', role: 'Website Developer & Editor' },
     ],
   },
 }
