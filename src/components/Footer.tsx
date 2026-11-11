@@ -48,7 +48,7 @@ const socialLinks = (youtubeUrl: string) => [
 export default function Footer({ lang }: FooterProps) {
   const t = ui[lang]
   const youtubeUrl = getYoutubeChannelUrl(lang)
-  const otherHref = lang === 'ua' ? '/?lang=en' : '/?lang=ua'
+  const otherHref = lang === 'ua' ? '/en' : '/uk'
   const otherLabel = lang === 'ua' ? 'EN' : 'UA'
 
   return (

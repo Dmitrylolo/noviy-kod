@@ -22,8 +22,12 @@ export const metadata: Metadata = {
     url: 'https://newcode.com.ua',
   },
   alternates: {
-    canonical: 'https://newcode.com.ua',
-    languages: { en: 'https://newcode.com.ua/en' },
+    canonical: 'https://newcode.com.ua/uk',
+    languages: {
+      'uk-UA': 'https://newcode.com.ua/uk',
+      en: 'https://newcode.com.ua/en',
+      'x-default': 'https://newcode.com.ua',
+    },
   },
 }
 

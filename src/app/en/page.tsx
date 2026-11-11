@@ -23,7 +23,11 @@ export const metadata: Metadata = {
   },
   alternates: {
     canonical: 'https://newcode.com.ua/en',
-    languages: { uk: 'https://newcode.com.ua' },
+    languages: {
+      'uk-UA': 'https://newcode.com.ua/uk',
+      en: 'https://newcode.com.ua/en',
+      'x-default': 'https://newcode.com.ua',
+    },
   },
 }
 

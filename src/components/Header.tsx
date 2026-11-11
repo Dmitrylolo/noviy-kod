@@ -22,10 +22,14 @@ export default function Header({ lang }: HeaderProps) {
   }, [])
 
   const otherLang = lang === 'ua' ? 'en' : 'ua'
-  const otherHref = lang === 'ua' ? '/?lang=en' : '/?lang=ua'
+  const otherHref = lang === 'ua' ? '/en' : '/uk'
 
-  function setLangCookie(value: string) {
+  function setLangCookie(value: string, event: React.MouseEvent<HTMLAnchorElement>) {
     document.cookie = `nk_lang=${value}; path=/; max-age=${60 * 60 * 24 * 365}; SameSite=Lax`
+    if (window.location.hash) {
+      event.preventDefault()
+      window.location.assign(`${otherHref}${window.location.hash}`)
+    }
   }
 
   const navLinks = [
@@ -72,7 +76,7 @@ export default function Header({ lang }: HeaderProps) {
               <span className="text-white/30 mx-1">|</span>
               <Link
                 href={otherHref}
-                onClick={() => setLangCookie(otherLang)}
+                onClick={(event) => setLangCookie(otherLang, event)}
                 className="text-white/50 hover:text-white transition-colors"
               >
                 {t.nav.switchLang}
@@ -129,7 +133,7 @@ export default function Header({ lang }: HeaderProps) {
             <div className="flex items-center gap-2 text-sm font-display">
               <span className="text-white">{t.nav.currentLang}</span>
               <span className="text-white/30">|</span>
-              <Link href={otherHref} onClick={() => setLangCookie(otherLang)} className="text-white/50">
+              <Link href={otherHref} onClick={(event) => setLangCookie(otherLang, event)} className="text-white/50">
                 {t.nav.switchLang}
               </Link>
             </div>

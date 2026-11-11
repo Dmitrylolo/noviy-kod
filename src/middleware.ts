@@ -11,9 +11,15 @@ const handleI18nRouting = createMiddleware(routing)
 export function middleware(request: NextRequest) {
   const url = request.nextUrl.clone()
 
+  // Keep the explicit Ukrainian URL independent from locale detection.
+  if (url.pathname === '/uk' || url.pathname === '/uk/') {
+    return NextResponse.next()
+  }
+
   // Explicit language switch via query param
   const forcedLang = url.searchParams.get('lang')
-  if (forcedLang === 'en' || forcedLang === 'ua') {
+  const hasExplicitLocalePath = url.pathname === '/en' || url.pathname === '/uk'
+  if (!hasExplicitLocalePath && (forcedLang === 'en' || forcedLang === 'ua')) {
     url.searchParams.delete('lang')
     url.pathname = forcedLang === 'en' ? '/en' : '/'
     const res = NextResponse.redirect(url)

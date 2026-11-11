@@ -8,7 +8,7 @@ interface HeroSectionProps {
 
 export default function HeroSection({ lang }: HeroSectionProps) {
   const t = ui[lang].hero
-  const otherHref = lang === 'ua' ? '/?lang=en' : '/?lang=ua'
+  const otherHref = lang === 'ua' ? '/en' : '/uk'
   const otherFlag = lang === 'ua' ? '🇬🇧' : '🇺🇦'
 
   return (
