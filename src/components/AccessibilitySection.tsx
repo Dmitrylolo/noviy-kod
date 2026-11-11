@@ -11,7 +11,6 @@ export default function AccessibilitySection({ lang }: AccessibilitySectionProps
   const t = ui[lang].accessibility
   const season2Episodes = seasons[lang].find((season) => season.id === 'season2')?.episodes ?? []
   const signVersions = season2Episodes.filter((ep) => ep.signLanguageUrl)
-  const hasPendingSignVersions = signVersions.length < season2Episodes.length
   // Two different destinations: Season 1 dubbing is on the English channel, Season 2 on the Ukrainian one
   const englishVersions = [
     { label: t.enSeason1, href: playlists.season1EnglishDubbed },
@@ -65,9 +64,16 @@ export default function AccessibilitySection({ lang }: AccessibilitySectionProps
                 </ul>
               </div>
             )}
-            {hasPendingSignVersions && (
-              <p className="mt-6 text-white/40 text-xs">{t.signPending}</p>
-            )}
+            <div className="mt-auto pt-6">
+              <a
+                href={playlists.season2SignLanguage}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="btn-outline"
+              >
+                {t.signCta}
+              </a>
+            </div>
           </div>
 
           {/* English version */}

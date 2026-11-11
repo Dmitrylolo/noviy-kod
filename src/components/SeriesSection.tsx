@@ -31,6 +31,7 @@ function EpisodeCard({
   season2Label,
   lang,
   isSeason2,
+  isSpecial,
   onOpen,
 }: {
   ep: Episode
@@ -39,6 +40,7 @@ function EpisodeCard({
   season2Label: string
   lang: Lang
   isSeason2: boolean
+  isSpecial: boolean
   onOpen: () => void
 }) {
   const hasUkrainianFallback = lang === 'en' && !!ep.uaFallbackUrl
@@ -50,7 +52,7 @@ function EpisodeCard({
 
   return (
     <div
-      className={`relative flex-shrink-0 w-72 sm:w-auto bg-white/5 snap-start ${ep.featured ? 'border-l-2 border-[#E8A030]' : ''
+      className={`relative bg-white/5 ${isSpecial ? 'flex flex-col w-full' : 'flex-shrink-0 w-72 sm:w-auto snap-start'} ${ep.featured ? 'border-l-2 border-[#E8A030]' : ''
         }`}
     >
       {/* Thumbnail → YouTube with play button on hover */}
@@ -77,7 +79,7 @@ function EpisodeCard({
             alt={ep.title}
             fill
             className="object-cover group-hover/thumb:scale-105 transition-transform duration-500"
-            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 25vw"
+            sizes={isSpecial ? '(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw' : '(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 25vw'}
           />
           {/* Dark overlay */}
           <div className="absolute inset-0 bg-black/0 group-hover/thumb:bg-black/50 transition-colors duration-300" />
@@ -121,12 +123,15 @@ function EpisodeCard({
       {/* Info — whole section opens modal */}
       <button
         onClick={onOpen}
-        className={`${hasFooter ? 'px-4 pt-4 pb-2' : 'p-4'} w-full text-left block hover:bg-white/10 transition-colors group/info`}
+        className={`${hasFooter ? 'px-4 pt-4 pb-2' : 'p-4'} w-full text-left hover:bg-white/10 transition-colors group/info ${isSpecial ? 'flex flex-1 flex-col' : 'block'}`}
       >
+        {isSpecial && (
+          <h3 className="font-display text-white text-base leading-snug uppercase mb-2">{ep.title}</h3>
+        )}
         <p className="text-white/50 text-sm leading-relaxed">{ep.synopsis}</p>
 
         {!hasUkrainianFallback && (
-          <span className="mt-3 inline-block text-[#E8A030] font-display text-xs tracking-widest uppercase group-hover/info:underline">
+          <span className={`${isSpecial ? 'mt-auto pt-3 self-start' : 'mt-3'} inline-block text-[#E8A030] font-display text-xs tracking-widest uppercase group-hover/info:underline`}>
             {t.details} →
           </span>
         )}
@@ -534,7 +539,8 @@ export default function SeriesSection({ lang }: SeriesSectionProps) {
 
   const currentSeason = allSeasons[activeTab]
   const isShortsTab = currentSeason.id === 'shorts'
-  const isFeedTab = isShortsTab || currentSeason.id === 'specials'
+  const isSpecialsTab = currentSeason.id === 'specials'
+  const isFeedTab = isShortsTab || isSpecialsTab
   const displayEpisodes = isFeedTab
     ? [...currentSeason.episodes].sort((first, second) => second.number - first.number)
     : currentSeason.episodes
@@ -615,6 +621,8 @@ export default function SeriesSection({ lang }: SeriesSectionProps) {
             onScroll={handleScroll}
             className={isShortsTab
               ? 'flex overflow-x-auto gap-4 pb-2 -mx-4 px-4 sm:mx-0 sm:px-0 snap-x snap-mandatory scrollbar-none'
+              : isSpecialsTab
+              ? 'grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4'
               : 'flex overflow-x-auto gap-4 pb-2 -mx-4 px-4 sm:mx-0 sm:px-0 sm:grid sm:grid-cols-2 lg:grid-cols-4 snap-x snap-mandatory sm:snap-none scrollbar-none'}
           >
             {displayEpisodes.length > 0 ? (
@@ -637,6 +645,7 @@ export default function SeriesSection({ lang }: SeriesSectionProps) {
                     season2Label={t.sections.season2}
                     lang={lang}
                     isSeason2={currentSeason.id === 'season2'}
+                    isSpecial={isSpecialsTab}
                     onOpen={() => setSelectedEp(ep)}
                   />
                 ))
@@ -664,7 +673,7 @@ export default function SeriesSection({ lang }: SeriesSectionProps) {
           </div>
 
           {/* Carousel dots + counter — mobile only, only when has content */}
-          {displayEpisodes.length > 0 && total > 1 && (
+          {displayEpisodes.length > 0 && total > 1 && !isSpecialsTab && (
             <div className="flex items-center gap-2 mt-5 sm:hidden">
               {displayEpisodes.map((_, i) => (
                 <button
